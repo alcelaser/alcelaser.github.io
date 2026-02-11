@@ -222,8 +222,8 @@ export const languages: Language[] = [
   },
   {
     name: 'German',
-    level: 'A2',
-    detail: 'Work in progress',
+    level: 'A1',
+    detail: 'Work in progress, following a language course',
     percent: 25,
   },
 ];
