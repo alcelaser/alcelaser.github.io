@@ -92,10 +92,10 @@ export const education: Education[] = [
     details: ['Math: 650 — Reading & Writing: 700'],
   },
   {
-    institution: 'Marymount International School',
-    location: 'Rome',
-    degree: 'Primary & Middle School',
-    period: '',
+    institution: 'ISF Waterloo',
+    location: 'Waterloo, Belgium',
+    degree: 'High School',
+    period: '2017 - 2021',
   },
 ];
 
@@ -121,7 +121,7 @@ export const skills: Skill[] = [
   { name: 'Flutter', category: 'programming' },
   { name: 'LLM Development', category: 'ai' },
   { name: 'Token Embedding', category: 'ai' },
-  { name: 'Prompt Engineering', category: 'ai' },
+  { name: 'Ethical Use of AI', category: 'ai' },
   { name: 'Machine Learning', category: 'ai' },
   { name: 'Bioinformatics', category: 'ai' },
   { name: 'LaTeX', category: 'tools' },
@@ -131,7 +131,7 @@ export const skills: Skill[] = [
   { name: 'MUN Vice-Chair', category: 'soft' },
   { name: 'Multilingual', category: 'soft' },
   { name: 'Research', category: 'soft' },
-  { name: 'GDSC Press Writer', category: 'soft' },
+  { name: 'Google Developer Group Guido Carli Press Writer', category: 'soft' },
 ];
 
 export interface Award {
@@ -142,7 +142,7 @@ export interface Award {
 
 export const awards: Award[] = [
   {
-    title: 'International Certificate of Excellence',
+    title: 'International Certificate of Excellence - Distinction',
     issuer: 'University of Cambridge',
   },
   {
