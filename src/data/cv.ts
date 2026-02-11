@@ -2,7 +2,7 @@ export const personal = {
   name: 'Alberto Maccanico',
   title: 'AI & Management Student | Software Developer',
   email: 'maccanicoalberto@gmail.com',
-  phone: '+39 351 597 2851',
+  phone: 'ask via e-mail',
   location: 'Rome, Italy',
   nationality: 'Italian',
   github: 'https://github.com/alcelaser',
