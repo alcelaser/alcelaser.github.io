@@ -1,0 +1,142 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#education', label: 'Education' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#awards', label: 'Awards' },
+  { href: '#articles', label: 'Articles' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 -translate-y-full"
+>
+  <div class="glass mx-auto max-w-5xl mt-4 rounded-2xl px-6 py-3">
+    <div class="flex items-center justify-between">
+      <a href="#" class="font-mono text-sm font-bold gradient-text">AM</a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-6">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="nav-link text-sm text-text-secondary hover:text-accent-blue transition-colors duration-300"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col gap-1.5 p-2"
+        aria-label="Toggle menu"
+      >
+        <span class="block w-5 h-0.5 bg-text-primary transition-all duration-300 origin-center" id="bar1"></span>
+        <span class="block w-5 h-0.5 bg-text-primary transition-all duration-300" id="bar2"></span>
+        <span class="block w-5 h-0.5 bg-text-primary transition-all duration-300 origin-center" id="bar3"></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden transition-all duration-300">
+      <div class="pt-4 pb-2 flex flex-col gap-3">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="mobile-nav-link text-sm text-text-secondary hover:text-accent-blue transition-colors duration-300 py-1"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar')!;
+  const toggle = document.getElementById('menu-toggle')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const bar1 = document.getElementById('bar1')!;
+  const bar2 = document.getElementById('bar2')!;
+  const bar3 = document.getElementById('bar3')!;
+  let menuOpen = false;
+
+  // Show navbar after scroll past hero
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) {
+        navbar.classList.remove('-translate-y-full');
+        navbar.classList.add('translate-y-0');
+      } else {
+        navbar.classList.add('-translate-y-full');
+        navbar.classList.remove('translate-y-0');
+      }
+    },
+    { threshold: 0.1 }
+  );
+
+  const hero = document.getElementById('hero');
+  if (hero) observer.observe(hero);
+
+  // Active section tracking
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.remove('text-accent-blue');
+            link.classList.add('text-text-secondary');
+            if (link.getAttribute('href') === `#${entry.target.id}`) {
+              link.classList.add('text-accent-blue');
+              link.classList.remove('text-text-secondary');
+            }
+          });
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  sections.forEach((section) => sectionObserver.observe(section));
+
+  // Mobile menu toggle
+  toggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      bar1.style.transform = 'rotate(45deg) translate(3px, 3px)';
+      bar2.style.opacity = '0';
+      bar3.style.transform = 'rotate(-45deg) translate(3px, -3px)';
+    } else {
+      mobileMenu.style.maxHeight = '0';
+      bar1.style.transform = '';
+      bar2.style.opacity = '1';
+      bar3.style.transform = '';
+    }
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.style.maxHeight = '0';
+      bar1.style.transform = '';
+      bar2.style.opacity = '1';
+      bar3.style.transform = '';
+    });
+  });
+</script>

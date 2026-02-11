@@ -1,0 +1,133 @@
+---
+import { personal } from '../data/cv';
+---
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <canvas id="particle-canvas" class="absolute inset-0 w-full h-full"></canvas>
+
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <div class="mb-6">
+      <span class="inline-block font-mono text-sm text-accent-blue mb-4 opacity-0" id="hero-greeting">
+        &lt;hello world /&gt;
+      </span>
+    </div>
+
+    <h1
+      class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0"
+      id="hero-name"
+    >
+      <span class="gradient-text">{personal.name}</span>
+    </h1>
+
+    <div class="h-8 md:h-10 mb-8 overflow-hidden">
+      <p
+        class="font-mono text-lg md:text-xl text-text-secondary opacity-0"
+        id="hero-tagline"
+      >
+        <span id="typewriter"></span>
+        <span class="inline-block w-0.5 h-5 bg-accent-blue ml-1 animate-pulse"></span>
+      </p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-4 opacity-0" id="hero-cta">
+      <a
+        href="#projects"
+        class="group relative px-8 py-3 rounded-full font-medium text-sm overflow-hidden"
+      >
+        <span class="absolute inset-0 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full"></span>
+        <span class="absolute inset-[2px] bg-bg-primary rounded-full transition-all group-hover:bg-opacity-0"></span>
+        <span class="relative gradient-text group-hover:text-white group-hover:[-webkit-text-fill-color:white]">View Projects</span>
+      </a>
+
+      <a
+        href="#contact"
+        class="px-8 py-3 rounded-full font-medium text-sm glass text-text-secondary hover:text-accent-blue transition-colors"
+      >
+        Get in Touch
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0" id="scroll-indicator">
+    <div class="flex flex-col items-center gap-2 text-text-muted">
+      <span class="text-xs font-mono">scroll</span>
+      <div class="w-5 h-8 rounded-full border border-text-muted/30 flex justify-center pt-1.5">
+        <div class="w-1 h-2 rounded-full bg-accent-blue animate-bounce"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Typing effect
+  const phrases = [
+    'AI & Management Student',
+    'Software Developer',
+    'Research Enthusiast',
+    'Prompt Engineer',
+    'Full-Stack Builder',
+  ];
+
+  const typewriter = document.getElementById('typewriter')!;
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function type() {
+    const current = phrases[phraseIndex];
+
+    if (isDeleting) {
+      typewriter.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typewriter.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let delay = isDeleting ? 30 : 60;
+
+    if (!isDeleting && charIndex === current.length) {
+      delay = 2000;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      delay = 400;
+    }
+
+    setTimeout(type, delay);
+  }
+
+  // Hero entrance animations
+  function animateHero() {
+    const greeting = document.getElementById('hero-greeting')!;
+    const name = document.getElementById('hero-name')!;
+    const tagline = document.getElementById('hero-tagline')!;
+    const cta = document.getElementById('hero-cta')!;
+    const scroll = document.getElementById('scroll-indicator')!;
+
+    const items = [greeting, name, tagline, cta, scroll];
+    items.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        el.style.transform = 'translateY(0)';
+        el.style.opacity = '1';
+      }, 300 + i * 200);
+      el.style.transform = 'translateY(20px)';
+    });
+
+    setTimeout(type, 1400);
+  }
+
+  // Start after particles have loaded (or immediately)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', animateHero);
+  } else {
+    animateHero();
+  }
+</script>
+
+<script>
+  import '../scripts/particles';
+</script>

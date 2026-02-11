@@ -1,0 +1,73 @@
+---
+import { personal, stats } from '../data/cv';
+---
+
+<section id="about" class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
+      <span class="gradient-text">About Me</span>
+    </h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-12 section-fade"></div>
+
+    <div class="grid md:grid-cols-5 gap-12 items-start">
+      <div class="md:col-span-3 section-fade">
+        <p class="text-lg text-text-secondary leading-relaxed mb-6">
+          {personal.summary}
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          Currently pursuing a <span class="text-accent-blue">BSc in Artificial Intelligence and Management</span> at
+          LUISS Guido Carli University in Rome. Previously studied Computer Science at Vrije Universiteit Amsterdam.
+          Experienced with enterprise LLM development, scientific research, and full-stack web applications.
+        </p>
+      </div>
+
+      <div class="md:col-span-2 grid grid-cols-2 gap-4 section-fade">
+        <div class="glass rounded-2xl p-6 text-center glow-border">
+          <div class="text-3xl font-bold gradient-text stat-number" data-target={stats.publicRepos}>0</div>
+          <div class="text-xs text-text-muted mt-2 font-mono uppercase tracking-wider">Public Repos</div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center glow-border">
+          <div class="text-3xl font-bold gradient-text stat-number" data-target={stats.languagesSpoken}>0</div>
+          <div class="text-xs text-text-muted mt-2 font-mono uppercase tracking-wider">Languages</div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center glow-border">
+          <div class="text-3xl font-bold gradient-text stat-number" data-target={stats.countriesLived}>0</div>
+          <div class="text-xs text-text-muted mt-2 font-mono uppercase tracking-wider">Countries</div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center glow-border">
+          <div class="text-3xl font-bold gradient-text stat-number" data-target={stats.yearsExperience}>0</div>
+          <div class="text-xs text-text-muted mt-2 font-mono uppercase tracking-wider">Years Exp.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animated counters
+  const counters = document.querySelectorAll('.stat-number');
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const target = parseInt(el.dataset.target || '0', 10);
+          let current = 0;
+          const step = Math.ceil(target / 30);
+          const interval = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(interval);
+            }
+            el.textContent = current.toString();
+          }, 40);
+          counterObserver.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  counters.forEach((c) => counterObserver.observe(c));
+</script>
