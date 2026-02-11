@@ -24,6 +24,16 @@ export interface Experience {
 export const experience: Experience[] = [
   {
     role: 'Software Developer',
+    company: 'Freelance',
+    type: 'Freelance',
+    period: '2019 – Present',
+    bullets: [
+      'Full-stack web and mobile projects for various clients',
+      'Specialising in Flutter, Vue, TypeScript, and Python',
+    ],
+  },
+  {
+    role: 'Software Developer',
     company: 'Inotum L.L.C',
     type: 'Junior Developer',
     period: 'Sept 2023 – Dec 2023',
@@ -158,17 +168,23 @@ export const awards: Award[] = [
 export interface Article {
   title: string;
   description: string;
+  url?: string;
+  publication?: string;
 }
 
 export const articles: Article[] = [
   {
     title: 'Vibe Coding',
     description: 'Coding in the modern age.',
+    url: '',
+    publication: '',
   },
   {
     title: "The Efficient Compute Frontier – AI's Great Filter",
     description:
       'Discusses efficiency in AI development and its potential constraints on future innovation.',
+    url: '',
+    publication: '',
   },
 ];
 
@@ -198,11 +214,23 @@ export const languages: Language[] = [
     detail: 'A* A Level (90%-100%)',
     percent: 88,
   },
+  {
+    name: 'Spanish',
+    level: 'B2',
+    detail: 'Upper intermediate',
+    percent: 65,
+  },
+  {
+    name: 'German',
+    level: 'A2',
+    detail: 'Work in progress',
+    percent: 25,
+  },
 ];
 
 export const stats = {
   publicRepos: 7,
-  languagesSpoken: 3,
+  languagesSpoken: 5,
   countriesLived: 3,
-  yearsExperience: 3,
+  yearsExperience: 6,
 };

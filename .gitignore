@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # claude temp files
 tmpclaude-*
+
+# local guide (not for repo)
+GUIDE.md
