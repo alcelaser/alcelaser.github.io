@@ -1,23 +1,37 @@
 ---
 const links = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#education', label: 'Education' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#awards', label: 'Awards' },
-  { href: '#articles', label: 'Articles' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#about', label: 'About' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#education', label: 'Education' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#awards', label: 'Awards' },
+  { href: '/#articles', label: 'Articles' },
+  { href: '/#contact', label: 'Contact' },
 ];
 ---
 
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-bg-primary/95 backdrop-blur-xl md:hidden -translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-8">
+  {
+    links.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-nav-link text-2xl font-semibold text-text-secondary hover:text-accent-blue transition-colors duration-300 transform hover:scale-110"
+      >
+        {link.label}
+      </a>
+    ))
+  }
+</div>
+
 <nav
   id="navbar"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 -translate-y-full"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 -translate-y-full px-4 md:px-0"
 >
   <div class="glass mx-auto max-w-5xl mt-4 rounded-2xl px-6 py-3">
     <div class="flex items-center justify-between">
-      <a href="#" class="font-mono text-sm font-bold gradient-text">AM</a>
+      <a href="/#" class="font-mono text-sm font-bold gradient-text">AM</a>
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-6">
@@ -43,20 +57,6 @@ const links = [
         <span class="block w-5 h-0.5 bg-text-primary transition-all duration-300" id="bar2"></span>
         <span class="block w-5 h-0.5 bg-text-primary transition-all duration-300 origin-center" id="bar3"></span>
       </button>
-    </div>
-
-    <!-- Mobile menu overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-bg-primary/95 backdrop-blur-xl md:hidden translate-y-[-100%] transition-transform duration-500 flex flex-col items-center justify-center gap-8">
-      {
-        links.map((link) => (
-          <a
-            href={link.href}
-            class="mobile-nav-link text-2xl font-semibold text-text-secondary hover:text-accent-blue transition-colors duration-300 transform hover:scale-110"
-          >
-            {link.label}
-          </a>
-        ))
-      }
     </div>
   </div>
 </nav>
@@ -85,7 +85,13 @@ const links = [
   );
 
   const hero = document.getElementById('hero');
-  if (hero) observer.observe(hero);
+  if (hero) {
+    observer.observe(hero);
+  } else {
+    // If there is no hero (like on blog or article pages), make sure navbar is visible immediately
+    navbar.classList.remove('-translate-y-full');
+    navbar.classList.add('translate-y-0');
+  }
 
   // Active section tracking
   const sections = document.querySelectorAll('section[id]');
@@ -98,7 +104,10 @@ const links = [
           navLinks.forEach((link) => {
             link.classList.remove('text-accent-blue');
             link.classList.add('text-text-secondary');
-            if (link.getAttribute('href') === `#${entry.target.id}`) {
+            
+            // Note: Since links now have /#id, we need to extract the id
+            const href = link.getAttribute('href');
+            if (href && href.endsWith(`#${entry.target.id}`)) {
               link.classList.add('text-accent-blue');
               link.classList.remove('text-text-secondary');
             }
@@ -115,14 +124,14 @@ const links = [
   toggle.addEventListener('click', () => {
     menuOpen = !menuOpen;
     if (menuOpen) {
-      mobileMenu.classList.remove('translate-y-[-100%]');
+      mobileMenu.classList.remove('-translate-y-full');
       mobileMenu.classList.add('translate-y-0');
       bar1.style.transform = 'rotate(45deg) translate(3px, 3px)';
       bar2.style.opacity = '0';
       bar3.style.transform = 'rotate(-45deg) translate(3px, -3px)';
     } else {
       mobileMenu.classList.remove('translate-y-0');
-      mobileMenu.classList.add('translate-y-[-100%]');
+      mobileMenu.classList.add('-translate-y-full');
       bar1.style.transform = '';
       bar2.style.opacity = '1';
       bar3.style.transform = '';
@@ -134,7 +143,7 @@ const links = [
     link.addEventListener('click', () => {
       menuOpen = false;
       mobileMenu.classList.remove('translate-y-0');
-      mobileMenu.classList.add('translate-y-[-100%]');
+      mobileMenu.classList.add('-translate-y-full');
       bar1.style.transform = '';
       bar2.style.opacity = '1';
       bar3.style.transform = '';
