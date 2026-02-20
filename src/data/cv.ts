@@ -7,6 +7,7 @@ export const personal = {
   nationality: 'Italian',
   github: 'https://github.com/alcelaser',
   githubHandle: 'alcelaser',
+  linkedin: 'https://www.linkedin.com/in/alberto-maccanico-16266b30a/',
   summary:
     'University student with international experience and a strong scientific background. ' +
     'Passionate about research, algorithm design, management, and building software that matters. ' +
