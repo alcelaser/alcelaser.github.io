@@ -1,0 +1,141 @@
+---
+import Layout from './Layout.astro';
+import Nav from '../components/Nav.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={`${frontmatter.title} | Alberto Maccanico`}>
+  <Nav />
+  
+  <article class="max-w-3xl mx-auto py-32 px-6 markdown-content">
+    <div class="mb-12 section-fade">
+      <a href="/blog" class="text-accent-blue hover:underline text-sm font-mono mb-4 inline-flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 mt-6 text-text-primary">{frontmatter.title}</h1>
+      {frontmatter.description && (
+        <p class="text-xl text-text-secondary leading-relaxed mb-6">{frontmatter.description}</p>
+      )}
+      {frontmatter.publication && (
+        <p class="text-sm font-mono text-accent-purple mb-4">{frontmatter.publication}</p>
+      )}
+      {frontmatter.originalUrl && (
+        <a href={frontmatter.originalUrl} target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline text-sm font-mono inline-flex items-center gap-1">
+          Read on original publication
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+        </a>
+      )}
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mt-8"></div>
+    </div>
+
+    <div class="prose prose-invert prose-lg max-w-none text-text-secondary section-fade">
+      <slot />
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  /* Markdown Styles for the Blog */
+  .markdown-content .prose p {
+    margin-bottom: 1.5em;
+    line-height: 1.75;
+  }
+  .markdown-content .prose h1,
+  .markdown-content .prose h2,
+  .markdown-content .prose h3,
+  .markdown-content .prose h4 {
+    color: var(--color-text-primary);
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+  .markdown-content .prose h2 {
+    font-size: 1.875rem;
+  }
+  .markdown-content .prose h3 {
+    font-size: 1.5rem;
+  }
+  .markdown-content .prose a {
+    color: var(--color-accent-blue);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+  }
+  .markdown-content .prose a:hover {
+    color: var(--color-accent-purple);
+  }
+  .markdown-content .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .markdown-content .prose ol {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .markdown-content .prose li {
+    margin-bottom: 0.5em;
+  }
+  .markdown-content .prose blockquote {
+    border-left: 4px solid var(--color-accent-purple);
+    padding-left: 1em;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5em;
+    background: var(--color-bg-secondary);
+    padding: 1rem 1rem 1rem 1.5rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  .markdown-content .prose pre {
+    background: #1e1e2e;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+    border: 1px solid var(--color-border-glass);
+  }
+  .markdown-content .prose code {
+    font-family: var(--font-mono);
+    background: oklch(1 1 1 / 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    color: var(--color-accent-blue);
+  }
+  .markdown-content .prose pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+  }
+  .markdown-content .prose img {
+    border-radius: 0.75rem;
+    max-width: 100%;
+    height: auto;
+    margin: 2em 0;
+    border: 1px solid var(--color-border-glass);
+  }
+</style>
+
+<script>
+  // Section fade-in observer for markdown items
+  const faders = document.querySelectorAll('.section-fade');
+  const fadeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  faders.forEach((el) => fadeObserver.observe(el));
+</script>

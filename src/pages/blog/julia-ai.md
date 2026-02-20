@@ -1,0 +1,20 @@
+---
+layout: ../../layouts/ArticleLayout.astro
+title: "Julia AI, Your Personal Guide for Rome"
+description: "In an ever evolving generative AI scene, Microsoft's latest venture, Julia AI, provides a refreshing take on touristic guides, ready to tackle the influx of visitors from around the globe..."
+publication: "Google Developer Group Guido Carli"
+originalUrl: "https://googleguidocarli.wordpress.com/2025/03/18/julia-ai-your-personal-guide-for-rome/"
+---
+
+In an ever evolving generative AI scene, Microsoft’s latest venture, Julia AI, provides a refreshing take on touristic guides, ready to tackle the influx of visitors from around the globe in preparation of the 2025 Jubilee in Rome. On a more technical note, Julia is a collaboration with NTT Data using Microsoft Azure OpenAI Service on the base of GPT-4o. By tinkering with the dataset used in training, Julia is tailor-made to tackle the Eternal City making it the perfect companion to any pilgrim or tourist alike interested in any facet of the Roman experience, from renowned attractions like the Colosseum and Vatican City to lesser-known gems tucked away in ancient alleys, the assistant provides a comprehensive overview of the city’s rich tapestry of history and modern vibrancy.
+
+## Why use Julia?
+As an AI assistant Julia leverages real-time data and interactive interfaces to deliver tailored recommendations, in a language agnostic manner, accommodating any language and such any tourist. By incorporating multilingual support and intuitive navigation, Julia addresses the needs of a diverse international audience. This forward-thinking solution not only simplifies the exploration process but also enriches the cultural narrative for every user. To interact with Julia, Microsoft has set up a variety of methods to communicate with the model such as WhatsApp, making the model incredibly accessible as it allows users who may not be technologically literate to interact with the model as if they were a family member. On top of the accessibility, Julia has a large context to fish from, not only covering the main attractions like most tourist guides, but every corner of the Eternal City, from lesser-known and newer attractions like the Parco Archeologico del Celio to local eateries that are well known by word of mouth but that you won’t necessarily find in guides such as Suppli Roma in Trastevere.
+
+## Tradition and Technology Intertwine
+For any curious tourist Julia AI is capable of guiding tourists into the cultural significance of not only landmarks and statues, but every aspect of the Roman way of life. Confused tourists who may have been lashed out at for ordering a Cappuccino after 12, they can ask the AI which will gladly and without judgement guide the tourist through the rich tapestry of Roman Customs. Planning in Rome is hard as is, but with Julia, things become simpler, Rome is not a city you can visit in a day and as such with Julia you can plan detailed Itineraries, tailor made to your tastes, fan of the Renaissance? Julia can plan a trip around Villa Farnesina and the Palazzo Farnese. Love ancient Rome? Julia can prepare a nice evening plan to stroll in the Domus Aurea or at the Baths of Caracalla.
+
+All together, Julia is a great step in the right direction for revamping tourist experience in the Eternal City which is famous, or rather infamous, for its lack of technology in the touristic sector, marking a monumental shift in how Rome organises Tourism in the digital age.
+
+### Summary
+Julia AI is Microsoft’s new AI-powered tour guide for Rome, developed with NTT Data using GPT-4o on Azure OpenAI Service. Designed for the 2025 Jubilee, it provides multilingual, real-time, and personalized recommendations, covering both major landmarks and hidden gems. Accessible via platforms like WhatsApp, Julia simplifies trip planning and enhances cultural understanding by offering tailored itineraries and insights into Roman customs. By blending tradition with technology, Julia represents a major innovation in Rome’s tourism sector, improving accessibility and engagement for visitors worldwide.
