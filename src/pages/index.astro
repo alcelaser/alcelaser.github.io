@@ -62,8 +62,10 @@ try {
   // fallback: empty repos, page still renders
 }
 ---
-
 <Layout>
+  <!-- Background Animation for whole page -->
+  <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
+  
   <Nav />
   <Hero />
   <About />
@@ -488,149 +490,8 @@ try {
     });
   });
 
-  // =====================================================
-  // FISH SCHOOL BACKGROUND - HERO SECTION ONLY
-  // =====================================================
+</script>
 
-  // Wait for DOM to fully load
-  setTimeout(() => {
-    // Find the hero - it's a component, so look for main container
-    const main = document.querySelector('main');
-    if (!main) return;
-    
-    // Create canvas wrapper
-    const heroWrapper = document.createElement('div');
-    heroWrapper.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-    `;
-    
-    const canvas = document.createElement('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.cssText = `
-      width: 100%;
-      height: 100%;
-      opacity: 0.5;
-    `;
-    
-    heroWrapper.appendChild(canvas);
-    document.body.insertBefore(heroWrapper, document.body.firstChild);
-    
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    // Resize handler
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-    
-    // Line data
-    interface Line {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      length: number;
-      angle: number;
-    }
-    
-    const lines: Line[] = [];
-    const lineCount = 40;
-    
-    for (let i = 0; i < lineCount; i++) {
-      lines.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        length: Math.random() * 80 + 40,
-        angle: Math.random() * Math.PI * 2,
-      });
-    }
-    
-    let mouseX = canvas.width / 2;
-    let mouseY = canvas.height / 2;
-    
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-    
-    function animate() {
-      if (!ctx) return; // Null check for TypeScript
-      
-      // Only draw if on top portion of page
-      const scrollY = window.scrollY;
-      if (scrollY > window.innerHeight) {
-        requestAnimationFrame(animate);
-        return;
-      }
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      lines.forEach((line) => {
-        if (!ctx) return; // Null check for TypeScript
-        
-        // Calculate distance to mouse
-        const dx = mouseX - line.x;
-        const dy = mouseY - line.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        
-        // Fish behavior - attracted to mouse
-        if (dist < 250 && dist > 0) {
-          const attractX = (dx / dist) * 0.08;
-          const attractY = (dy / dist) * 0.08;
-          line.vx += attractX;
-          line.vy += attractY;
-        }
-        
-        // Velocity limits
-        const speed = Math.sqrt(line.vx * line.vx + line.vy * line.vy);
-        if (speed > 2) {
-          line.vx = (line.vx / speed) * 2;
-          line.vy = (line.vy / speed) * 2;
-        }
-        
-        // Update position
-        line.x += line.vx;
-        line.y += line.vy;
-        line.angle = Math.atan2(line.vy, line.vx);
-        
-        // Wrap around screen
-        if (line.x < -100) line.x = canvas.width + 100;
-        if (line.x > canvas.width + 100) line.x = -100;
-        if (line.y < -100) line.y = canvas.height + 100;
-        if (line.y > canvas.height + 100) line.y = -100;
-        
-        // Draw line
-        const endX = line.x + Math.cos(line.angle) * line.length;
-        const endY = line.y + Math.sin(line.angle) * line.length;
-        
-        // Color based on proximity to mouse
-        const opacity = dist < 200 ? 0.4 : 0.2;
-        const color = dist < 200 
-          ? `rgba(0, 212, 255, ${opacity})`
-          : `rgba(100, 100, 120, ${opacity})`;
-        
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.5;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(line.x, line.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-      });
-      
-      requestAnimationFrame(animate);
-    }
-    
-    animate();
-  }, 100);
+<script>
+  import '../scripts/particles';
 </script>

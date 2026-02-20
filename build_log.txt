@@ -1,48 +1,48 @@
-[2m19:53:46[22m [34m[content][39m Syncing content
-[2m19:53:46[22m [34m[content][39m Synced content
-[2m19:53:46[22m [34m[types][39m Generated [2m38ms[22m
-[2m19:53:46[22m [34m[build][39m output: [34m"static"[39m
-[2m19:53:46[22m [34m[build][39m mode: [34m"static"[39m
-[2m19:53:46[22m [34m[build][39m directory: [34mC:\Users\macca\Desktop\CV\alcelaser.github.io\dist\[39m
-[2m19:53:46[22m [34m[build][39m Collecting build info...
-[2m19:53:46[22m [34m[build][39m [32m✓ Completed in 55ms.[39m
-[2m19:53:46[22m [34m[build][39m Building static entrypoints...
-[2m19:53:47[22m [34m[vite][39m [32m✓ built in 1.01s[39m
-[2m19:53:47[22m [34m[build][39m [32m✓ Completed in 1.05s.[39m
+[2m20:34:11[22m [34m[content][39m Syncing content
+[2m20:34:11[22m [34m[content][39m Synced content
+[2m20:34:11[22m [34m[types][39m Generated [2m42ms[22m
+[2m20:34:11[22m [34m[build][39m output: [34m"static"[39m
+[2m20:34:11[22m [34m[build][39m mode: [34m"static"[39m
+[2m20:34:11[22m [34m[build][39m directory: [34mC:\Users\macca\Desktop\CV\alcelaser.github.io\dist\[39m
+[2m20:34:11[22m [34m[build][39m Collecting build info...
+[2m20:34:11[22m [34m[build][39m [32m✓ Completed in 60ms.[39m
+[2m20:34:11[22m [34m[build][39m Building static entrypoints...
+[2m20:34:12[22m [34m[vite][39m [32m✓ built in 1.00s[39m
+[2m20:34:12[22m [34m[build][39m [32m✓ Completed in 1.04s.[39m
 
 [42m[30m building client (vite) [39m[49m
-[2m19:53:47[22m [34m[vite][39m transforming...
-[2m19:53:49[22m [34m[vite][39m [32m✓[39m 15 modules transformed.
-[2m19:53:49[22m [34m[vite][39m rendering chunks...
-[2m19:53:49[22m [34m[vite][39m computing gzip size...
-[2m19:53:49[22m [34m[vite][39m [2mdist/[22m[36m_astro/ArticleLayout.astro_astro_type_script_index_0_lang.lYrMrDmV.js  [39m[1m[2m  0.32 kB[22m[1m[22m[2m │ gzip:   0.26 kB[22m
-[2m19:53:49[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.astro_astro_type_script_index_0_lang.D3vAoISa.js          [39m[1m[2m  2.30 kB[22m[1m[22m[2m │ gzip:   1.15 kB[22m
-[2m19:53:49[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.astro_astro_type_script_index_0_lang.DbMioR35.js          [39m[1m[2m  2.92 kB[22m[1m[22m[2m │ gzip:   1.32 kB[22m
-[2m19:53:49[22m [34m[vite][39m [2mdist/[22m[36m_astro/ScrollTrigger.Cv03IO65.js                                       [39m[1m[2m 43.63 kB[22m[1m[22m[2m │ gzip:  18.15 kB[22m
-[2m19:53:49[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.CB87Sc6I.js                                               [39m[1m[2m 70.32 kB[22m[1m[22m[2m │ gzip:  27.76 kB[22m
-[2m19:53:49[22m [34m[vite][39m [2mdist/[22m[36m_astro/Hero.astro_astro_type_script_index_0_lang.C7IHo8bV.js           [39m[1m[2m489.97 kB[22m[1m[22m[2m │ gzip: 124.10 kB[22m
-[2m19:53:49[22m [34m[vite][39m [32m✓ built in 1.56s[39m
+[2m20:34:12[22m [34m[vite][39m transforming...
+[2m20:34:13[22m [34m[vite][39m [32m✓[39m 15 modules transformed.
+[2m20:34:13[22m [34m[vite][39m rendering chunks...
+[2m20:34:13[22m [34m[vite][39m computing gzip size...
+[2m20:34:13[22m [34m[vite][39m [2mdist/[22m[36m_astro/ArticleLayout.astro_astro_type_script_index_0_lang.lYrMrDmV.js  [39m[1m[2m  0.32 kB[22m[1m[22m[2m │ gzip:   0.26 kB[22m
+[2m20:34:13[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.astro_astro_type_script_index_0_lang.CSeWRbeO.js          [39m[1m[2m  0.96 kB[22m[1m[22m[2m │ gzip:   0.54 kB[22m
+[2m20:34:13[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.astro_astro_type_script_index_1_lang.BMEnUBW6.js          [39m[1m[2m  1.19 kB[22m[1m[22m[2m │ gzip:   0.60 kB[22m
+[2m20:34:13[22m [34m[vite][39m [2mdist/[22m[36m_astro/ScrollTrigger.Cv03IO65.js                                       [39m[1m[2m 43.63 kB[22m[1m[22m[2m │ gzip:  18.15 kB[22m
+[2m20:34:13[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.CB87Sc6I.js                                               [39m[1m[2m 70.32 kB[22m[1m[22m[2m │ gzip:  27.76 kB[22m
+[2m20:34:13[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.astro_astro_type_script_index_0_lang.C7IHo8bV.js          [39m[1m[2m489.97 kB[22m[1m[22m[2m │ gzip: 124.10 kB[22m
+[2m20:34:13[22m [34m[vite][39m [32m✓ built in 1.27s[39m
 
 [42m[30m generating static routes [39m[49m
-[2m19:53:49[22m [32m▶[39m src/pages/blog/ai-bubble.md
-[2m19:53:49[22m   [34m└─[39m [2m/blog/ai-bubble/index.html[22m [2m(+9ms)[22m 
-[2m19:53:49[22m [32m▶[39m src/pages/blog/efficient-compute.md
-[2m19:53:49[22m   [34m└─[39m [2m/blog/efficient-compute/index.html[22m [2m(+4ms)[22m 
-[2m19:53:49[22m [32m▶[39m src/pages/blog/illusion-of-control.md
-[2m19:53:49[22m   [34m└─[39m [2m/blog/illusion-of-control/index.html[22m [2m(+3ms)[22m 
-[2m19:53:49[22m [32m▶[39m src/pages/blog/julia-ai.md
-[2m19:53:49[22m   [34m└─[39m [2m/blog/julia-ai/index.html[22m [2m(+4ms)[22m 
-[2m19:53:49[22m [32m▶[39m src/pages/blog/vibe-coding.md
-[2m19:53:49[22m   [34m└─[39m [2m/blog/vibe-coding/index.html[22m [2m(+3ms)[22m 
-[2m19:53:49[22m [32m▶[39m src/pages/blog/index.astro
-[2m19:53:49[22m   [34m└─[39m [2m/blog/index.html[22mAstro.glob is deprecated and will be removed in a future major version of Astro.
+[2m20:34:13[22m [32m▶[39m src/pages/blog/ai-bubble.md
+[2m20:34:13[22m   [34m└─[39m [2m/blog/ai-bubble/index.html[22m [2m(+8ms)[22m 
+[2m20:34:13[22m [32m▶[39m src/pages/blog/efficient-compute.md
+[2m20:34:13[22m   [34m└─[39m [2m/blog/efficient-compute/index.html[22m [2m(+2ms)[22m 
+[2m20:34:13[22m [32m▶[39m src/pages/blog/illusion-of-control.md
+[2m20:34:13[22m   [34m└─[39m [2m/blog/illusion-of-control/index.html[22m [2m(+3ms)[22m 
+[2m20:34:13[22m [32m▶[39m src/pages/blog/julia-ai.md
+[2m20:34:13[22m   [34m└─[39m [2m/blog/julia-ai/index.html[22m [2m(+2ms)[22m 
+[2m20:34:13[22m [32m▶[39m src/pages/blog/vibe-coding.md
+[2m20:34:13[22m   [34m└─[39m [2m/blog/vibe-coding/index.html[22m [2m(+2ms)[22m 
+[2m20:34:13[22m [32m▶[39m src/pages/blog/index.astro
+[2m20:34:13[22m   [34m└─[39m [2m/blog/index.html[22mAstro.glob is deprecated and will be removed in a future major version of Astro.
 Use import.meta.glob instead: https://vitejs.dev/guide/features.html#glob-import
- [2m(+5ms)[22m 
-[2m19:53:49[22m [32m▶[39m src/pages/index.astro
-[2m19:53:49[22m   [34m└─[39m [2m/index.html[22mAstro.glob is deprecated and will be removed in a future major version of Astro.
+ [2m(+4ms)[22m 
+[2m20:34:13[22m [32m▶[39m src/pages/index.astro
+[2m20:34:13[22m   [34m└─[39m [2m/index.html[22mAstro.glob is deprecated and will be removed in a future major version of Astro.
 Use import.meta.glob instead: https://vitejs.dev/guide/features.html#glob-import
- [2m(+306ms)[22m 
-[2m19:53:49[22m [32m✓ Completed in 377ms.
+ [2m(+312ms)[22m 
+[2m20:34:13[22m [32m✓ Completed in 368ms.
 [39m
-[2m19:53:49[22m [34m[build][39m 7 page(s) built in [1m3.07s[22m
-[2m19:53:49[22m [34m[build][39m [1mComplete![22m
+[2m20:34:13[22m [34m[build][39m 7 page(s) built in [1m2.76s[22m
+[2m20:34:13[22m [34m[build][39m [1mComplete![22m
