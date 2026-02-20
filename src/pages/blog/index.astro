@@ -12,6 +12,16 @@ const sortedPosts = allPosts;
 <Layout title="Blog | Alberto Maccanico">
   <Nav />
   
+  <div class="max-w-5xl mx-auto py-32 px-6 min-h-screen">
+    <div class="mb-16 section-fade">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Blog & Articles</span>
+      </h1>
+      <p class="text-text-secondary max-w-2xl text-lg">
+        Just paste your Markdown (.md) files into the <code>src/pages/blog/</code> folder to add new articles instantly.
+      </p>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mt-8"></div>
+    </div>
 
     <div class="grid md:grid-cols-2 gap-6">
       {sortedPosts.map((post) => {
@@ -42,18 +52,24 @@ const sortedPosts = allPosts;
 </Layout>
 
 <script>
-  // Section fade-in observer
-  const faders = document.querySelectorAll('.section-fade');
-  const fadeObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          fadeObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-  faders.forEach((el) => fadeObserver.observe(el));
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  const container = document.querySelector('.max-w-5xl');
+  if (container) {
+    const faders = container.querySelectorAll('.section-fade');
+    gsap.to(faders, {
+      scrollTrigger: {
+        trigger: container,
+        start: "top 85%",
+      },
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.1
+    });
+  }
 </script>

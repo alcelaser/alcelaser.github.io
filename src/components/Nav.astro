@@ -36,7 +36,7 @@ const links = [
       <!-- Mobile hamburger -->
       <button
         id="menu-toggle"
-        class="md:hidden flex flex-col gap-1.5 p-2"
+        class="md:hidden relative z-50 flex flex-col gap-1.5 p-2"
         aria-label="Toggle menu"
       >
         <span class="block w-5 h-0.5 bg-text-primary transition-all duration-300 origin-center" id="bar1"></span>
@@ -45,20 +45,18 @@ const links = [
       </button>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden transition-all duration-300">
-      <div class="pt-4 pb-2 flex flex-col gap-3">
-        {
-          links.map((link) => (
-            <a
-              href={link.href}
-              class="mobile-nav-link text-sm text-text-secondary hover:text-accent-blue transition-colors duration-300 py-1"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </div>
+    <!-- Mobile menu overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-bg-primary/95 backdrop-blur-xl md:hidden translate-y-[-100%] transition-transform duration-500 flex flex-col items-center justify-center gap-8">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="mobile-nav-link text-2xl font-semibold text-text-secondary hover:text-accent-blue transition-colors duration-300 transform hover:scale-110"
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </div>
   </div>
 </nav>
@@ -117,12 +115,14 @@ const links = [
   toggle.addEventListener('click', () => {
     menuOpen = !menuOpen;
     if (menuOpen) {
-      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      mobileMenu.classList.remove('translate-y-[-100%]');
+      mobileMenu.classList.add('translate-y-0');
       bar1.style.transform = 'rotate(45deg) translate(3px, 3px)';
       bar2.style.opacity = '0';
       bar3.style.transform = 'rotate(-45deg) translate(3px, -3px)';
     } else {
-      mobileMenu.style.maxHeight = '0';
+      mobileMenu.classList.remove('translate-y-0');
+      mobileMenu.classList.add('translate-y-[-100%]');
       bar1.style.transform = '';
       bar2.style.opacity = '1';
       bar3.style.transform = '';
@@ -133,7 +133,8 @@ const links = [
   document.querySelectorAll('.mobile-nav-link').forEach((link) => {
     link.addEventListener('click', () => {
       menuOpen = false;
-      mobileMenu.style.maxHeight = '0';
+      mobileMenu.classList.remove('translate-y-0');
+      mobileMenu.classList.add('translate-y-[-100%]');
       bar1.style.transform = '';
       bar2.style.opacity = '1';
       bar3.style.transform = '';

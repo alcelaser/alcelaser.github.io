@@ -124,18 +124,26 @@ const { frontmatter } = Astro.props;
 </style>
 
 <script>
-  // Section fade-in observer for markdown items
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
   const faders = document.querySelectorAll('.section-fade');
-  const fadeObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          fadeObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-  faders.forEach((el) => fadeObserver.observe(el));
+  if (faders.length > 0) {
+    gsap.fromTo(faders, 
+      { y: 30, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: ".markdown-content",
+          start: "top 85%",
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.15
+      }
+    );
+  }
 </script>
