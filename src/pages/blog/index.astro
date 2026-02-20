@@ -12,7 +12,10 @@ const sortedPosts = allPosts;
 <Layout title="Blog | Alberto Maccanico">
   <Nav />
   
-  <div class="max-w-5xl mx-auto py-32 px-6 min-h-screen">
+  <!-- Cool technical neural network background animation -->
+  <canvas id="blog-bg-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-[-1] opacity-40"></canvas>
+  
+  <div class="max-w-5xl mx-auto py-32 px-6 min-h-screen relative z-10">
     <div class="mb-16 section-fade">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">
         <span class="gradient-text">Blog & Articles</span>
@@ -102,4 +105,108 @@ const sortedPosts = allPosts;
       }, 500);
     });
   });
+
+  // ==========================================
+  // TECHNICAL BACKGROUND ANIMATION (Neural Network)
+  // ==========================================
+  const canvas = document.getElementById('blog-bg-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles: {x: number, y: number, vx: number, vy: number, size: number}[] = [];
+      const particleCount = Math.floor((window.innerWidth * window.innerHeight) / 15000); // responsive count
+      const connectionDistance = 150;
+
+      for (let i = 0; i < particleCount; i++) {
+         particles.push({
+           x: Math.random() * width,
+           y: Math.random() * height,
+           vx: (Math.random() - 0.5) * 0.6,
+           vy: (Math.random() - 0.5) * 0.6,
+           size: Math.random() * 2 + 0.5
+         });
+      }
+
+      let mouse = { x: -1000, y: -1000 };
+      document.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      function render() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          let p = particles[i];
+          
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(0, 212, 255, 0.6)';
+          ctx.fill();
+
+          // Connect particles to each other
+          for (let j = i + 1; j < particles.length; j++) {
+            let p2 = particles[j];
+            let dx = p.x - p2.x;
+            let dy = p.y - p2.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < connectionDistance) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              let opacity = 1 - (dist / connectionDistance);
+              // using accent-purple for connections between nodes
+              ctx.strokeStyle = `rgba(124, 58, 237, ${opacity * 0.25})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+          
+          // Connect to mouse and attract
+          let dxMouse = p.x - mouse.x;
+          let dyMouse = p.y - mouse.y;
+          let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+          if (distMouse < 200) {
+             ctx.beginPath();
+             ctx.moveTo(p.x, p.y);
+             ctx.lineTo(mouse.x, mouse.y);
+             let opacity = 1 - (distMouse / 200);
+             // using accent-blue for mouse connections
+             ctx.strokeStyle = `rgba(0, 212, 255, ${opacity * 0.4})`;
+             ctx.stroke();
+             
+             // Slight attraction to mouse
+             p.vx -= (dxMouse / distMouse) * 0.015;
+             p.vy -= (dyMouse / distMouse) * 0.015;
+          }
+          
+          // Speed limit
+          let speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+          if (speed > 1.2) {
+            p.vx = (p.vx / speed) * 1.2;
+            p.vy = (p.vy / speed) * 1.2;
+          }
+        }
+
+        requestAnimationFrame(render);
+      }
+      render();
+    }
+  }
 </script>
