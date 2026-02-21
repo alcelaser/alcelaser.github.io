@@ -39,10 +39,11 @@ if (canvas) {
     baseVelocities[i + 2] = vz;
 
     // Randomize colors for each particle
-    const mixedColor = colorBlue.clone().lerp(colorPurple, Math.random());
-    colors[i] = mixedColor.r;
-    colors[i + 1] = mixedColor.g;
-    colors[i + 2] = mixedColor.b;
+    const color = new THREE.Color();
+    color.setHSL(Math.random(), 0.8, 0.6);
+    colors[i] = color.r;
+    colors[i + 1] = color.g;
+    colors[i + 2] = color.b;
   }
 
   const geometry = new THREE.BufferGeometry();

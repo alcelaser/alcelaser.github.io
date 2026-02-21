@@ -42,16 +42,15 @@ import { personal } from '../data/cv';
     </div>
 
     <h1
-      class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-light mb-4 md:mb-6 opacity-0 drop-shadow-2xl tracking-[0.05em] uppercase"
+      class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-medium mb-4 md:mb-6 opacity-0 drop-shadow-xl"
       id="hero-name"
-      data-name={personal.name}
     >
       <span class="gradient-text">{personal.name}</span>
     </h1>
 
     <div class="h-8 md:h-10 mb-8 overflow-hidden">
       <p
-        class="font-display font-medium text-base sm:text-lg md:text-2xl text-accent-blue opacity-0 drop-shadow-md tracking-[0.1em] sm:tracking-[0.15em] uppercase"
+        class="font-display font-normal text-base sm:text-lg md:text-xl text-text-primary opacity-0 drop-shadow-sm"
         id="hero-tagline"
       >
         <span id="typewriter"></span>
@@ -62,7 +61,7 @@ import { personal } from '../data/cv';
     <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 opacity-0 mt-6 md:mt-8 w-full px-4 sm:px-0" id="hero-cta">
       <a
         href="#projects"
-        class="group relative px-6 md:px-8 py-3 rounded-full font-display uppercase tracking-widest font-semibold text-[11px] md:text-sm overflow-hidden w-full sm:w-auto"
+        class="group relative px-6 md:px-8 py-3 rounded-full font-medium text-[14px] md:text-[15px] overflow-hidden w-full sm:w-auto"
       >
         <span class="absolute inset-0 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full"></span>
         <span class="absolute inset-[2px] bg-bg-primary rounded-full transition-all group-hover:bg-opacity-0"></span>
@@ -71,14 +70,14 @@ import { personal } from '../data/cv';
 
       <a
         href="/blog"
-        class="px-6 md:px-8 py-3 rounded-full font-display uppercase tracking-widest font-semibold text-[11px] md:text-sm glass text-text-primary hover:text-accent-blue transition-colors border-accent-blue/30 w-full sm:w-auto"
+        class="px-6 md:px-8 py-3 rounded-full font-medium text-[14px] md:text-[15px] glass text-text-primary hover:text-accent-blue transition-colors border-accent-blue/30 w-full sm:w-auto"
       >
         Read Blog
       </a>
 
       <a
         href="#contact"
-        class="px-6 md:px-8 py-3 rounded-full font-display uppercase tracking-widest font-semibold text-[11px] md:text-sm glass text-text-secondary hover:text-accent-purple transition-colors w-full sm:w-auto"
+        class="px-6 md:px-8 py-3 rounded-full font-medium text-[14px] md:text-[15px] glass text-text-secondary hover:text-accent-purple transition-colors w-full sm:w-auto"
       >
         Contact
       </a>
@@ -88,7 +87,7 @@ import { personal } from '../data/cv';
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0" id="scroll-indicator">
     <div class="flex flex-col items-center gap-2 text-text-muted">
-      <span class="text-[0.65rem] uppercase tracking-[0.3em] font-display font-bold">Scroll</span>
+      <span class="text-xs font-mono">scroll</span>
       <div class="w-5 h-8 rounded-full border border-text-muted/30 flex justify-center pt-1.5">
         <div class="w-1 h-2 rounded-full bg-accent-blue animate-bounce"></div>
       </div>
@@ -136,24 +135,6 @@ import { personal } from '../data/cv';
     setTimeout(type, delay);
   }
 
-  function scrambleText(element: HTMLElement, originalText: string) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>';
-    let iteration = 0;
-    const interval = setInterval(() => {
-      element.innerText = originalText.split('').map((letter, index) => {
-        if (index < iteration) {
-          return originalText[index];
-        }
-        return chars[Math.floor(Math.random() * chars.length)];
-      }).join('');
-      
-      if (iteration >= originalText.length) {
-        clearInterval(interval);
-      }
-      iteration += 1 / 2;
-    }, 40);
-  }
-
   // Hero entrance animations
   function animateHero() {
     const socials = document.getElementById('hero-socials')!;
@@ -168,15 +149,6 @@ import { personal } from '../data/cv';
         el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         el.style.transform = 'translateY(0)';
         el.style.opacity = '1';
-
-        // Trigger scramble when name fades in
-        if (el.id === 'hero-name') {
-           const span = el.querySelector('.gradient-text') as HTMLElement;
-           if (span) {
-             const originalText = el.getAttribute('data-name') || '';
-             scrambleText(span, originalText);
-           }
-        }
       }, 300 + i * 200);
       el.style.transform = 'translateY(20px)';
     });
