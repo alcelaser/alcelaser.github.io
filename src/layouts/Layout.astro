@@ -29,13 +29,20 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <title>{title}</title>
   </head>
   <body class="bg-bg-primary text-text-primary antialiased">
+    <!-- Global Background Animation -->
+    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
+    
     <slot />
+
+    <script>
+      import '../scripts/particles';
+    </script>
   </body>
 </html>

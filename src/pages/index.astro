@@ -14,7 +14,7 @@ import {
 } from '../data/cv';
 
 // Fetch articles from the blog folder
-const allPosts = await Astro.glob('./blog/*.md');
+const allPosts = Object.values(import.meta.glob<{ url: string, frontmatter: any }>('./blog/*.md', { eager: true }));
 const displayedArticles = allPosts.slice(0, 4); // Display up to 4 articles
 
 const skillCategories = [
@@ -63,9 +63,6 @@ try {
 }
 ---
 <Layout>
-  <!-- Background Animation for whole page -->
-  <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
-  
   <Nav />
   <Hero />
   <About />
@@ -490,8 +487,4 @@ try {
     });
   });
 
-</script>
-
-<script>
-  import '../scripts/particles';
 </script>

@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 
 // Fetch all markdown files in the blog directory
-const allPosts = await Astro.glob('./*.md');
+const allPosts = Object.values(import.meta.glob<{ url: string, frontmatter: any }>('./*.md', { eager: true }));
 
 // Sort by date or just reverse so newest is on top (since there is no date now, just raw array)
 const sortedPosts = allPosts;
@@ -12,7 +12,7 @@ const sortedPosts = allPosts;
 <Layout title="Blog | Alberto Maccanico">
   <Nav />
   
-  <div class="max-w-5xl mx-auto py-32 px-6 min-h-screen relative z-10">
+  <div id="blog-content" class="max-w-5xl mx-auto py-32 px-6 min-h-screen relative z-10">
     <div class="mb-16 section-fade">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">
         <span class="gradient-text">Blog & Articles</span>
@@ -50,29 +50,32 @@ const sortedPosts = allPosts;
 
 <script>
   import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
 
-  // Timeline for a gorgeous staggered entrance on load
-  const tl = gsap.timeline();
-
-  const header = document.querySelector('.max-w-5xl > .mb-16');
-  const cards = document.querySelectorAll('.grid > a.glass');
-
-  if (header) {
-    tl.fromTo(header,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
-    );
-  }
-
-  if (cards.length > 0) {
-    tl.fromTo(cards,
-      { y: 50, opacity: 0, scale: 0.95 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.2)" },
-      "-=0.4" // Start animating cards slightly before header finishes
+  // Animate header and cards on scroll
+  const container = document.getElementById('blog-content');
+  if (container) {
+    const faders = container.querySelectorAll('.section-fade');
+    gsap.fromTo(faders, 
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: container,
+          start: "top 80%",
+        }
+      }
     );
   }
 
   // 3D MOUSE-FOLLOWING CARD TILT
+  const cards = document.querySelectorAll('.glass');
   cards.forEach((card) => {
     const cardEl = card as HTMLElement;
     
