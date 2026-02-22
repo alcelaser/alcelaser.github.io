@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import TimelineCard from '../components/TimelineCard.astro';
-import { getCV, useTranslations } from '../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import TimelineCard from '../../components/TimelineCard.astro';
+import { getCV, useTranslations } from '../../i18n/utils';
 
 const lang = Astro.currentLocale || 'en';
 const {
@@ -18,7 +18,7 @@ const {
 const t = useTranslations(lang);
 
 // Fetch articles from the blog folder
-const allPosts = Object.values(import.meta.glob<{ url: string, frontmatter: any }>('./blog/*.md', { eager: true }));
+const allPosts = Object.values(import.meta.glob<{ url: string, frontmatter: any }>('../blog/*.md', { eager: true }));
 const displayedArticles = allPosts.slice(0, 4); // Display up to 4 articles
 
 const skillCategories = [

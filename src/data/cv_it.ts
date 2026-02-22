@@ -1,17 +1,17 @@
 export const personal = {
   name: 'Alberto Maccanico',
-  title: 'AI & Management Student | Software Developer',
+  title: 'Studente di AI & Management | Sviluppatore Software',
   email: 'maccanicoalberto@gmail.com',
-  phone: 'ask via e-mail',
-  location: 'Rome, Italy',
-  nationality: 'Italian',
+  phone: 'richiedi via e-mail',
+  location: 'Roma, Italia',
+  nationality: 'Italiana',
   github: 'https://github.com/alcelaser',
   githubHandle: 'alcelaser',
   linkedin: 'https://www.linkedin.com/in/alberto-maccanico-16266b30a/',
   summary:
-    'University student with international experience and a strong scientific background. ' +
-    'Passionate about research, algorithm design, management, and building software that matters. ' +
-    'Experienced in both laboratory and software environments across Italy, Belgium, and the Netherlands.',
+    'Studente universitario con esperienza internazionale e forte background scientifico. ' +
+    'Appassionato di ricerca, progettazione di algoritmi, management e di sviluppo software ad alto impatto. ' +
+    'Ha maturato esperienza sia in laboratorio che in ambienti software in Italia, Belgio e Paesi Bassi.',
 };
 
 export interface Experience {
@@ -24,32 +24,32 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
-    role: 'Software Developer',
+    role: 'Sviluppatore Software',
     company: 'Freelance',
     type: 'Freelance',
-    period: '2019 – Present',
+    period: '2019 – Presente',
     bullets: [
-      'Full-stack web and mobile projects for various clients',
-      'Specialising in Flutter, Vue, TypeScript, and Python',
+      'Progetti web e mobile full-stack per vari clienti',
+      'Specializzato in Flutter, Vue, TypeScript e Python',
     ],
   },
   {
-    role: 'Software Developer',
+    role: 'Sviluppatore Software',
     company: 'Inotum L.L.C',
-    type: 'Junior Developer',
-    period: 'Sept 2023 – Dec 2023',
+    type: 'Sviluppatore Junior',
+    period: 'Sett 2023 – Dic 2023',
     bullets: [
-      'Worked with Laravel and OpenLLaMA models',
-      'Focus on prompt engineering and enterprise software',
+      'Esperienza con i modelli Laravel e OpenLLaMA',
+      'Focus su prompt engineering e software aziendale',
     ],
   },
   {
-    role: 'Laboratory Assistant',
+    role: 'Assistente di Laboratorio',
     company: 'ISF Waterloo',
-    type: 'Chemical Lab Technician',
-    period: 'Sept 2019 – Oct 2020',
+    type: 'Tecnico di Laboratorio Chimico',
+    period: 'Sett 2019 – Ott 2020',
     bullets: [
-      'Supported science labs, data collection, and experiment setup',
+      'Supporto a laboratori scientifici, raccolta dati e preparazione di esperimenti',
     ],
   },
 ];
@@ -64,38 +64,38 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    institution: 'LUISS Guido Carli University',
-    location: 'Rome',
-    degree: 'BSc in Artificial Intelligence and Management (in progress)',
-    period: 'September 2024 – Present',
+    institution: 'Università LUISS Guido Carli',
+    location: 'Roma',
+    degree: 'Laurea in Artificial Intelligence and Management (in corso)',
+    period: 'Settembre 2024 – Presente',
   },
   {
     institution: 'Vrije Universiteit Amsterdam',
-    location: 'Netherlands',
-    degree: 'BSc in Computer Science (Bioinformatics Track – Discontinued)',
-    period: 'Sept 2022 – June 2025',
+    location: 'Paesi Bassi',
+    degree: 'Laurea in Computer Science (Indirizzo Bioinformatica – Interrotta)',
+    period: 'Sett 2022 – Giu 2025',
   },
   {
     institution: 'International School of Flanders',
-    location: 'Waterloo, Belgium',
+    location: 'Waterloo, Belgio',
     degree: 'A Levels & IGCSEs',
     period: '2017 – 2021',
     details: [
-      'A Levels (2021): French (A*), Mathematics (B), Physics (B)',
-      'IGCSEs (2019): 9 Subjects incl. Coordinated Sciences, French, English Literature, Business, History',
+      'A Levels (2021): Francese (A*), Matematica (B), Fisica (B)',
+      'IGCSEs (2019): 9 materie tra cui Scienze Coordinate, Francese, Letteratura Inglese, Business, Storia',
     ],
   },
   {
     institution: 'SAT',
     location: '',
-    degree: 'Scholastic Aptitude Test — 1350/1600 (90th Percentile)',
+    degree: 'Scholastic Aptitude Test — 1350/1600 (90° Percentile)',
     period: '',
-    details: ['Math: 650 — Reading & Writing: 700'],
+    details: ['Matematica: 650 — Lettura e Scrittura: 700'],
   },
   {
     institution: 'ISF Waterloo',
-    location: 'Waterloo, Belgium',
-    degree: 'High School',
+    location: 'Waterloo, Belgio',
+    degree: 'Scuola Superiore',
     period: '2017 - 2021',
   },
 ];
@@ -120,25 +120,25 @@ export const skills: Skill[] = [
   { name: 'x86 Assembly', category: 'programming' },
   { name: 'Dart', category: 'programming' },
   { name: 'Flutter', category: 'programming' },
-  { name: 'LLM Development', category: 'ai' },
+  { name: 'Sviluppo LLM', category: 'ai' },
   { name: 'Token Embedding', category: 'ai' },
-  { name: 'Ethical Use of AI', category: 'ai' },
+  { name: 'Uso Etico dell\'AI', category: 'ai' },
   { name: 'Machine Learning', category: 'ai' },
-  { name: 'Bioinformatics', category: 'ai' },
+  { name: 'Bioinformatica', category: 'ai' },
   { name: 'Large Language Models', category: 'ai' },
-  { name: 'Generative AI', category: 'ai' },
+  { name: 'AI Generativa', category: 'ai' },
   { name: 'Neural Scaling Laws', category: 'ai' },
   { name: 'Prompt Engineering', category: 'ai' },
   { name: 'LaTeX', category: 'tools' },
   { name: 'Git', category: 'tools' },
-  { name: 'Scientific Writing', category: 'tools' },
-  { name: 'No-Code/Low-Code Platforms', category: 'tools' },
-  { name: 'OpenAI API', category: 'tools' },
+  { name: 'Scrittura Scientifica', category: 'tools' },
+  { name: 'Piattaforme No-Code/Low-Code', category: 'tools' },
+  { name: 'API OpenAI', category: 'tools' },
   { name: 'Teamwork', category: 'soft' },
-  { name: 'MUN Vice-Chair', category: 'soft' },
-  { name: 'Multilingual', category: 'soft' },
-  { name: 'Research', category: 'soft' },
-  { name: 'Google Developer Group Guido Carli Press Writer', category: 'soft' },
+  { name: 'Vice-Presidente MUN', category: 'soft' },
+  { name: 'Multilingue', category: 'soft' },
+  { name: 'Ricerca', category: 'soft' },
+  { name: 'Redattore per Google Developer Group Guido Carli', category: 'soft' },
 ];
 
 export interface Award {
@@ -149,26 +149,26 @@ export interface Award {
 
 export const awards: Award[] = [
   {
-    title: 'International Certificate of Excellence - Distinction',
-    issuer: 'University of Cambridge',
+    title: 'Certificato Internazionale di Eccellenza - Distinzione',
+    issuer: 'Università di Cambridge',
   },
   {
     title: 'Royal Society of Chemistry',
     issuer: 'RSC',
-    detail: 'Bronze (S1&2), Silver (S3)',
+    detail: 'Bronzo (S1&2), Argento (S3)',
   },
   {
-    title: "Primary's Choice – Science Fair",
+    title: "Scelta Primaria – Fiera della Scienza",
     issuer: 'ISF Waterloo',
   },
   {
-    title: 'Model United Nations – Speaker',
+    title: 'Model United Nations – Oratore',
     issuer: 'Cambridge 2019',
   },
   {
-    title: 'Google x LUISS Prompt-a-Thon',
+    title: 'Prompt-a-Thon Google x LUISS',
     issuer: 'Google & LUISS',
-    detail: 'Participant',
+    detail: 'Partecipante',
   },
 ];
 
@@ -182,14 +182,14 @@ export interface Article {
 export const articles: Article[] = [
   {
     title: 'Vibe Coding',
-    description: 'Coding in the modern age.',
+    description: 'La programmazione nell\'era moderna.',
     url: '',
     publication: '',
   },
   {
-    title: "The Efficient Compute Frontier – AI's Great Filter",
+    title: "La Frontiera Efficiente del Calcolo – Il Grande Filtro dell'AI",
     description:
-      'Discusses efficiency in AI development and its potential constraints on future innovation.',
+      'Discute l\'efficienza nello sviluppo dell\'AI e i suoi potenziali vincoli sull\'innovazione futura.',
     url: '',
     publication: '',
   },
@@ -204,33 +204,33 @@ export interface Language {
 
 export const languages: Language[] = [
   {
-    name: 'Italian',
+    name: 'Italiano',
     level: 'C2',
-    detail: 'Native speaker',
+    detail: 'Madrelingua',
     percent: 100,
   },
   {
-    name: 'English',
+    name: 'Inglese',
     level: 'C2',
     detail: 'IELTS 8.0 (Speaking 9.0)',
     percent: 95,
   },
   {
-    name: 'French',
+    name: 'Francese',
     level: 'C1',
     detail: 'A* A Level (90%-100%)',
     percent: 88,
   },
   {
-    name: 'Spanish',
+    name: 'Spagnolo',
     level: 'B2',
-    detail: 'Upper intermediate',
+    detail: 'Livello Intermedio Superiore',
     percent: 65,
   },
   {
-    name: 'German',
+    name: 'Tedesco',
     level: 'A1',
-    detail: 'Work in progress, following a language course',
+    detail: 'In corso, seguendo un corso di lingua',
     percent: 25,
   },
 ];

@@ -10,10 +10,12 @@ const {
   title = 'Alberto Maccanico | Developer & AI Student',
   description = 'Personal CV and portfolio of Alberto Maccanico – AI & Management student, software developer, and researcher based in Rome.',
 } = Astro.props;
+
+const lang = Astro.currentLocale || 'en';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

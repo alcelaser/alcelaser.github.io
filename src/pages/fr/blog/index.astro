@@ -1,10 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Nav from '../../components/Nav.astro';
-import { useTranslations } from '../../i18n/utils';
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import { useTranslations } from '../../../i18n/utils';
 
 // Fetch all markdown files in the blog directory
-const allPosts = Object.values(import.meta.glob<{ url: string, frontmatter: any }>('./*.md', { eager: true }));
+const allPosts = Object.values(import.meta.glob<{ url: string, frontmatter: any }>('../../blog/*.md', { eager: true }));
 
 // Sort by date or just reverse so newest is on top (since there is no date now, just raw array)
 const sortedPosts = allPosts;
