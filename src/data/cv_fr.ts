@@ -24,6 +24,17 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
+    role: 'Chercheur',
+    company: 'Google Developer Group on Campus – Guido Carli',
+    type: 'Recherche',
+    period: '2026',
+    bullets: [
+      'Co-auteur de l\'article de recherche : "Anomaly Detection in Spacecraft Telemetry: An Ensemble Approach"',
+      'Développement d\'un framework d\'ensemble hybride combinant Isolation Forest, un prédicteur temporel inspiré de Telemanom et une couche de méta-apprentissage XGBoost',
+      'Travail avec le jeu de données ESA Anomaly Detection Benchmark, avec un accent sur l\'interprétabilité via l\'analyse d\'importance des caractéristiques arborescentes',
+    ],
+  },
+  {
     role: 'Développeur Logiciel',
     company: 'Freelance',
     type: 'Freelance',
@@ -192,6 +203,13 @@ export const articles: Article[] = [
       'Examine l\'efficacité dans le développement de l\'IA et ses contraintes potentielles sur l\'innovation future.',
     url: '',
     publication: '',
+  },
+  {
+    title: 'L\'Informatique Quantique sur la Scène Mondiale',
+    description:
+      'Examine comment la superposition, l\'intrication et les investissements mondiaux façonnent la course à l\'avantage quantique.',
+    url: 'https://googleguidocarli.wordpress.com/2026/02/24/quantum-computing-on-the-global-stage/',
+    publication: 'Google Developer Group Guido Carli',
   },
 ];
 
