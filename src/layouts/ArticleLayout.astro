@@ -123,6 +123,9 @@ const { frontmatter } = Astro.props;
   }
 
   /* ── Footnote reference (superscript number in text) ── */
+  .markdown-content .prose sup {
+    line-height: 0;
+  }
   .markdown-content .prose sup a[data-footnote-ref] {
     display: inline-flex;
     align-items: center;
@@ -141,6 +144,7 @@ const { frontmatter } = Astro.props;
     vertical-align: super;
     transition: all 0.25s ease;
     backdrop-filter: blur(4px);
+    cursor: pointer;
   }
   .markdown-content .prose sup a[data-footnote-ref]:hover {
     color: #fff;
@@ -150,7 +154,107 @@ const { frontmatter } = Astro.props;
     transform: translateY(-1px);
   }
 
-  /* ── Footnotes section at the bottom ── */
+  /* ── Footnote popover card ── */
+  .fn-popover {
+    position: absolute;
+    z-index: 100;
+    width: min(26rem, 90vw);
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, rgba(15, 15, 25, 0.97), rgba(20, 20, 35, 0.97));
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(16px);
+    box-shadow:
+      0 0 20px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(124, 58, 237, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .fn-popover.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fn-popover::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: var(--arrow-left, 1.5rem);
+    width: 12px;
+    height: 12px;
+    background: rgba(15, 15, 25, 0.97);
+    border-top: 1px solid rgba(124, 58, 237, 0.3);
+    border-left: 1px solid rgba(124, 58, 237, 0.3);
+    transform: rotate(45deg);
+  }
+  .fn-popover.above::before {
+    top: auto;
+    bottom: -6px;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+    border-right: 1px solid rgba(124, 58, 237, 0.3);
+  }
+  .fn-popover-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-accent-purple);
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(0, 212, 255, 0.12));
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: 9999px;
+    min-width: 1.4em;
+    height: 1.4em;
+    padding: 0 0.3em;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+  .fn-popover-body {
+    display: flex;
+    align-items: flex-start;
+  }
+  .fn-popover-text {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    flex: 1;
+  }
+  .fn-popover-text em {
+    color: var(--color-text-muted);
+  }
+  .fn-popover-text strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+  .fn-popover-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.6rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+    line-height: 1;
+  }
+  .fn-popover-close:hover {
+    color: var(--color-accent-blue);
+    background: rgba(0, 212, 255, 0.1);
+  }
+
+  /* ── Footnotes section at the bottom (kept but collapsed) ── */
   .markdown-content .prose .footnotes {
     margin-top: 4rem;
     padding-top: 2rem;
@@ -238,12 +342,12 @@ const { frontmatter } = Astro.props;
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  
+
   gsap.registerPlugin(ScrollTrigger);
 
   const faders = document.querySelectorAll('.section-fade');
   if (faders.length > 0) {
-    gsap.fromTo(faders, 
+    gsap.fromTo(faders,
       { y: 30, opacity: 0 },
       {
         scrollTrigger: {
@@ -258,4 +362,122 @@ const { frontmatter } = Astro.props;
       }
     );
   }
+
+  /* ── Footnote popover logic ── */
+  let activePopover: HTMLElement | null = null;
+
+  function closePopover() {
+    if (!activePopover) return;
+    activePopover.classList.remove('visible');
+    const pop = activePopover;
+    setTimeout(() => pop.remove(), 250);
+    activePopover = null;
+  }
+
+  function getFootnoteContent(id: string): string {
+    // id is like "user-content-fn-3"
+    const li = document.getElementById(id);
+    if (!li) return '';
+    // Clone and strip the back-ref link
+    const clone = li.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll('a[data-footnote-backref]').forEach(a => a.remove());
+    // Get inner HTML of the <p> tags (or fallback to full content)
+    const paragraphs = clone.querySelectorAll('p');
+    if (paragraphs.length > 0) {
+      return Array.from(paragraphs).map(p => p.innerHTML).join('<br>');
+    }
+    return clone.innerHTML;
+  }
+
+  document.querySelectorAll('sup a[data-footnote-ref]').forEach(ref => {
+    ref.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // If clicking the same ref, just close
+      const href = (ref as HTMLAnchorElement).getAttribute('href') || '';
+      const fnId = href.replace('#', '');
+      if (activePopover && activePopover.dataset.fnId === fnId) {
+        closePopover();
+        return;
+      }
+      closePopover();
+
+      const number = ref.textContent || '?';
+      const content = getFootnoteContent(fnId);
+      if (!content) return;
+
+      // Build card
+      const card = document.createElement('div');
+      card.className = 'fn-popover';
+      card.dataset.fnId = fnId;
+      card.innerHTML = `
+        <button class="fn-popover-close" aria-label="Close">&times;</button>
+        <div class="fn-popover-body">
+          <span class="fn-popover-badge">${number}</span>
+          <div class="fn-popover-text">${content}</div>
+        </div>
+      `;
+
+      // Position relative to the sup element
+      const sup = ref.closest('sup') || ref;
+      const rect = sup.getBoundingClientRect();
+      const scrollY = window.scrollY;
+      const scrollX = window.scrollX;
+
+      // Append to body first (invisible) to measure
+      document.body.appendChild(card);
+      const cardH = card.offsetHeight;
+      const cardW = card.offsetWidth;
+
+      // Decide above or below
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const placeAbove = spaceBelow < cardH + 16 && rect.top > cardH + 16;
+
+      let top: number;
+      if (placeAbove) {
+        top = rect.top + scrollY - cardH - 10;
+        card.classList.add('above');
+      } else {
+        top = rect.bottom + scrollY + 10;
+      }
+
+      // Horizontal: center on the ref, but clamp to viewport
+      let left = rect.left + scrollX + rect.width / 2 - 1.5 * 16; // align arrow roughly
+      const maxLeft = window.innerWidth - cardW - 12;
+      if (left < 12) left = 12;
+      if (left > maxLeft) left = maxLeft;
+
+      // Adjust arrow position
+      const arrowOffset = rect.left + scrollX + rect.width / 2 - left;
+      const arrow = card.querySelector('.fn-popover::before') as HTMLElement;
+      // Use CSS custom property for arrow
+      card.style.setProperty('--arrow-left', `${Math.max(12, Math.min(arrowOffset, cardW - 20))}px`);
+
+      card.style.position = 'absolute';
+      card.style.top = `${top}px`;
+      card.style.left = `${left}px`;
+
+      // Close button
+      card.querySelector('.fn-popover-close')!.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        closePopover();
+      });
+
+      activePopover = card;
+      requestAnimationFrame(() => card.classList.add('visible'));
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (activePopover && !activePopover.contains(e.target as Node)) {
+      closePopover();
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePopover();
+  });
 </script>
