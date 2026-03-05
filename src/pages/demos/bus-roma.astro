@@ -1,0 +1,467 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+---
+
+<Layout title="BUS Roma | Alberto Maccanico">
+  <Nav />
+
+  <div class="max-w-6xl mx-auto px-6 relative z-10 min-h-screen py-28">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <a href="/demos" class="text-text-muted hover:text-accent-blue transition-colors flex items-center gap-1.5 font-mono text-xs group">
+        <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Projects
+      </a>
+      <a href="https://github.com/alcelaser/bus-roma" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-text-muted text-xs font-mono hover:text-accent-blue transition-colors">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        Source
+      </a>
+    </div>
+
+    <!-- Title -->
+    <div class="text-center mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">
+        <span class="gradient-text">BUS</span> Roma
+      </h1>
+      <p class="text-text-muted text-sm max-w-lg mx-auto">Real-time bus timetables & live arrivals for all ATAC stops in Rome. Built with Flutter & Clean Architecture.</p>
+      <div class="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
+        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+        </svg>
+        Android app — native SQLite prevents web deployment
+      </div>
+    </div>
+
+    <!-- Two-column layout: phone mockup + content -->
+    <div class="flex flex-col lg:flex-row items-start gap-10 lg:gap-14">
+
+      <!-- Phone mockup (simulated screens) -->
+      <div class="flex-shrink-0 mx-auto lg:mx-0">
+        <div class="relative" style="width: 320px;">
+          <!-- Phone frame -->
+          <div class="rounded-[3rem] border-[14px] border-gray-800 bg-gray-800 shadow-2xl shadow-black/50 overflow-hidden relative">
+            <!-- Notch -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-2xl z-20"></div>
+            <!-- Simulated screen -->
+            <div id="phone-screen" class="rounded-[2.2rem] overflow-hidden bg-black relative" style="height: 580px;">
+              <!-- Screen 1: Home -->
+              <div class="screen-slide active absolute inset-0 flex flex-col" data-screen="0">
+                <!-- Status bar -->
+                <div class="bg-[#1a1a1a] px-6 pt-8 pb-3 flex items-center justify-between">
+                  <span class="text-white/60 text-[10px] font-mono">9:41</span>
+                  <span class="text-white/60 text-[10px]">●●●● ▊ 🔋</span>
+                </div>
+                <!-- App bar -->
+                <div class="bg-[#8B0000] px-5 py-3">
+                  <h2 class="text-white font-semibold text-lg">BUS Roma</h2>
+                  <div class="mt-2 bg-white/10 rounded-xl px-3 py-2 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                    <span class="text-white/40 text-xs">Search stops, lines…</span>
+                  </div>
+                </div>
+                <!-- Content -->
+                <div class="flex-1 bg-[#121212] px-4 py-3 overflow-hidden">
+                  <p class="text-[#DAA520] text-[10px] font-semibold uppercase tracking-wider mb-2">Favorites</p>
+                  <!-- Favorite card -->
+                  <div class="bg-[#1e1e1e] rounded-xl p-3 mb-2">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="text-white text-xs font-medium">Termini (MA)</span>
+                      <span class="text-white/40 text-[9px]">75m</span>
+                    </div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="bg-[#0066CC] text-white text-[9px] font-bold px-1.5 py-0.5 rounded">64</span>
+                      <span class="text-white/70 text-[10px]">San Pietro</span>
+                      <span class="text-green-400 text-[9px] font-mono ml-auto">2 min</span>
+                      <span class="bg-green-500/20 text-green-400 text-[8px] px-1 rounded font-mono">LIVE</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="bg-[#CC3300] text-white text-[9px] font-bold px-1.5 py-0.5 rounded">H</span>
+                      <span class="text-white/70 text-[10px]">Cornelia</span>
+                      <span class="text-orange-400 text-[9px] font-mono ml-auto">7 min</span>
+                      <span class="bg-orange-500/20 text-orange-400 text-[8px] px-1 rounded font-mono">+3m</span>
+                    </div>
+                  </div>
+                  <div class="bg-[#1e1e1e] rounded-xl p-3 mb-3">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="text-white text-xs font-medium">Colosseo</span>
+                      <span class="text-white/40 text-[9px]">310m</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="bg-[#006633] text-white text-[9px] font-bold px-1.5 py-0.5 rounded">75</span>
+                      <span class="text-white/70 text-[10px]">Poerio/Piramide</span>
+                      <span class="text-green-400 text-[9px] font-mono ml-auto">4 min</span>
+                      <span class="bg-green-500/20 text-green-400 text-[8px] px-1 rounded font-mono">LIVE</span>
+                    </div>
+                  </div>
+                  <p class="text-[#DAA520] text-[10px] font-semibold uppercase tracking-wider mb-2">Nearby stops</p>
+                  <div class="bg-[#1e1e1e] rounded-xl p-3 mb-2">
+                    <div class="flex items-center gap-2">
+                      <div class="w-6 h-6 rounded-full bg-[#8B0000]/30 flex items-center justify-center">
+                        <svg class="w-3 h-3 text-[#FF6B5A]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                      </div>
+                      <div>
+                        <p class="text-white text-[10px] font-medium">Cavour</p>
+                        <p class="text-white/40 text-[9px]">120m away · 3 lines</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Bottom nav -->
+                <div class="bg-[#1a1a1a] border-t border-white/5 px-2 py-1.5 flex justify-around">
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 rounded-full bg-[#DAA520]/20 flex items-center justify-center"><svg class="w-3 h-3 text-[#DAA520]" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+                    <span class="text-[#DAA520] text-[7px]">Home</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Lines</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Navigate</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Map</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Alerts</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen 2: Stop Detail -->
+              <div class="screen-slide absolute inset-0 flex flex-col" data-screen="1" style="opacity:0; transform: translateX(100%);">
+                <div class="bg-[#1a1a1a] px-6 pt-8 pb-3 flex items-center justify-between">
+                  <span class="text-white/60 text-[10px] font-mono">9:41</span>
+                  <span class="text-white/60 text-[10px]">●●●● ▊ 🔋</span>
+                </div>
+                <div class="bg-[#8B0000] px-5 py-3 flex items-center gap-3">
+                  <svg class="w-4 h-4 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+                  <div>
+                    <h2 class="text-white font-semibold text-sm">Termini (MA)</h2>
+                    <p class="text-white/60 text-[10px]">Stop 70101</p>
+                  </div>
+                  <svg class="w-4 h-4 text-[#DAA520] ml-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <div class="flex-1 bg-[#121212] px-4 py-3 overflow-hidden">
+                  <p class="text-white/50 text-[9px] font-mono mb-3">Live departures — auto-refresh 30s</p>
+                  <!-- Departure rows -->
+                  <div class="space-y-2">
+                    <div class="bg-[#1e1e1e] rounded-lg p-2.5 flex items-center gap-2.5">
+                      <span class="bg-[#0066CC] text-white text-[9px] font-bold px-2 py-1 rounded min-w-[28px] text-center">64</span>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-white text-[10px] truncate">San Pietro</p>
+                        <p class="text-white/40 text-[8px]">14:23 → <span class="text-green-400">14:25</span></p>
+                      </div>
+                      <div class="text-right">
+                        <p class="text-green-400 text-xs font-mono font-bold">2'</p>
+                        <span class="bg-green-500/20 text-green-400 text-[7px] px-1 rounded font-mono">LIVE</span>
+                      </div>
+                    </div>
+                    <div class="bg-[#1e1e1e] rounded-lg p-2.5 flex items-center gap-2.5">
+                      <span class="bg-[#CC3300] text-white text-[9px] font-bold px-2 py-1 rounded min-w-[28px] text-center">H</span>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-white text-[10px] truncate">Cornelia</p>
+                        <p class="text-white/40 text-[8px]">14:27 → <span class="text-orange-400">14:30</span></p>
+                      </div>
+                      <div class="text-right">
+                        <p class="text-orange-400 text-xs font-mono font-bold">7'</p>
+                        <span class="bg-orange-500/20 text-orange-400 text-[7px] px-1 rounded font-mono">+3m</span>
+                      </div>
+                    </div>
+                    <div class="bg-[#1e1e1e] rounded-lg p-2.5 flex items-center gap-2.5">
+                      <span class="bg-[#339933] text-white text-[9px] font-bold px-2 py-1 rounded min-w-[28px] text-center">170</span>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-white text-[10px] truncate">Agricoltura</p>
+                        <p class="text-white/40 text-[8px]">14:35</p>
+                      </div>
+                      <div class="text-right">
+                        <p class="text-white/70 text-xs font-mono font-bold">12'</p>
+                      </div>
+                    </div>
+                    <div class="bg-[#1e1e1e] rounded-lg p-2.5 flex items-center gap-2.5">
+                      <span class="bg-[#0066CC] text-white text-[9px] font-bold px-2 py-1 rounded min-w-[28px] text-center">64</span>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-white text-[10px] truncate">San Pietro</p>
+                        <p class="text-white/40 text-[8px]">14:43 → <span class="text-green-400">14:42</span></p>
+                      </div>
+                      <div class="text-right">
+                        <p class="text-green-400 text-xs font-mono font-bold">19'</p>
+                        <span class="bg-green-500/20 text-green-400 text-[7px] px-1 rounded font-mono">-1m</span>
+                      </div>
+                    </div>
+                    <div class="bg-[#1e1e1e] rounded-lg p-2.5 flex items-center gap-2.5">
+                      <span class="bg-[#CC6600] text-white text-[9px] font-bold px-2 py-1 rounded min-w-[28px] text-center">40</span>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-white text-[10px] truncate">Borghese</p>
+                        <p class="text-white/40 text-[8px]">14:50</p>
+                      </div>
+                      <div class="text-right">
+                        <p class="text-white/70 text-xs font-mono font-bold">27'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Bottom nav (same) -->
+                <div class="bg-[#1a1a1a] border-t border-white/5 px-2 py-1.5 flex justify-around">
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 rounded-full bg-[#DAA520]/20 flex items-center justify-center"><svg class="w-3 h-3 text-[#DAA520]" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+                    <span class="text-[#DAA520] text-[7px]">Home</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Lines</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Navigate</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Map</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Alerts</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen 3: Map -->
+              <div class="screen-slide absolute inset-0 flex flex-col" data-screen="2" style="opacity:0; transform: translateX(100%);">
+                <div class="bg-[#1a1a1a] px-6 pt-8 pb-3 flex items-center justify-between">
+                  <span class="text-white/60 text-[10px] font-mono">9:41</span>
+                  <span class="text-white/60 text-[10px]">●●●● ▊ 🔋</span>
+                </div>
+                <div class="bg-[#8B0000] px-5 py-3">
+                  <h2 class="text-white font-semibold text-sm">Map</h2>
+                </div>
+                <!-- Simulated map -->
+                <div class="flex-1 relative overflow-hidden" style="background: #2a3a2a;">
+                  <!-- Map grid -->
+                  <div class="absolute inset-0" style="background: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 30px 30px;"></div>
+                  <!-- Roads -->
+                  <div class="absolute" style="left: 20%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.08);"></div>
+                  <div class="absolute" style="left: 55%; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.1);"></div>
+                  <div class="absolute" style="top: 35%; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.08);"></div>
+                  <div class="absolute" style="top: 65%; left: 0; right: 0; height: 3px; background: rgba(255,255,255,0.1);"></div>
+                  <!-- Stop markers -->
+                  <div class="absolute" style="left: 45%; top: 40%;">
+                    <div class="w-5 h-5 rounded-full bg-[#8B0000] border-2 border-white flex items-center justify-center shadow-lg">
+                      <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                    </div>
+                  </div>
+                  <div class="absolute" style="left: 62%; top: 28%;">
+                    <div class="w-4 h-4 rounded-full bg-[#FF6B5A] border border-white/80 shadow"></div>
+                  </div>
+                  <div class="absolute" style="left: 30%; top: 55%;">
+                    <div class="w-4 h-4 rounded-full bg-[#FF6B5A] border border-white/80 shadow"></div>
+                  </div>
+                  <div class="absolute" style="left: 75%; top: 60%;">
+                    <div class="w-4 h-4 rounded-full bg-[#FF6B5A] border border-white/80 shadow"></div>
+                  </div>
+                  <!-- Bus vehicle -->
+                  <div class="absolute" style="left: 50%; top: 50%;">
+                    <div class="w-6 h-6 rounded-full bg-[#0066CC] border-2 border-white flex items-center justify-center shadow-lg animate-pulse">
+                      <span class="text-white text-[7px] font-bold">64</span>
+                    </div>
+                  </div>
+                  <div class="absolute" style="left: 35%; top: 38%;">
+                    <div class="w-6 h-6 rounded-full bg-[#CC3300] border-2 border-white flex items-center justify-center shadow-lg animate-pulse">
+                      <span class="text-white text-[7px] font-bold">H</span>
+                    </div>
+                  </div>
+                  <!-- User location -->
+                  <div class="absolute" style="left: 48%; top: 45%;">
+                    <div class="w-3 h-3 rounded-full bg-blue-500 border-2 border-white shadow-lg">
+                      <div class="absolute inset-0 rounded-full bg-blue-500/30 animate-ping"></div>
+                    </div>
+                  </div>
+                  <!-- Bottom sheet peek -->
+                  <div class="absolute bottom-0 left-0 right-0 bg-[#1e1e1e] rounded-t-2xl p-3 shadow-2xl">
+                    <div class="w-8 h-1 bg-white/20 rounded-full mx-auto mb-2"></div>
+                    <div class="flex items-center gap-2">
+                      <div class="w-8 h-8 rounded-full bg-[#8B0000]/30 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-[#FF6B5A]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                      </div>
+                      <div>
+                        <p class="text-white text-[10px] font-medium">Termini (MA)</p>
+                        <p class="text-white/40 text-[8px]">7 lines · Next: 64 in 2 min</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Bottom nav -->
+                <div class="bg-[#1a1a1a] border-t border-white/5 px-2 py-1.5 flex justify-around">
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Home</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Lines</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Navigate</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 rounded-full bg-[#DAA520]/20 flex items-center justify-center"><svg class="w-3 h-3 text-[#DAA520]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg></div>
+                    <span class="text-[#DAA520] text-[7px]">Map</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5">
+                    <div class="w-5 h-5 flex items-center justify-center"><svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg></div>
+                    <span class="text-white/40 text-[7px]">Alerts</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Home indicator -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-gray-600 rounded-full"></div>
+        </div>
+        <!-- Screen navigation dots -->
+        <div class="flex justify-center gap-2 mt-4">
+          <button class="screen-dot w-2 h-2 rounded-full bg-[#FF6B5A] transition-colors cursor-pointer" data-target="0" aria-label="Home screen"></button>
+          <button class="screen-dot w-2 h-2 rounded-full bg-white/20 transition-colors cursor-pointer" data-target="1" aria-label="Stop detail"></button>
+          <button class="screen-dot w-2 h-2 rounded-full bg-white/20 transition-colors cursor-pointer" data-target="2" aria-label="Map"></button>
+        </div>
+      </div>
+
+      <!-- Info panel -->
+      <div class="flex-1 min-w-0 space-y-5">
+        <!-- Features card -->
+        <div class="glass rounded-2xl glow-border overflow-hidden">
+          <div class="divide-y divide-border-glass">
+            <div class="px-6 py-4 flex items-start gap-4">
+              <div class="w-9 h-9 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4.5 h-4.5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Live Departures</h3>
+                <p class="text-text-muted text-xs leading-relaxed">GTFS-RT protobuf feeds with 30s auto-refresh. Delay overlays on scheduled times, color-coded badges.</p>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4">
+              <div class="w-9 h-9 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4.5 h-4.5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Maps & Navigation</h3>
+                <p class="text-text-muted text-xs leading-relaxed">OpenStreetMap with stop markers, live vehicle positions, GPS nearby stops, and multi-leg trip planning.</p>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4">
+              <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4.5 h-4.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Drift SQLite Database</h3>
+                <p class="text-text-muted text-xs leading-relaxed">9 tables, 1.2M+ stop_times rows, batch imports of 5k rows/tx, composite indexes, schema migrations.</p>
+              </div>
+            </div>
+            <div class="px-6 py-4 flex items-start gap-4">
+              <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4.5 h-4.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.384 3.188c-.767.454-1.655-.349-1.397-1.194l1.47-4.799a1.125 1.125 0 00-.372-1.172L1.652 8.203c-.673-.548-.276-1.578.572-1.637l4.834-.34a1.125 1.125 0 001.013-.735l1.93-4.7c.352-.858 1.56-.858 1.912 0l1.93 4.7c.078.19.228.343.41.435" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Clean Architecture</h3>
+                <p class="text-text-muted text-xs leading-relaxed">Data → Domain → Presentation layers. Riverpod state management, abstract repository interfaces, use cases.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Tech footer -->
+          <div class="px-6 py-3 border-t border-border-glass bg-bg-primary/20">
+            <div class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs text-text-muted font-mono">
+              <span><span class="text-cyan-400 font-semibold">Flutter</span></span>
+              <span><span class="text-purple-400 font-semibold">Riverpod</span></span>
+              <span><span class="text-blue-400 font-semibold">Drift</span> SQLite</span>
+              <span><span class="text-amber-400 font-semibold">352</span> tests</span>
+              <span><span class="text-red-400 font-semibold">5★</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture flow -->
+        <div class="glass rounded-xl px-5 py-4 glow-border">
+          <p class="text-text-muted text-[10px] font-mono uppercase tracking-wider mb-3">Data Pipeline</p>
+          <div class="flex items-center gap-1.5 text-[10px] font-mono flex-wrap">
+            <span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">GTFS ZIP</span>
+            <span class="text-text-muted">→</span>
+            <span class="text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">CSV Parse</span>
+            <span class="text-text-muted">→</span>
+            <span class="text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">SQLite</span>
+            <span class="text-text-muted">→</span>
+            <span class="text-green-400 bg-green-500/10 px-2 py-0.5 rounded">Repository</span>
+            <span class="text-text-muted">→</span>
+            <span class="text-red-400 bg-red-500/10 px-2 py-0.5 rounded">RT Merge</span>
+            <span class="text-text-muted">→</span>
+            <span class="text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded">UI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  // Screen slideshow for phone mockup
+  const slides = document.querySelectorAll('.screen-slide');
+  const dots = document.querySelectorAll('.screen-dot');
+  let current = 0;
+  let interval: ReturnType<typeof setInterval>;
+
+  function goTo(idx: number) {
+    slides.forEach((s, i) => {
+      const el = s as HTMLElement;
+      if (i === idx) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateX(0)';
+        el.classList.add('active');
+      } else if (i < idx) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(-100%)';
+        el.classList.remove('active');
+      } else {
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(100%)';
+        el.classList.remove('active');
+      }
+      el.style.transition = 'all 0.4s ease';
+    });
+    dots.forEach((d, i) => {
+      (d as HTMLElement).className = `screen-dot w-2 h-2 rounded-full transition-colors cursor-pointer ${i === idx ? 'bg-[#FF6B5A]' : 'bg-white/20'}`;
+    });
+    current = idx;
+  }
+
+  function next() {
+    goTo((current + 1) % slides.length);
+  }
+
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      const target = parseInt((d as HTMLElement).dataset.target || '0');
+      goTo(target);
+      clearInterval(interval);
+      interval = setInterval(next, 5000);
+    });
+  });
+
+  interval = setInterval(next, 5000);
+</script>

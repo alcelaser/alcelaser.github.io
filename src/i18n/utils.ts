@@ -43,6 +43,7 @@ const ui: Record<string, Record<string, string>> = {
         'section.projects': 'Projects',
         'section.projects.desc': 'Open-source work fetched live from',
         'section.projects.fallback': 'Projects could not be loaded. Visit',
+        'section.projects.liveDemos': 'Live Demos',
         'section.skills': 'Skills',
         'section.skills.cat.programming': 'Programming & Frameworks',
         'section.skills.cat.ai': 'AI & Research',
@@ -59,7 +60,11 @@ const ui: Record<string, Record<string, string>> = {
         'nav.research': 'Research',
         'research.title': 'Research Papers',
         'research.subtitle': 'Published academic and applied research work.',
-        'research.back': 'Back to Home'
+        'research.back': 'Back to Home',
+        'nav.demos': 'Demos',
+        'demos.title': 'Live Demos',
+        'demos.subtitle': 'Interactive demos of selected projects, running directly in your browser.',
+        'demos.back': 'Back to Home'
     },
     it: {
         'nav.about': 'Su di me',
@@ -87,6 +92,7 @@ const ui: Record<string, Record<string, string>> = {
         'section.projects': 'Progetti',
         'section.projects.desc': 'Lavori open-source recuperati live da',
         'section.projects.fallback': 'Impossibile caricare i progetti. Visita',
+        'section.projects.liveDemos': 'Demo Live',
         'section.skills': 'Competenze',
         'section.skills.cat.programming': 'Programmazione & Framework',
         'section.skills.cat.ai': 'AI & Ricerca',
@@ -103,7 +109,11 @@ const ui: Record<string, Record<string, string>> = {
         'nav.research': 'Ricerca',
         'research.title': 'Articoli di Ricerca',
         'research.subtitle': 'Lavori di ricerca accademica e applicata pubblicati.',
-        'research.back': 'Torna alla Home'
+        'research.back': 'Torna alla Home',
+        'nav.demos': 'Demo',
+        'demos.title': 'Demo Interattive',
+        'demos.subtitle': 'Demo interattive di progetti selezionati, direttamente nel browser.',
+        'demos.back': 'Torna alla Home'
     },
     fr: {
         'nav.about': 'À propos',
@@ -131,6 +141,7 @@ const ui: Record<string, Record<string, string>> = {
         'section.projects': 'Projets',
         'section.projects.desc': 'Travaux open-source récupérés en direct de',
         'section.projects.fallback': 'Impossible de charger les projets. Visitez',
+        'section.projects.liveDemos': 'Démos Live',
         'section.skills': 'Compétences',
         'section.skills.cat.programming': 'Programmation & Frameworks',
         'section.skills.cat.ai': 'IA & Recherche',
@@ -147,7 +158,11 @@ const ui: Record<string, Record<string, string>> = {
         'nav.research': 'Recherche',
         'research.title': 'Articles de Recherche',
         'research.subtitle': 'Travaux de recherche académique et appliquée publiés.',
-        'research.back': 'Retour à l\'accueil'
+        'research.back': 'Retour à l\'accueil',
+        'nav.demos': 'Démos',
+        'demos.title': 'Démonstrations',
+        'demos.subtitle': 'Démonstrations interactives de projets sélectionnés, directement dans votre navigateur.',
+        'demos.back': 'Retour à l\'accueil'
     }
 };
 
