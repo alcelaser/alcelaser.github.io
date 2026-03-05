@@ -55,7 +55,11 @@ const ui: Record<string, Record<string, string>> = {
         'section.contact': 'Get in Touch',
         'section.contact.desc': 'Interested in collaborating or have a question? Feel free to reach out.',
         'blog.title': 'Articles & Thoughts',
-        'blog.back': 'Back to Home'
+        'blog.back': 'Back to Home',
+        'nav.research': 'Research',
+        'research.title': 'Research Papers',
+        'research.subtitle': 'Published academic and applied research work.',
+        'research.back': 'Back to Home'
     },
     it: {
         'nav.about': 'Su di me',
@@ -95,7 +99,11 @@ const ui: Record<string, Record<string, string>> = {
         'section.contact': 'Contattami',
         'section.contact.desc': 'Interessato a collaborare o hai una domanda? Non esitare a contattarmi.',
         'blog.title': 'Articoli e Pubblicazioni',
-        'blog.back': 'Torna alla Home'
+        'blog.back': 'Torna alla Home',
+        'nav.research': 'Ricerca',
+        'research.title': 'Articoli di Ricerca',
+        'research.subtitle': 'Lavori di ricerca accademica e applicata pubblicati.',
+        'research.back': 'Torna alla Home'
     },
     fr: {
         'nav.about': 'À propos',
@@ -135,7 +143,11 @@ const ui: Record<string, Record<string, string>> = {
         'section.contact': 'Contactez-moi',
         'section.contact.desc': 'Intéressé à collaborer ou vous avez une question? N\'hésitez pas à me contacter.',
         'blog.title': 'Articles et Publications',
-        'blog.back': 'Retour à l\'accueil'
+        'blog.back': 'Retour à l\'accueil',
+        'nav.research': 'Recherche',
+        'research.title': 'Articles de Recherche',
+        'research.subtitle': 'Travaux de recherche académique et appliquée publiés.',
+        'research.back': 'Retour à l\'accueil'
     }
 };
 
