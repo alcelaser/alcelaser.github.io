@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "npx playwright test",
+    "test:mobile": "npx playwright test --project=mobile-portrait --project=mobile-small",
+    "test:desktop": "npx playwright test --project=desktop"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
@@ -17,6 +20,7 @@
     "three": "^0.182.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/three": "^0.182.0"
   }
 }

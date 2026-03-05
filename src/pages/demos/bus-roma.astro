@@ -6,7 +6,7 @@ import Nav from '../../components/Nav.astro';
 <Layout title="BUS Roma | Alberto Maccanico">
   <Nav />
 
-  <div class="max-w-6xl mx-auto px-6 relative z-10 min-h-screen py-28">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 min-h-screen py-20 sm:py-28">
 
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
@@ -23,7 +23,7 @@ import Nav from '../../components/Nav.astro';
     </div>
 
     <!-- Title -->
-    <div class="text-center mb-10">
+    <div class="text-center mb-6 sm:mb-10">
       <h1 class="text-3xl md:text-4xl font-bold mb-2">
         <span class="gradient-text">BUS</span> Roma
       </h1>
@@ -32,16 +32,16 @@ import Nav from '../../components/Nav.astro';
         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
         </svg>
-        Android app — native SQLite prevents web deployment
+        Android app
       </div>
     </div>
 
     <!-- Two-column layout: phone mockup + content -->
-    <div class="flex flex-col lg:flex-row items-start gap-10 lg:gap-14">
+    <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-14">
 
       <!-- Phone mockup (simulated screens) -->
-      <div class="flex-shrink-0 mx-auto lg:mx-0">
-        <div class="relative" style="width: 320px;">
+      <div class="flex-shrink-0 mx-auto lg:mx-0 w-full sm:w-auto">
+        <div class="phone-frame-wrapper relative mx-auto" style="width: 320px;">
           <!-- Phone frame -->
           <div class="rounded-[3rem] border-[14px] border-gray-800 bg-gray-800 shadow-2xl shadow-black/50 overflow-hidden relative">
             <!-- Notch -->
@@ -335,58 +335,58 @@ import Nav from '../../components/Nav.astro';
       </div>
 
       <!-- Info panel -->
-      <div class="flex-1 min-w-0 space-y-5">
+      <div class="flex-1 min-w-0 space-y-4 sm:space-y-5">
         <!-- Features card -->
         <div class="glass rounded-2xl glow-border overflow-hidden">
           <div class="divide-y divide-border-glass">
-            <div class="px-6 py-4 flex items-start gap-4">
-              <div class="w-9 h-9 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-4.5 h-4.5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div>
-                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Live Departures</h3>
+                <h3 class="text-text-primary font-semibold text-xs sm:text-sm mb-0.5">Live Departures</h3>
                 <p class="text-text-muted text-xs leading-relaxed">GTFS-RT protobuf feeds with 30s auto-refresh. Delay overlays on scheduled times, color-coded badges.</p>
               </div>
             </div>
-            <div class="px-6 py-4 flex items-start gap-4">
-              <div class="w-9 h-9 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-4.5 h-4.5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
                 </svg>
               </div>
               <div>
-                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Maps & Navigation</h3>
+                <h3 class="text-text-primary font-semibold text-xs sm:text-sm mb-0.5">Maps & Navigation</h3>
                 <p class="text-text-muted text-xs leading-relaxed">OpenStreetMap with stop markers, live vehicle positions, GPS nearby stops, and multi-leg trip planning.</p>
               </div>
             </div>
-            <div class="px-6 py-4 flex items-start gap-4">
-              <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-4.5 h-4.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
                 </svg>
               </div>
               <div>
-                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Drift SQLite Database</h3>
+                <h3 class="text-text-primary font-semibold text-xs sm:text-sm mb-0.5">Drift SQLite Database</h3>
                 <p class="text-text-muted text-xs leading-relaxed">9 tables, 1.2M+ stop_times rows, batch imports of 5k rows/tx, composite indexes, schema migrations.</p>
               </div>
             </div>
-            <div class="px-6 py-4 flex items-start gap-4">
-              <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-4.5 h-4.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.384 3.188c-.767.454-1.655-.349-1.397-1.194l1.47-4.799a1.125 1.125 0 00-.372-1.172L1.652 8.203c-.673-.548-.276-1.578.572-1.637l4.834-.34a1.125 1.125 0 001.013-.735l1.93-4.7c.352-.858 1.56-.858 1.912 0l1.93 4.7c.078.19.228.343.41.435" />
                 </svg>
               </div>
               <div>
-                <h3 class="text-text-primary font-semibold text-sm mb-0.5">Clean Architecture</h3>
+                <h3 class="text-text-primary font-semibold text-xs sm:text-sm mb-0.5">Clean Architecture</h3>
                 <p class="text-text-muted text-xs leading-relaxed">Data → Domain → Presentation layers. Riverpod state management, abstract repository interfaces, use cases.</p>
               </div>
             </div>
           </div>
           <!-- Tech footer -->
-          <div class="px-6 py-3 border-t border-border-glass bg-bg-primary/20">
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs text-text-muted font-mono">
+          <div class="px-4 sm:px-6 py-2.5 sm:py-3 border-t border-border-glass bg-bg-primary/20">
+            <div class="flex flex-wrap justify-center gap-x-3 sm:gap-x-5 gap-y-1 text-[11px] sm:text-xs text-text-muted font-mono">
               <span><span class="text-cyan-400 font-semibold">Flutter</span></span>
               <span><span class="text-purple-400 font-semibold">Riverpod</span></span>
               <span><span class="text-blue-400 font-semibold">Drift</span> SQLite</span>
@@ -397,7 +397,7 @@ import Nav from '../../components/Nav.astro';
         </div>
 
         <!-- Architecture flow -->
-        <div class="glass rounded-xl px-5 py-4 glow-border">
+        <div class="glass rounded-xl px-4 sm:px-5 py-3 sm:py-4 glow-border">
           <p class="text-text-muted text-[10px] font-mono uppercase tracking-wider mb-3">Data Pipeline</p>
           <div class="flex items-center gap-1.5 text-[10px] font-mono flex-wrap">
             <span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">GTFS ZIP</span>
@@ -420,6 +420,25 @@ import Nav from '../../components/Nav.astro';
 </Layout>
 
 <script>
+  // Responsive phone scaling for small viewports
+  function scalePhone() {
+    const wrapper = document.querySelector('.phone-frame-wrapper') as HTMLElement;
+    if (!wrapper) return;
+    const available = wrapper.parentElement!.clientWidth;
+    const phoneW = 320;
+    if (available < phoneW) {
+      const s = available / phoneW;
+      wrapper.style.transform = `scale(${s})`;
+      wrapper.style.transformOrigin = 'top center';
+      wrapper.style.marginBottom = `-${(1 - s) * wrapper.offsetHeight}px`;
+    } else {
+      wrapper.style.transform = '';
+      wrapper.style.marginBottom = '';
+    }
+  }
+  scalePhone();
+  window.addEventListener('resize', scalePhone);
+
   // Screen slideshow for phone mockup
   const slides = document.querySelectorAll('.screen-slide');
   const dots = document.querySelectorAll('.screen-dot');

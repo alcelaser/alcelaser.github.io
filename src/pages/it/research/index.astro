@@ -13,8 +13,8 @@ const t = useTranslations(lang);
 <Layout title={`${t('research.title')} | Alberto Maccanico`}>
   <Nav />
 
-  <div id="research-content" class="max-w-5xl mx-auto py-32 px-6 min-h-screen relative z-10">
-    <div class="mb-16 section-fade">
+  <div id="research-content" class="max-w-5xl mx-auto py-24 sm:py-32 px-4 sm:px-6 min-h-screen relative z-10">
+    <div class="mb-10 sm:mb-16 section-fade">
       <div class="mb-8">
         <a href={lang === 'en' ? '/' : `/${lang}`} class="text-text-muted hover:text-accent-blue transition-colors flex items-center gap-2 font-mono text-sm w-fit">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -30,13 +30,13 @@ const t = useTranslations(lang);
       <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mt-8"></div>
     </div>
 
-    <div class="grid gap-6">
+    <div class="grid gap-4 sm:gap-6">
       {sortedPapers.map((paper) => {
         const { title, description, publication, originalUrl } = paper.frontmatter;
         return (
           <a
             href={paper.url}
-            class="glass rounded-2xl p-8 section-fade glow-border group block hover:scale-[1.01] transition-transform cursor-pointer"
+            class="glass rounded-2xl p-5 sm:p-8 section-fade glow-border group block hover:scale-[1.01] transition-transform cursor-pointer"
           >
             <div class="flex items-start justify-between mb-4">
               <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20 flex items-center justify-center group-hover:from-accent-blue/30 group-hover:to-accent-purple/30 transition-colors">

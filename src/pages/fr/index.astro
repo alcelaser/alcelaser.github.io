@@ -72,12 +72,12 @@ try {
   <About />
 
   <!-- Experience -->
-  <section id="experience" class="py-24 px-6">
+  <section id="experience" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
         <span class="gradient-text">{t('section.experience')}</span>
       </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-12 section-fade"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
 
       <div class="relative">
         <div class="hidden md:block absolute left-1/2 -translate-x-px top-0 bottom-0 w-px bg-border-glass"></div>
@@ -98,12 +98,12 @@ try {
   </section>
 
   <!-- Education -->
-  <section id="education" class="py-24 px-6">
+  <section id="education" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
         <span class="gradient-text">{t('section.education')}</span>
       </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-12 section-fade"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
 
       <div class="relative">
         <div class="hidden md:block absolute left-1/2 -translate-x-px top-0 bottom-0 w-px bg-border-glass"></div>
@@ -124,12 +124,12 @@ try {
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="py-24 px-6">
+  <section id="projects" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
         <span class="gradient-text">{t('section.projects')}</span>
       </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-4 section-fade"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-3 sm:mb-4 section-fade"></div>
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12 section-fade">
         <p class="text-text-secondary">
           {t('section.projects.desc')} <a href={personal.github} target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">GitHub</a>.
@@ -187,12 +187,12 @@ try {
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="py-24 px-6">
+  <section id="skills" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
         <span class="gradient-text">{t('section.skills')}</span>
       </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-12 section-fade"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
 
       <div class="grid md:grid-cols-2 gap-8">
         {skillCategories.map((cat) => (
@@ -214,12 +214,12 @@ try {
   </section>
 
   <!-- Languages -->
-  <section id="languages" class="py-24 px-6">
+  <section id="languages" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
         <span class="gradient-text">{t('section.languages')}</span>
       </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-12 section-fade"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
 
       <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {languages.map((lang) => (
@@ -242,12 +242,12 @@ try {
   </section>
 
   <!-- Awards -->
-  <section id="awards" class="py-24 px-6">
+  <section id="awards" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
         <span class="gradient-text">{t('section.awards')}</span>
       </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-12 section-fade"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {awards.map((award) => (
@@ -267,7 +267,7 @@ try {
   </section>
 
   <!-- Articles -->
-  <section id="articles" class="py-24 px-6">
+  <section id="articles" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-5xl mx-auto">
       <div class="flex items-center justify-between mb-2 section-fade">
         <h2 class="text-3xl md:text-4xl font-bold">
@@ -280,9 +280,9 @@ try {
           </svg>
         </a>
       </div>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-12 section-fade"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
         {displayedArticles.map((post) => {
           const { title, description, publication } = post.frontmatter;
           const articleUrl = post.url;
@@ -311,7 +311,7 @@ try {
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-24 px-6">
+  <section id="contact" class="py-16 sm:py-24 px-4 sm:px-6">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
         <span class="gradient-text">{t('section.contact')}</span>
@@ -385,7 +385,7 @@ try {
   </section>
 
   <!-- Footer -->
-  <footer class="py-8 px-6 border-t border-border-glass">
+  <footer class="py-6 sm:py-8 px-4 sm:px-6 border-t border-border-glass">
     <div class="max-w-5xl mx-auto text-center">
       <p class="text-text-muted text-sm">
         &copy; {new Date().getFullYear()} {personal.name}
