@@ -134,7 +134,7 @@ try {
         <p class="text-text-secondary">
           {t('section.projects.desc')} <a href={personal.github} target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">GitHub</a>.
         </p>
-        <a href="/demos" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-blue/10 border border-accent-blue/30 text-accent-blue text-sm font-mono hover:bg-accent-blue/20 hover:border-accent-blue/50 transition-colors whitespace-nowrap w-fit">
+        <a href={lang === 'en' ? '/demos' : `/${lang}/demos`} class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-blue/10 border border-accent-blue/30 text-accent-blue text-sm font-mono hover:bg-accent-blue/20 hover:border-accent-blue/50 transition-colors whitespace-nowrap w-fit">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z" /></svg>
           {t('section.projects.liveDemos')}
         </a>
