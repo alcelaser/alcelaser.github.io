@@ -1,6 +1,6 @@
 export const personal = {
   name: 'Alberto Maccanico',
-  title: 'Étudiant en IA & Management | Développeur Logiciel',
+  title: 'Étudiant en IA & Management | Développeur Logiciel | Chercheur en IA Appliquée | Praticien en Machine Learning | Ingénieur Full-Stack | Builder de Produits Data-Driven | Spécialiste en Prompt Engineering | Passionné de Conception Algorithmique',
   email: 'maccanicoalberto@gmail.com',
   phone: 'demande par e-mail',
   location: 'Rome, Italie',
@@ -153,7 +153,6 @@ export const skills: Skill[] = [
   { name: 'Vice-Président MUN', category: 'soft' },
   { name: 'Multilingue', category: 'soft' },
   { name: 'Recherche', category: 'soft' },
-  { name: 'Rédacteur pour Google Developer Group Guido Carli', category: 'soft' },
 ];
 
 export interface Award {

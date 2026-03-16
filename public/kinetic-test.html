@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GSAP Kinetic Typo Setup Test</title>
+  <style>
+    body { background: #E0E0E0; font-family: sans-serif; padding: 50px; }
+    h1 {
+      font-size: 5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); /* Hides overflow for reveals */
+    }
+    .char {
+      display: inline-block;
+      transform: translateY(100%);
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+  <h1 id="split-target" aria-label="kinetic typography">Kinetic Typography</h1>
+
+  <script>
+    // 1. Text Splitting Function without external plugins
+    function splitTextToChars(element) {
+      const text = element.innerText;
+      element.innerHTML = '';
+      
+      text.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        // Preserve spaces
+        span.innerHTML = char === ' ' ? '&nbsp;' : char;
+        element.appendChild(span);
+      });
+    }
+
+    // 2. Setup
+    const target = document.getElementById('split-target');
+    splitTextToChars(target);
+
+    // 3. Stagger Animation Test
+    gsap.to('.char', {
+      y: 0,
+      duration: 1,
+      ease: "power4.out",
+      stagger: 0.05,
+      delay: 0.5
+    });
+  </script>
+</body>
+</html>

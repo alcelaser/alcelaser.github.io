@@ -1,9 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import TimelineCard from '../components/TimelineCard.astro';
 import { getCV, useTranslations } from '../i18n/utils';
 
 const lang = Astro.currentLocale || 'en';
@@ -16,409 +12,192 @@ const {
   personal
 } = getCV(lang);
 const t = useTranslations(lang);
+const titleVariants = personal.title
+  .split('|')
+  .map((item) => item.trim())
+  .filter(Boolean);
 
-// Fetch articles from the blog folder
 const allPosts = Object.values(import.meta.glob<{ url: string, frontmatter: any }>('./blog/*.md', { eager: true }));
-const displayedArticles = allPosts.slice(0, 4); // Display up to 4 articles
+const displayedArticles = allPosts.slice(0, 4);
 
-const skillCategories = [
-  { key: 'programming' as const, label: t('section.skills.cat.programming') },
-  { key: 'ai' as const, label: t('section.skills.cat.ai') },
-  { key: 'tools' as const, label: t('section.skills.cat.tools') },
-  { key: 'soft' as const, label: t('section.skills.cat.soft') },
-];
-
-// Fetch GitHub repos at build time
 interface GitHubRepo {
   name: string;
   description: string | null;
   html_url: string;
-  stargazers_count: number;
-  language: string | null;
-  topics: string[];
-  updated_at: string;
-  fork: boolean;
 }
-
-const langColors: Record<string, string> = {
-  Dart: '#00B4AB',
-  TypeScript: '#3178C6',
-  JavaScript: '#F7DF1E',
-  Python: '#3572A5',
-  'Jupyter Notebook': '#DA5B0B',
-  Rust: '#DEA584',
-  PHP: '#4F5D95',
-};
-
 let repos: GitHubRepo[] = [];
 try {
   const res = await fetch('https://api.github.com/users/alcelaser/repos?sort=updated&per_page=30', {
     headers: { Accept: 'application/vnd.github.v3+json' },
   });
   if (res.ok) {
-    const all: GitHubRepo[] = await res.json();
+    const all = await res.json();
     repos = all
-      .filter((r) => !r.fork && r.name !== 'alcelaser' && r.name !== 'phobiareleased')
-      .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+      .filter((r: any) => !r.fork && r.name !== 'alcelaser' && r.name !== 'phobiareleased')
       .slice(0, 6);
   }
-} catch {
-  // fallback: empty repos, page still renders
-}
+} catch {}
 ---
-<Layout title={personal.name + ' | ' + personal.title} description={personal.summary}>
-  <Nav />
-  <Hero />
-  <About />
+<Layout title={personal.name} description={personal.summary}>
 
-  <!-- Experience -->
-  <section id="experience" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
-        <span class="gradient-text">{t('section.experience')}</span>
-      </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
-
-      <div class="relative">
-        <div class="hidden md:block absolute left-1/2 -translate-x-px top-0 bottom-0 w-px bg-border-glass"></div>
-        <div class="space-y-8 md:space-y-12">
-          {experience.map((exp, i) => (
-            <TimelineCard
-              title={exp.role}
-              subtitle={exp.company}
-              meta={exp.type}
-              period={exp.period}
-              items={exp.bullets}
-              index={i}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
-        <span class="gradient-text">{t('section.education')}</span>
-      </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
-
-      <div class="relative">
-        <div class="hidden md:block absolute left-1/2 -translate-x-px top-0 bottom-0 w-px bg-border-glass"></div>
-        <div class="space-y-8 md:space-y-12">
-          {education.map((edu, i) => (
-            <TimelineCard
-              title={edu.institution}
-              subtitle={edu.degree}
-              meta={edu.location}
-              period={edu.period}
-              items={edu.details}
-              index={i}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
-        <span class="gradient-text">{t('section.projects')}</span>
-      </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-3 sm:mb-4 section-fade"></div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12 section-fade">
-        <p class="text-text-secondary">
-          {t('section.projects.desc')} <a href={personal.github} target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">GitHub</a>.
-        </p>
-        <a href="/demos" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-blue/10 border border-accent-blue/30 text-accent-blue text-sm font-mono hover:bg-accent-blue/20 hover:border-accent-blue/50 transition-colors whitespace-nowrap w-fit">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z" /></svg>
-          {t('section.projects.liveDemos')}
-        </a>
-      </div>
-
-      {repos.length > 0 ? (
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {repos.map((repo) => (
-            <a
-              href={repo.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="glass rounded-2xl p-6 section-fade glow-border group transition-transform hover:scale-[1.02] block project-card"
-            >
-              <div class="flex items-start justify-between mb-3">
-                <svg class="w-6 h-6 text-text-muted group-hover:text-accent-blue transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
-                </svg>
-                {repo.stargazers_count > 0 && (
-                  <span class="flex items-center gap-1 text-text-muted text-sm">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                    </svg>
-                    {repo.stargazers_count}
-                  </span>
-                )}
-              </div>
-
-              <h3 class="font-semibold text-text-primary mb-2 group-hover:text-accent-blue transition-colors">{repo.name}</h3>
-              <p class="text-text-secondary text-sm leading-relaxed mb-4 line-clamp-2">{repo.description || 'No description'}</p>
-
-              <div class="flex items-center gap-3 flex-wrap mt-auto">
-                {repo.language && (
-                  <span class="flex items-center gap-1.5 text-xs text-text-muted">
-                    <span class="w-2.5 h-2.5 rounded-full" style={`background-color: ${langColors[repo.language] || '#8b8b8b'}`}></span>
-                    {repo.language}
-                  </span>
-                )}
-                {(repo.topics || []).slice(0, 3).map((topic) => (
-                  <span class="text-xs px-2 py-0.5 rounded-full border border-border-glass text-text-muted">{topic}</span>
-                ))}
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <p class="text-text-muted text-center">{t('section.projects.fallback')} <a href={personal.github} class="text-accent-blue hover:underline">GitHub</a> directly.</p>
-      )}
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
-        <span class="gradient-text">{t('section.skills')}</span>
-      </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        {skillCategories.map((cat) => (
-          <div class="glass rounded-2xl p-6 section-fade glow-border">
-            <h3 class="font-mono text-sm text-accent-blue mb-4 uppercase tracking-wider">{cat.label}</h3>
-            <div class="flex flex-wrap gap-2">
-              {skills
-                .filter((s) => s.category === cat.key)
-                .map((s) => (
-                  <span class="px-3 py-1.5 rounded-full text-sm text-text-secondary bg-bg-primary/60 border border-border-glass hover:border-accent-purple/40 hover:text-text-primary transition-colors">
-                    {s.name}
-                  </span>
-                ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Languages -->
-  <section id="languages" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
-        <span class="gradient-text">{t('section.languages')}</span>
-      </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
-
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        {languages.map((lang) => (
-          <div class="glass rounded-2xl p-6 section-fade glow-border">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-lg font-semibold text-text-primary">{lang.name}</h3>
-              <span class="font-mono text-sm text-accent-blue">{lang.level}</span>
-            </div>
-            <p class="text-text-muted text-sm mb-4">{lang.detail}</p>
-            <div class="w-full h-1.5 rounded-full bg-bg-primary/60">
-              <div
-                class="h-full rounded-full bg-gradient-to-r from-accent-blue to-accent-purple lang-bar"
-                style={`width: 0%; --target-width: ${lang.percent}%`}
-              ></div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Awards -->
-  <section id="awards" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
-        <span class="gradient-text">{t('section.awards')}</span>
-      </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {awards.map((award) => (
-          <div class="glass rounded-2xl p-6 section-fade glow-border group">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20 flex items-center justify-center mb-4 group-hover:from-accent-blue/30 group-hover:to-accent-purple/30 transition-colors">
-              <svg class="w-5 h-5 text-accent-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-              </svg>
-            </div>
-            <h3 class="font-semibold text-text-primary mb-1">{award.title}</h3>
-            <p class="text-accent-blue text-sm font-mono">{award.issuer}</p>
-            {award.detail && <p class="text-text-muted text-sm mt-2">{award.detail}</p>}
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Articles -->
-  <section id="articles" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex items-center justify-between mb-2 section-fade">
-        <h2 class="text-3xl md:text-4xl font-bold">
-          <span class="gradient-text">{t('section.articles')}</span>
+  <div class="content-wrapper min-h-screen relative overflow-hidden">
+    
+    <!-- HEADER -->
+    <header class="bauhaus-border-b flex flex-col md:flex-row min-h-[60vh]">
+      
+      <div class="flex-1 p-8 sm:p-12 lg:p-16 flex flex-col justify-center anim-slide-up" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">
+        <h1 class="huge-text mb-6 tracking-tight block">{personal.name.split(' ')[0]}<br/>{personal.name.split(' ')[1]}</h1>
+        <h2 class="large-text">
+          <span id="hero-typewriter" data-positions={JSON.stringify(titleVariants)}>{titleVariants[0] ?? personal.title}</span>
         </h2>
-        <a href={lang === 'en' ? '/blog' : `/${lang}/blog`} class="text-accent-blue hover:text-accent-purple transition-colors text-sm font-mono flex items-center gap-1 group">
-          {t('section.articles.viewAll')}
-          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
       </div>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 sm:mb-12 section-fade"></div>
 
-      <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
-        {displayedArticles.map((post) => {
-          const { title, description, publication } = post.frontmatter;
-          const articleUrl = post.url;
-          return (
-            <a href={articleUrl} class="glass rounded-2xl p-6 section-fade glow-border group block hover:scale-[1.02] transition-transform cursor-pointer">
-              <div class="flex items-start justify-between mb-4">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20 flex items-center justify-center group-hover:from-accent-blue/30 group-hover:to-accent-purple/30 transition-colors">
-                  <svg class="w-5 h-5 text-accent-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                  </svg>
-                </div>
-                <svg class="w-4 h-4 text-text-muted group-hover:text-accent-blue transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                </svg>
+      <!-- Outbound Initial Links (User Request) -->
+      <nav class="md:w-[450px] flex flex-col bauhaus-border-t md:bauhaus-border-t-0 md:bauhaus-border-l shrink-0 bg-white">
+        <a href={`mailto:${personal.email}`} class="bauhaus-link" style="background-color: var(--bauhaus-red); color: white;">
+          {t('hero.contact')} <span class="bauhaus-link-arrow">↗</span>
+        </a>
+        <a href={personal.linkedin} target="_blank" class="bauhaus-link">
+          linkedin <span class="bauhaus-link-arrow">↗</span>
+        </a>
+        <a href={personal.github} target="_blank" class="bauhaus-link">
+          github <span class="bauhaus-link-arrow">↗</span>
+        </a>
+        <a href={lang === 'en' ? '/blog' : `/${lang}/blog`} class="bauhaus-link">
+          {t('hero.readBlog')} <span class="bauhaus-link-arrow">→</span>
+        </a>
+        <a href={lang === 'en' ? '/demos' : `/${lang}/demos`} class="bauhaus-link">
+          {t('hero.projects')} <span class="bauhaus-link-arrow">→</span>
+        </a>
+      </nav>
+
+    </header>
+
+    <!-- ABOUT ACCORDION -->
+    <section id="about" class="bauhaus-border-b flex flex-col bg-white">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-black); color: var(--bauhaus-white);">
+        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.about')}</h2>
+        <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
+      </div>
+      <div class="accordion-content overflow-hidden bauhaus-border-t">
+        <div class="p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+          <p class="text-3xl sm:text-4xl md:text-[2.5rem] leading-tight font-bold text-black" set:html={t('about.desc1') || personal.summary}></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS ACCORDION -->
+    <section id="skills" class="bauhaus-border-b flex flex-col bg-white">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">
+        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.skills')}</h2>
+        <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
+      </div>
+      <div class="accordion-content overflow-hidden bg-[#F5F5F5] bauhaus-border-t">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 p-8 sm:p-12 lg:p-16">
+          {skills.map((s, i) => {
+            const bgs = ['var(--bauhaus-red)', 'var(--bauhaus-white)', 'var(--bauhaus-yellow)', 'var(--bauhaus-black)'];
+            const txt = bgs[i % bgs.length] === 'var(--bauhaus-red)' || bgs[i % bgs.length] === 'var(--bauhaus-black)' ? 'var(--bauhaus-white)' : 'var(--bauhaus-black)';
+            return (
+              <div class="skill-card-flow uppercase shadow-[6px_6px_0px_#000]" style={`background-color: ${bgs[i % bgs.length]}; color: ${txt}; border: var(--line-weight) solid var(--bauhaus-black); padding: 1.5rem; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 900; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 100px;`}>
+                {s.name}
               </div>
-              <h3 class="font-semibold text-text-primary text-lg mb-2 group-hover:text-accent-blue transition-colors">{title}</h3>
-              <p class="text-text-secondary text-sm leading-relaxed">{description}</p>
-              {publication && (
-                <p class="text-text-muted text-xs font-mono mt-3">{publication}</p>
-              )}
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE ACCORDION -->
+    <section id="experience" class="bauhaus-border-b flex flex-col bg-white">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-red); color: var(--bauhaus-white);">
+        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.experience')}</h2>
+        <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
+      </div>
+      <div class="accordion-content overflow-hidden bauhaus-border-t">
+        <div class="flex flex-col">
+          {experience.map((exp, i) => (
+            <article class="p-8 sm:p-12 lg:p-16 bauhaus-border-b last:border-b-0 flex flex-col xl:flex-row gap-8 lg:gap-16 bg-white hover-row transition-transform duration-300">
+              <div class="xl:w-1/3 shrink-0">
+                <h3 class="text-4xl md:text-5xl font-black mb-4 uppercase leading-none tracking-tight">{exp.role}</h3>
+                <span class="inline-block px-4 py-2 bg-black text-white font-bold text-2xl md:text-3xl leading-none shadow-[6px_6px_0px_#D3D3D3]">{exp.company}</span>
+                <p class="mt-8 text-2xl font-bold font-mono text-gray-700 bg-[var(--bauhaus-yellow)] w-fit px-2 border-[3px] border-black">{exp.period}</p>
+              </div>
+              <div class="xl:w-2/3">
+                <ul class="list-square pl-6 text-2xl md:text-[1.75rem] leading-snug font-medium space-y-6">
+                  {exp.bullets.map((b: string) => <li>{b}</li>)}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS ACCORDION -->
+    <section id="projects" class="bauhaus-border-b flex flex-col bg-white">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">
+        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.projects')}</h2>
+        <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
+      </div>
+      <div class="accordion-content overflow-hidden bauhaus-border-t">
+        <div class="flex flex-wrap bg-white">
+          {repos.map((r, i) => {
+            const bgs = ['var(--bauhaus-white)', 'var(--bauhaus-yellow)', 'var(--bauhaus-blue)', 'var(--bauhaus-grey)', 'var(--bauhaus-white)', 'var(--bauhaus-red)'];
+            const textCols = ['var(--bauhaus-black)', 'var(--bauhaus-black)', 'var(--bauhaus-white)', 'var(--bauhaus-black)', 'var(--bauhaus-black)', 'var(--bauhaus-white)'];
+            
+            let bg = bgs[i % bgs.length];
+            let tx = textCols[i % textCols.length];
+            
+            return (
+               <a href={r.html_url} target="_blank" class="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col hover-row-red min-h-[400px]" style={`background-color: ${bg}; color: ${tx}; border-bottom: var(--line-weight) solid var(--bauhaus-black); border-right: var(--line-weight) solid var(--bauhaus-black); margin-bottom: -5px; margin-right: -5px;`}>
+                 <h3 class="text-4xl lg:text-5xl font-black mb-6 leading-none tracking-tight">{r.name}</h3>
+                 <p class="text-2xl font-medium leading-relaxed flex-1">{r.description || 'github repository'}</p>
+                 <div class="mt-8">
+                   <span class="inline-block px-4 py-2 text-2xl font-bold uppercase border-2 focus:outline-none" style={`border-color: ${tx};`}>repository ↗</span>
+                 </div>
+               </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLES ACCORDION -->
+    <section id="articles" class="bauhaus-border-b flex flex-col bg-white">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-grey); color: var(--bauhaus-black);">
+        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.articles')}</h2>
+        <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
+      </div>
+      <div class="accordion-content overflow-hidden bauhaus-border-t">
+        <div class="flex flex-col">
+          {displayedArticles.map(post => (
+            <a href={post.url} class="block p-8 sm:p-12 lg:p-16 hover-row-red bauhaus-border-b last:border-b-0 flex flex-col xl:flex-row justify-between gap-8 xl:items-center bg-white text-black">
+              <div class="xl:w-2/3">
+                <h3 class="text-5xl lg:text-6xl xl:text-7xl font-black mb-6 tracking-tighter leading-none">{post.frontmatter.title}</h3>
+                <p class="text-2xl font-medium max-w-3xl leading-snug">{post.frontmatter.description}</p>
+              </div>
+              <div class="xl:w-1/3 xl:text-right pt-4 xl:pt-0">
+                 <span class="inline-block px-6 py-4 bg-black text-white text-3xl font-black uppercase transition-transform hover:-translate-y-1 shadow-[8px_8px_0px_#FFFF00]">read ↗</span>
+              </div>
             </a>
-          );
-        })}
+          ))}
+          <div class="p-8 sm:p-12 lg:p-16 bg-white flex justify-center hover-row-red bauhaus-border-t mt-[-5px]">
+             <a href="/blog" class="text-3xl md:text-5xl font-black text-black uppercase">view all articles →</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section id="contact" class="py-16 sm:py-24 px-4 sm:px-6">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-2 section-fade">
-        <span class="gradient-text">{t('section.contact')}</span>
-      </h2>
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mb-8 mx-auto section-fade"></div>
+    <!-- FOOTER LINKS -->
+    <footer class="flex flex-col bg-white">
+       <a href="#top" class="block w-full p-12 lg:p-16 text-center text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight hover-row-red">
+         back to top ↑
+       </a>
+    </footer>
 
-      <p class="text-text-secondary mb-12 section-fade">
-        {t('section.contact.desc')}
-      </p>
+  </div>
 
-      <div class="flex flex-wrap justify-center gap-4 section-fade">
-        <a
-          href={`mailto:${personal.email}`}
-          class="glass rounded-2xl px-6 py-4 flex items-center gap-3 glow-border hover:scale-[1.02] transition-transform"
-        >
-          <svg class="w-5 h-5 text-accent-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-          </svg>
-          <span class="text-text-secondary text-sm">{personal.email}</span>
-        </a>
-
-        <a
-          href={personal.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="glass rounded-2xl px-6 py-4 flex items-center gap-3 glow-border hover:scale-[1.02] transition-transform"
-        >
-          <svg class="w-5 h-5 text-accent-purple" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          <span class="text-text-secondary text-sm">{personal.githubHandle}</span>
-        </a>
-
-        <a
-          href={personal.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="glass rounded-2xl px-6 py-4 flex items-center gap-3 glow-border hover:scale-[1.02] transition-transform"
-        >
-          <svg class="w-5 h-5 text-accent-blue" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-          <span class="text-text-secondary text-sm">LinkedIn</span>
-        </a>
-
-        <a
-          href="https://www.instagram.com/alcelaser"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="glass rounded-2xl px-6 py-4 flex items-center gap-3 glow-border hover:scale-[1.02] transition-transform"
-        >
-          <svg class="w-5 h-5 text-accent-purple" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5" />
-            <path d="M16 11.999a3.001 3.001 0 11-6.002.001A3.001 3.001 0 0116 11.999z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-          </svg>
-          <span class="text-text-secondary text-sm">@alcelaser</span>
-        </a>
-      </div>
-
-      <div class="mt-8 section-fade">
-        <p class="text-text-muted text-sm flex items-center justify-center gap-2">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-          </svg>
-          {personal.location}
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-6 sm:py-8 px-4 sm:px-6 border-t border-border-glass">
-    <div class="max-w-5xl mx-auto text-center">
-      <p class="text-text-muted text-sm">
-        &copy; {new Date().getFullYear()} {personal.name}
-      </p>
-    </div>
-  </footer>
 </Layout>
-
-<style>
-  /* 3D card effects */
-  .glass {
-    transition: transform 0.1s ease-out;
-  }
-  
-  .glass::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 1rem;
-    background: radial-gradient(
-      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(0, 212, 255, 0.1),
-      transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  
-  .glass:hover::after {
-    opacity: 1;
-  }
-</style>
 
 <script>
   import { gsap } from "gsap";
@@ -426,75 +205,169 @@ try {
   
   gsap.registerPlugin(ScrollTrigger);
 
-  // Staggered Section fade-in using GSAP
-  const sections = document.querySelectorAll('section');
-  sections.forEach((section) => {
-    const faders = section.querySelectorAll('.section-fade');
-    if(faders.length > 0) {
-      gsap.to(faders, {
+  // --- Scroll Animations ---
+  const sections = gsap.utils.toArray('.anim-slide-up');
+  sections.forEach((sec: any) => {
+    gsap.fromTo(sec, 
+      { opacity: 0, y: 100 }, 
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: sec, start: "top 85%" } }
+    );
+  });
+
+  // --- Absolute Parallax Shapes ---
+  gsap.utils.toArray('.geom-shape').forEach((shape: any) => {
+    const speed = parseFloat(shape.getAttribute('data-speed'));
+    
+    // Animate across the fixed viewport relative to total document scroll
+    gsap.fromTo(shape, 
+      { y: 0 },
+      {
+        y: () => -window.innerHeight * speed,
+        ease: "none",
         scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-        },
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.15
+          trigger: document.body,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true
+        }
+      }
+    );
+    
+    // Smooth endless rotating circle for red shape
+    if (shape.classList.contains('shape-red')) {
+      gsap.to(shape, {
+        rotation: 360,
+        ease: "none",
+        scrollTrigger: {
+          trigger: shape,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5
+        }
       });
     }
   });
 
-  // Language bar animation
-  const langBars = document.querySelectorAll('.lang-bar');
-  langBars.forEach((bar) => {
-    const el = bar as HTMLElement;
-    const target = el.style.getPropertyValue('--target-width');
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: "top 90%",
-      },
-      width: target,
-      duration: 1.5,
-      ease: "power2.out"
-    });
-  });
+  // --- Hero subtitle typewriter (write / backspace / next position) ---
+  const typewriter = document.getElementById('hero-typewriter');
+  if (typewriter) {
+    let positions: string[] = [];
+    try {
+      positions = JSON.parse(typewriter.getAttribute('data-positions') || '[]');
+    } catch {
+      positions = [];
+    }
 
-  // =====================================================
-  // 3D MOUSE-FOLLOWING CARD TILT
-  // =====================================================
-  
-  const cards = document.querySelectorAll('.glass:not(#navbar .glass)');
-  
-  cards.forEach((card) => {
-    const cardEl = card as HTMLElement;
-    
-    cardEl.addEventListener('mousemove', (e) => {
-      const rect = cardEl.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * 10; // Max 10 degrees
-      const rotateY = ((x - centerX) / centerX) * -10;
-      
-      cardEl.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-      
-      // Update gradient position
-      cardEl.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-      cardEl.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-    });
-    
-    cardEl.addEventListener('mouseleave', () => {
-      cardEl.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-      cardEl.style.transition = 'transform 0.5s ease';
-      setTimeout(() => {
-        cardEl.style.transition = 'transform 0.1s ease-out';
-      }, 500);
-    });
-  });
+    if (positions.length > 1) {
+      let positionIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
 
+      const typeDelay = 90;
+      const deleteDelay = 45;
+      const holdDelay = 1200;
+
+      const tick = () => {
+        const current = positions[positionIndex] || '';
+
+        if (isDeleting) {
+          charIndex = Math.max(0, charIndex - 1);
+        } else {
+          charIndex = Math.min(current.length, charIndex + 1);
+        }
+
+        const visibleText = current.slice(0, charIndex);
+        typewriter.textContent = visibleText.length > 0 ? visibleText : '\u00A0';
+
+        if (!isDeleting && charIndex === current.length) {
+          isDeleting = true;
+          window.setTimeout(tick, holdDelay);
+          return;
+        }
+
+        if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          positionIndex = (positionIndex + 1) % positions.length;
+          window.setTimeout(tick, 250);
+          return;
+        }
+
+        window.setTimeout(tick, isDeleting ? deleteDelay : typeDelay);
+      };
+
+      typewriter.textContent = '\u00A0';
+      window.setTimeout(tick, 300);
+    }
+  }
+
+  // --- Dynamic Universal Accordion Logic ---
+  const triggers = document.querySelectorAll('.accordion-trigger');
+  
+  // Start all contents openly
+  const contents = document.querySelectorAll('.accordion-content');
+  gsap.set(contents, { height: 'auto' });
+
+  triggers.forEach((trigger) => {
+    const parent = trigger.parentElement;
+    const content = parent ? parent.querySelector('.accordion-content') : null;
+    const icon = trigger.querySelector('.accordion-icon');
+    
+    // Store original colors to revert when opening
+    const originalBg = (trigger as HTMLElement).style.backgroundColor;
+    const originalColor = (trigger as HTMLElement).style.color;
+    
+    // All sections start open
+    let isExpanded = true;
+
+    if (content && icon) {
+      
+      // Set initial icon rotation since it's already open
+      gsap.set(icon, { rotation: 45 });
+
+      trigger.addEventListener('click', () => {
+        if (!isExpanded) {
+          
+          // Animate Accordion Open
+          gsap.to(content, { height: 'auto', duration: 0.6, ease: "power3.out" });
+
+          // Animate any skill cards if this is the skills grid
+          const skills = content.querySelectorAll('.skill-card-flow');
+          if (skills.length > 0) {
+            gsap.fromTo(skills, 
+              { y: -50, opacity: 0, scale: 0.8, rotation: () => gsap.utils.random(-15, 15) },
+              { y: 0, opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.5)", stagger: 0.04 }
+            );
+          }
+
+          // Trigger styling returns to default colorful
+          gsap.to(trigger, {
+            backgroundColor: originalBg,
+            color: originalColor,
+            duration: 0.4
+          });
+          
+          // Icon rotates to 'x' indicating close
+          gsap.to(icon, { rotation: 45, duration: 0.4, ease: "back.out(1.5)" });
+          
+          isExpanded = true;
+        } else {
+          
+          // Animate Accordion Closed
+          gsap.to(content, { height: 0, duration: 0.5, ease: "power3.inOut" });
+          
+          // Trigger styling turns into "Inactive state" (Black)
+          gsap.to(trigger, {
+            backgroundColor: 'var(--bauhaus-black)',
+            color: 'var(--bauhaus-white)',
+            duration: 0.4
+          });
+          
+          // Icon returns to '+'
+          gsap.to(icon, { rotation: 0, duration: 0.4, ease: "back.out(1.5)" });
+          
+          isExpanded = false;
+        }
+      });
+    }
+  });
 </script>

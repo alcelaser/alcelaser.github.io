@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background: #FFF;
+            height: 300vh;
+            overflow-x: hidden;
+        }
+
+        /* Z-Index architecture is critical here */
+        .content-stream {
+            position: relative;
+            z-index: 10;
+            width: 60%;
+            margin: 200px auto;
+            background: rgba(255, 255, 255, 0.9);
+            border: 5px solid black;
+            padding: 50px;
+            font-family: sans-serif;
+        }
+
+        /* Fixed Container for SVG Parallax Geometry */
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .geom-shape {
+            position: absolute;
+        }
+
+        .shape-red {
+            background: #FF0000;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            right: 10%;
+            top: 20%;
+            border: 10px solid black;
+        }
+
+        .shape-yellow {
+            background: #FFFF00;
+            width: 50vw;
+            height: 100px;
+            left: -10%;
+            top: 60%;
+            border: 10px solid black;
+        }
+
+        .shape-blue {
+            background: #0000FF;
+            width: 400px;
+            height: 600px;
+            right: -50px;
+            bottom: -100px;
+            border: 10px solid black;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Geometric Parallax Shapes Layer -->
+    <div class="parallax-layer">
+        <div class="geom-shape shape-red" data-speed="0.2"></div>
+        <div class="geom-shape shape-yellow" data-speed="0.8"></div>
+        <div class="geom-shape shape-blue" data-speed="0.4"></div>
+    </div>
+
+    <div class="content-stream">
+        <h1>Parallax Z-Index Test</h1>
+        <p>Scroll down. The geometric shapes should be locked to `position: fixed` behind this container, but they will
+            update their Y transformation based on native scroll progress to create relative depth.</p>
+    </div>
+
+    <div class="content-stream" style="margin-top: 500px;">
+        <h2>Box 2</h2>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Iterate over every geometry item
+        gsap.utils.toArray('.geom-shape').forEach(shape => {
+            const speed = shape.getAttribute('data-speed');
+
+            // 2. Parallax equation: calculate movement distance proportional to scroll height
+            // Moving fixed elements based on scrub velocity
+            gsap.to(shape, {
+                y: () => (window.innerHeight - shape.clientHeight) * speed * -1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: document.body,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true // Locks timing perfectly to scrollbar position
+                }
+            });
+
+            // 3. Add secondary slow rotation to circles
+            if (shape.classList.contains('shape-red')) {
+                gsap.to(shape, {
+                    rotation: 360,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: document.body,
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 1.5 // Smooth catch up
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,6 +1,5 @@
 ---
 import Layout from './Layout.astro';
-import Nav from '../components/Nav.astro';
 
 const { frontmatter } = Astro.props;
 const lang = Astro.currentLocale || 'en';
@@ -8,478 +7,76 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
 ---
 
 <Layout title={`${frontmatter.title} | Alberto Maccanico`}>
-  <Nav />
   
-  <article class="max-w-3xl mx-auto py-24 sm:py-32 px-4 sm:px-6 markdown-content">
-    <div class="mb-8 sm:mb-12 section-fade">
-      <a href={blogUrl} class="text-accent-blue hover:underline text-sm font-mono mb-4 inline-flex items-center gap-2">
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-        </svg>
-        Back to Blog
+  <div class="content-wrapper min-h-screen flex flex-col bg-white">
+    <!-- ARTICLE HEADER -->
+    <header class="p-8 sm:p-12 lg:p-16 flex flex-col justify-center bauhaus-border-b" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">
+      <a href={blogUrl} class="inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-white)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-white)] hover:text-black transition-colors">
+        ← return to articles 
       </a>
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 mt-6 text-text-primary">{frontmatter.title}</h1>
+      <h1 class="text-5xl sm:text-7xl lg:text-[6rem] font-black mb-6 tracking-tighter leading-none">{frontmatter.title}</h1>
+      
       {frontmatter.description && (
-        <p class="text-xl text-text-secondary leading-relaxed mb-6">{frontmatter.description}</p>
+        <p class="text-2xl sm:text-3xl font-medium max-w-5xl leading-tight border-l-[8px] border-white pl-6">{frontmatter.description}</p>
       )}
-      {frontmatter.publication && (
-        <p class="text-sm font-mono text-accent-purple mb-4">{frontmatter.publication}</p>
-      )}
-      {frontmatter.originalUrl && (
-        <a href={frontmatter.originalUrl} target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline text-sm font-mono inline-flex items-center gap-1">
-          Read on original publication
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-          </svg>
-        </a>
-      )}
-      <div class="w-16 h-1 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full mt-8"></div>
-    </div>
+      
+      <div class="mt-12 flex gap-4">
+        {frontmatter.publication && (
+          <span class="bg-[var(--bauhaus-black)] text-white px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider">{frontmatter.publication}</span>
+        )}
+        {frontmatter.originalUrl && (
+          <a href={frontmatter.originalUrl} target="_blank" rel="noopener noreferrer" class="bg-[var(--bauhaus-yellow)] text-black px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider hover:bg-black hover:text-white transition-colors">
+            read original publication ↗
+          </a>
+        )}
+      </div>
+    </header>
 
-    <div class="prose prose-invert prose-lg max-w-none text-text-secondary section-fade">
-      <slot />
-    </div>
-  </article>
+    <!-- ARTICLE BODY -->
+    <article class="p-8 sm:p-12 lg:p-16 flex-1 bg-white markdown-body">
+      <div class="prose prose-2xl max-w-[1000px] mx-auto prose-h2:font-black prose-h2:text-5xl prose-h2:uppercase prose-h3:font-black prose-h3:text-4xl prose-p:font-medium prose-p:leading-relaxed prose-a:bg-[var(--bauhaus-yellow)] prose-a:text-black prose-a:px-1 prose-a:font-bold prose-a:no-underline hover:prose-a:bg-black hover:prose-a:text-[var(--bauhaus-white)] prose-img:border-[6px] prose-img:border-black prose-img:rounded-none">
+        <slot />
+      </div>
+    </article>
+  </div>
+  
 </Layout>
 
 <style is:global>
-  /* Markdown Styles for the Blog */
-  .markdown-content .prose p {
-    margin-bottom: 1.5em;
-    line-height: 1.75;
-  }
-  .markdown-content .prose h1,
-  .markdown-content .prose h2,
-  .markdown-content .prose h3,
-  .markdown-content .prose h4 {
-    color: var(--color-text-primary);
-    font-weight: 700;
-    margin-top: 2em;
-    margin-bottom: 1em;
-  }
-  .markdown-content .prose h2 {
-    font-size: 1.875rem;
-  }
-  .markdown-content .prose h3 {
-    font-size: 1.5rem;
-  }
-  .markdown-content .prose a {
-    color: var(--color-accent-blue);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s;
-  }
-  .markdown-content .prose a:hover {
-    color: var(--color-accent-purple);
-  }
-  .markdown-content .prose ul {
-    list-style-type: disc;
-    padding-left: 1.5em;
-    margin-bottom: 1.5em;
-  }
-  .markdown-content .prose ol {
-    list-style-type: decimal;
-    padding-left: 1.5em;
-    margin-bottom: 1.5em;
-  }
-  .markdown-content .prose li {
-    margin-bottom: 0.5em;
-  }
-  .markdown-content .prose blockquote {
-    border-left: 4px solid var(--color-accent-purple);
-    padding-left: 1em;
-    font-style: italic;
-    color: var(--color-text-muted);
-    margin-bottom: 1.5em;
-    background: var(--color-bg-secondary);
-    padding: 1rem 1rem 1rem 1.5rem;
-    border-radius: 0 0.5rem 0.5rem 0;
-  }
-  .markdown-content .prose pre {
-    background: #1e1e2e;
-    padding: 1rem;
-    border-radius: 0.5rem;
+  /* Bauhaus Overrides for standard Markdown */
+  .markdown-body .prose p { color: var(--bauhaus-black); margin-bottom: 2rem; font-size: 1.5rem; }
+  .markdown-body .prose pre { 
+    background: var(--bauhaus-black); 
+    color: var(--bauhaus-white); 
+    padding: 2.5rem; 
+    border: var(--line-weight) solid var(--bauhaus-black); 
+    border-radius: 0;
+    margin-bottom: 3rem; 
     overflow-x: auto;
-    margin-bottom: 1.5em;
-    border: 1px solid var(--color-border-glass);
   }
-  .markdown-content .prose code {
-    font-family: var(--font-mono);
-    background: oklch(1 1 1 / 0.1);
-    padding: 0.2em 0.4em;
-    border-radius: 0.25rem;
-    font-size: 0.875em;
-    color: var(--color-accent-blue);
+  .markdown-body .prose code { 
+    font-family: monospace; 
+    font-weight: bold; 
+    background: var(--bauhaus-grey); 
+    padding: 0.2rem 0.5rem; 
+    color: var(--bauhaus-black); 
   }
-  .markdown-content .prose pre code {
-    background: transparent;
-    padding: 0;
-    color: inherit;
-  }
-  .markdown-content .prose img {
-    border-radius: 0.75rem;
-    max-width: 100%;
-    height: auto;
-    margin: 2em 0;
-    border: 1px solid var(--color-border-glass);
-  }
-
-  /* ── Footnote reference (superscript number in text) ── */
-  .markdown-content .prose sup {
-    line-height: 0;
-  }
-  .markdown-content .prose sup a[data-footnote-ref] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 0.65em;
+  .markdown-body .prose pre code { background: transparent; color: inherit; padding: 0; }
+  .markdown-body .prose blockquote {
+    border-left: 12px solid var(--bauhaus-red);
+    background: var(--bauhaus-grey);
+    padding: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: var(--color-accent-purple);
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(0, 212, 255, 0.10));
-    border: 1px solid rgba(124, 58, 237, 0.3);
-    border-radius: 9999px;
-    min-width: 1.5em;
-    height: 1.5em;
-    padding: 0 0.35em;
-    text-decoration: none;
-    vertical-align: super;
-    transition: all 0.25s ease;
-    backdrop-filter: blur(4px);
-    cursor: pointer;
+    margin-bottom: 3rem;
   }
-  .markdown-content .prose sup a[data-footnote-ref]:hover {
-    color: #fff;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.5), rgba(0, 212, 255, 0.35));
-    border-color: var(--color-accent-blue);
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3), 0 0 4px rgba(124, 58, 237, 0.2);
-    transform: translateY(-1px);
+  .markdown-body .prose ul, .markdown-body .prose ol { 
+    padding-left: 3rem; 
+    margin-bottom: 3rem; 
+    font-weight: 600; 
+    font-size: 1.5rem; 
+    line-height: 1.8; 
+    list-style-type: square; 
   }
-
-  /* ── Footnote popover card ── */
-  .fn-popover {
-    position: absolute;
-    z-index: 100;
-    width: min(26rem, 90vw);
-    padding: 1rem 1.25rem;
-    background: linear-gradient(135deg, rgba(15, 15, 25, 0.97), rgba(20, 20, 35, 0.97));
-    border: 1px solid rgba(124, 58, 237, 0.3);
-    border-radius: 0.75rem;
-    backdrop-filter: blur(16px);
-    box-shadow:
-      0 0 20px rgba(0, 0, 0, 0.4),
-      0 0 40px rgba(124, 58, 237, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    pointer-events: auto;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-  .fn-popover.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .fn-popover::before {
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: var(--arrow-left, 1.5rem);
-    width: 12px;
-    height: 12px;
-    background: rgba(15, 15, 25, 0.97);
-    border-top: 1px solid rgba(124, 58, 237, 0.3);
-    border-left: 1px solid rgba(124, 58, 237, 0.3);
-    transform: rotate(45deg);
-  }
-  .fn-popover.above::before {
-    top: auto;
-    bottom: -6px;
-    border-top: none;
-    border-left: none;
-    border-bottom: 1px solid rgba(124, 58, 237, 0.3);
-    border-right: 1px solid rgba(124, 58, 237, 0.3);
-  }
-  .fn-popover-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--color-accent-purple);
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(0, 212, 255, 0.12));
-    border: 1px solid rgba(124, 58, 237, 0.3);
-    border-radius: 9999px;
-    min-width: 1.4em;
-    height: 1.4em;
-    padding: 0 0.3em;
-    margin-right: 0.5rem;
-    flex-shrink: 0;
-  }
-  .fn-popover-body {
-    display: flex;
-    align-items: flex-start;
-  }
-  .fn-popover-text {
-    font-size: 0.8rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-    flex: 1;
-  }
-  .fn-popover-text em {
-    color: var(--color-text-muted);
-  }
-  .fn-popover-text strong {
-    color: var(--color-text-primary);
-    font-weight: 600;
-  }
-  .fn-popover-close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.6rem;
-    width: 1.25rem;
-    height: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: transparent;
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: color 0.2s, background 0.2s;
-    line-height: 1;
-  }
-  .fn-popover-close:hover {
-    color: var(--color-accent-blue);
-    background: rgba(0, 212, 255, 0.1);
-  }
-
-  /* ── Footnotes section at the bottom (kept but collapsed) ── */
-  .markdown-content .prose .footnotes {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(124, 58, 237, 0.25);
-    position: relative;
-  }
-  .markdown-content .prose .footnotes::before {
-    content: 'Notes';
-    position: absolute;
-    top: -0.75em;
-    left: 0;
-    background: var(--color-bg-primary);
-    padding-right: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-accent-purple);
-  }
-  .markdown-content .prose .footnotes hr {
-    display: none;
-  }
-  .markdown-content .prose .footnotes ol {
-    list-style: none;
-    padding-left: 0;
-    counter-reset: footnote-counter;
-  }
-  .markdown-content .prose .footnotes ol li {
-    counter-increment: footnote-counter;
-    position: relative;
-    padding-left: 2.5rem;
-    margin-bottom: 1.25rem;
-    font-size: 0.875rem;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-    border-left: 2px solid rgba(124, 58, 237, 0.15);
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    transition: border-color 0.3s ease, color 0.3s ease;
-  }
-  .markdown-content .prose .footnotes ol li:target {
-    border-left-color: var(--color-accent-blue);
-    color: var(--color-text-secondary);
-    background: linear-gradient(90deg, rgba(0, 212, 255, 0.05), transparent);
-    border-radius: 0 0.5rem 0.5rem 0;
-  }
-  .markdown-content .prose .footnotes ol li::before {
-    content: counter(footnote-counter);
-    position: absolute;
-    left: 0.5rem;
-    top: 0.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--color-accent-purple);
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(0, 212, 255, 0.10));
-    border: 1px solid rgba(124, 58, 237, 0.25);
-    border-radius: 9999px;
-    min-width: 1.4em;
-    height: 1.4em;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .markdown-content .prose .footnotes ol li p {
-    margin-bottom: 0.5em;
-  }
-
-  /* ── Back-reference arrow (↩) ── */
-  .markdown-content .prose .footnotes ol li a[data-footnote-backref] {
-    font-size: 0.75rem;
-    color: var(--color-accent-blue);
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-    margin-left: 0.25em;
-  }
-  .markdown-content .prose .footnotes ol li a[data-footnote-backref]:hover {
-    opacity: 1;
-    text-decoration: none;
-  }
+  .markdown-body .prose li { margin-bottom: 0.75rem; }
 </style>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const faders = document.querySelectorAll('.section-fade');
-  if (faders.length > 0) {
-    gsap.fromTo(faders,
-      { y: 30, opacity: 0 },
-      {
-        scrollTrigger: {
-          trigger: ".markdown-content",
-          start: "top 85%",
-        },
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.15
-      }
-    );
-  }
-
-  /* ── Footnote popover logic ── */
-  let activePopover: HTMLElement | null = null;
-
-  function closePopover() {
-    if (!activePopover) return;
-    activePopover.classList.remove('visible');
-    const pop = activePopover;
-    setTimeout(() => pop.remove(), 250);
-    activePopover = null;
-  }
-
-  function getFootnoteContent(id: string): string {
-    // id is like "user-content-fn-3"
-    const li = document.getElementById(id);
-    if (!li) return '';
-    // Clone and strip the back-ref link
-    const clone = li.cloneNode(true) as HTMLElement;
-    clone.querySelectorAll('a[data-footnote-backref]').forEach(a => a.remove());
-    // Get inner HTML of the <p> tags (or fallback to full content)
-    const paragraphs = clone.querySelectorAll('p');
-    if (paragraphs.length > 0) {
-      return Array.from(paragraphs).map(p => p.innerHTML).join('<br>');
-    }
-    return clone.innerHTML;
-  }
-
-  document.querySelectorAll('sup a[data-footnote-ref]').forEach(ref => {
-    ref.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // If clicking the same ref, just close
-      const href = (ref as HTMLAnchorElement).getAttribute('href') || '';
-      const fnId = href.replace('#', '');
-      if (activePopover && activePopover.dataset.fnId === fnId) {
-        closePopover();
-        return;
-      }
-      closePopover();
-
-      const number = ref.textContent || '?';
-      const content = getFootnoteContent(fnId);
-      if (!content) return;
-
-      // Build card
-      const card = document.createElement('div');
-      card.className = 'fn-popover';
-      card.dataset.fnId = fnId;
-      card.innerHTML = `
-        <button class="fn-popover-close" aria-label="Close">&times;</button>
-        <div class="fn-popover-body">
-          <span class="fn-popover-badge">${number}</span>
-          <div class="fn-popover-text">${content}</div>
-        </div>
-      `;
-
-      // Position relative to the sup element
-      const sup = ref.closest('sup') || ref;
-      const rect = sup.getBoundingClientRect();
-      const scrollY = window.scrollY;
-      const scrollX = window.scrollX;
-
-      // Append to body first (invisible) to measure
-      document.body.appendChild(card);
-      const cardH = card.offsetHeight;
-      const cardW = card.offsetWidth;
-
-      // Decide above or below
-      const spaceBelow = window.innerHeight - rect.bottom;
-      const placeAbove = spaceBelow < cardH + 16 && rect.top > cardH + 16;
-
-      let top: number;
-      if (placeAbove) {
-        top = rect.top + scrollY - cardH - 10;
-        card.classList.add('above');
-      } else {
-        top = rect.bottom + scrollY + 10;
-      }
-
-      // Horizontal: center on the ref, but clamp to viewport
-      let left = rect.left + scrollX + rect.width / 2 - 1.5 * 16; // align arrow roughly
-      const maxLeft = window.innerWidth - cardW - 12;
-      if (left < 12) left = 12;
-      if (left > maxLeft) left = maxLeft;
-
-      // Adjust arrow position
-      const arrowOffset = rect.left + scrollX + rect.width / 2 - left;
-      const arrow = card.querySelector('.fn-popover::before') as HTMLElement;
-      // Use CSS custom property for arrow
-      card.style.setProperty('--arrow-left', `${Math.max(12, Math.min(arrowOffset, cardW - 20))}px`);
-
-      card.style.position = 'absolute';
-      card.style.top = `${top}px`;
-      card.style.left = `${left}px`;
-
-      // Close button
-      card.querySelector('.fn-popover-close')!.addEventListener('click', (ev) => {
-        ev.stopPropagation();
-        closePopover();
-      });
-
-      activePopover = card;
-      requestAnimationFrame(() => card.classList.add('visible'));
-    });
-  });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (activePopover && !activePopover.contains(e.target as Node)) {
-      closePopover();
-    }
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closePopover();
-  });
-</script>
