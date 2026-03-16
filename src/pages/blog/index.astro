@@ -16,7 +16,7 @@ const t = useTranslations(lang);
     
     <!-- BLOG HEADER -->
     <header class="p-6 sm:p-12 lg:p-16 flex flex-col justify-center bauhaus-border-b" style="background-color: var(--bauhaus-black); color: var(--bauhaus-white);">
-      <a href={lang === 'en' ? '/' : `/${lang}`} class="inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-white)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-white)] hover:text-black transition-colors">
+      <a href={lang === 'en' ? '/' : `/${lang}`} class="blog-back-home-link inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-white)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-white)] hover:text-[var(--bauhaus-black)] transition-colors">
         ← {t('blog.back')}
       </a>
       <h1 class="text-5xl sm:text-7xl lg:text-[8rem] font-black tracking-tighter leading-none mb-4">{t('blog.title')}</h1>

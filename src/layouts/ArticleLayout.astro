@@ -11,7 +11,7 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
   <div class="content-wrapper min-h-screen flex flex-col bg-white">
     <!-- ARTICLE HEADER -->
     <header class="p-8 sm:p-12 lg:p-16 flex flex-col justify-center bauhaus-border-b" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">
-      <a href={blogUrl} class="inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-white)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-white)] hover:text-black transition-colors">
+      <a href={blogUrl} class="inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-white)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-white)] hover:text-[var(--bauhaus-black)] transition-colors">
         ← return to articles 
       </a>
       <h1 class="text-4xl sm:text-6xl lg:text-[5rem] font-black mb-6 tracking-tighter leading-none">{frontmatter.title}</h1>

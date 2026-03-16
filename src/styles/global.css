@@ -157,6 +157,10 @@ a {
   transform: translateX(0);
 }
 
+.blog-back-home-link:hover {
+  color: var(--bauhaus-black) !important;
+}
+
 /* PARALLAX LAYER */
 .parallax-layer {
   position: fixed;
