@@ -25,6 +25,30 @@ interface GitHubRepo {
   description: string | null;
   html_url: string;
 }
+
+const fallbackRepos: GitHubRepo[] = [
+  {
+    name: 'Albert Dashboard',
+    description: 'Real-time investment dashboard tracking stocks, crypto, and commodities.',
+    html_url: '/demos/albert-dashboard/index.html',
+  },
+  {
+    name: 'Codice Fiscale Generator',
+    description: 'Italian tax code generator using the official algorithm in the browser.',
+    html_url: '/demos/cfpython',
+  },
+  {
+    name: 'Limited Lands',
+    description: 'MTG companion app with mana calculator, life counter, deck builder, and tournament tools.',
+    html_url: '/demos/limitedlands',
+  },
+  {
+    name: 'BUS Roma',
+    description: 'Real-time ATAC bus arrivals and stop navigation for Rome.',
+    html_url: '/demos/bus-roma',
+  },
+];
+
 let repos: GitHubRepo[] = [];
 try {
   const res = await fetch('https://api.github.com/users/alcelaser/repos?sort=updated&per_page=30', {
@@ -37,6 +61,8 @@ try {
       .slice(0, 6);
   }
 } catch {}
+
+const projectCards = repos.length > 0 ? repos : fallbackRepos;
 ---
 <Layout title={personal.name} description={personal.summary}>
 
@@ -82,12 +108,21 @@ try {
       <div class="accordion-content overflow-hidden bauhaus-border-t">
         <div class="p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
           <p class="text-3xl sm:text-4xl md:text-[2.5rem] leading-tight font-bold text-black" set:html={t('about.desc1') || personal.summary}></p>
-          <div class="mt-10 sm:mt-12">
-            <h3 class="text-2xl sm:text-3xl font-black uppercase mb-5 text-black">Fluent Languages</h3>
-            <div class="flex flex-wrap gap-4">
-              <span class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black" style="background-color: var(--bauhaus-red); color: var(--bauhaus-white);">Italian</span>
-              <span class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">English</span>
-              <span class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">French</span>
+          <div class="mt-10 sm:mt-12 flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
+            <div class="flex-1 min-w-0">
+              <h3 class="text-2xl sm:text-3xl font-black uppercase mb-5 text-black">Fluent Languages</h3>
+              <div class="flex flex-wrap gap-4">
+                <a href="/it" class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 transition-transform" style="background-color: var(--bauhaus-red); color: var(--bauhaus-white);">Italian</a>
+                <a href="/" class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 transition-transform" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">English</a>
+                <a href="/fr" class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 transition-transform" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">French</a>
+              </div>
+            </div>
+            <div class="min-w-0 lg:ml-auto w-fit flex flex-col items-end">
+              <h3 class="text-2xl sm:text-3xl font-black uppercase mb-5 text-black text-right">Learning</h3>
+              <div class="flex flex-wrap gap-4 justify-end">
+                <span class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black shadow-[6px_6px_0px_#000]" style="background-color: var(--bauhaus-white); color: var(--bauhaus-black);">Spanish</span>
+                <span class="inline-block px-5 py-3 text-xl sm:text-2xl font-black uppercase border-[3px] border-black shadow-[6px_6px_0px_#000]" style="background-color: var(--bauhaus-white); color: var(--bauhaus-black);">German</span>
+              </div>
             </div>
           </div>
         </div>
@@ -102,11 +137,16 @@ try {
       </div>
       <div class="accordion-content overflow-hidden bg-[#F5F5F5] bauhaus-border-t">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 p-8 sm:p-12 lg:p-16">
-          {skills.map((s, i) => {
-            const bgs = ['var(--bauhaus-red)', 'var(--bauhaus-white)', 'var(--bauhaus-yellow)', 'var(--bauhaus-black)'];
-            const txt = bgs[i % bgs.length] === 'var(--bauhaus-red)' || bgs[i % bgs.length] === 'var(--bauhaus-black)' ? 'var(--bauhaus-white)' : 'var(--bauhaus-black)';
+          {skills.map((s) => {
+            const categoryColors = {
+              programming: { bg: 'var(--bauhaus-blue)', text: 'var(--bauhaus-white)' },
+              ai: { bg: 'var(--bauhaus-red)', text: 'var(--bauhaus-white)' },
+              tools: { bg: 'var(--bauhaus-yellow)', text: 'var(--bauhaus-black)' },
+              soft: { bg: 'var(--bauhaus-black)', text: 'var(--bauhaus-white)' },
+            };
+            const c = categoryColors[s.category] ?? { bg: 'var(--bauhaus-white)', text: 'var(--bauhaus-black)' };
             return (
-              <div class="skill-card-flow uppercase shadow-[6px_6px_0px_#000]" style={`background-color: ${bgs[i % bgs.length]}; color: ${txt}; border: var(--line-weight) solid var(--bauhaus-black); padding: 1.5rem; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 900; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 100px;`}>
+              <div class="skill-card-flow uppercase shadow-[6px_6px_0px_#000]" style={`background-color: ${c.bg}; color: ${c.text}; border: var(--line-weight) solid var(--bauhaus-black); padding: 1.5rem; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 900; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 100px;`}>
                 {s.name}
               </div>
             );
@@ -149,7 +189,7 @@ try {
       </div>
       <div class="accordion-content overflow-hidden bauhaus-border-t">
         <div class="flex flex-wrap bg-white">
-          {repos.map((r, i) => {
+          {projectCards.map((r, i) => {
             const bgs = ['var(--bauhaus-white)', 'var(--bauhaus-yellow)', 'var(--bauhaus-blue)', 'var(--bauhaus-grey)', 'var(--bauhaus-white)', 'var(--bauhaus-red)'];
             const textCols = ['var(--bauhaus-black)', 'var(--bauhaus-black)', 'var(--bauhaus-white)', 'var(--bauhaus-black)', 'var(--bauhaus-black)', 'var(--bauhaus-white)'];
             

@@ -14,7 +14,7 @@ import Layout from '../../layouts/Layout.astro';
       </a>
     </header>
 
-    <div class="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
+    <div class="demo-bauhaus px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
 
     <!-- Header -->
     <div class="hidden flex items-center justify-between mb-6">
@@ -36,7 +36,7 @@ import Layout from '../../layouts/Layout.astro';
         <span class="text-black">BUS</span> <span style="color: var(--bauhaus-red);">Roma</span>
       </h1>
       <p class="text-black text-sm max-w-lg mx-auto">Real-time bus timetables & live arrivals for all ATAC stops in Rome. Built with Flutter & Clean Architecture.</p>
-      <div class="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
+      <div class="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-black bg-[var(--bauhaus-yellow)] border border-[var(--bauhaus-black)] px-3 py-1 rounded-none">
         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
         </svg>
@@ -51,11 +51,11 @@ import Layout from '../../layouts/Layout.astro';
       <div class="flex-shrink-0 mx-auto lg:mx-0 w-full sm:w-auto">
         <div class="phone-frame-wrapper relative mx-auto" style="width: 320px;">
           <!-- Phone frame -->
-          <div class="rounded-[3rem] border-[14px] border-gray-800 bg-gray-800 shadow-2xl shadow-black/50 overflow-hidden relative">
+          <div class="rounded-none border-[16px] border-[var(--bauhaus-black)] bg-[var(--bauhaus-white)] overflow-hidden relative">
             <!-- Notch -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-2xl z-20"></div>
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-5 bg-[var(--bauhaus-black)] z-20"></div>
             <!-- Simulated screen -->
-            <div id="phone-screen" class="rounded-[2.2rem] overflow-hidden bg-black relative" style="height: 580px;">
+            <div id="phone-screen" class="rounded-none overflow-hidden bg-[var(--bauhaus-black)] relative" style="height: 580px; border: 5px solid var(--bauhaus-black);">
               <!-- Screen 1: Home -->
               <div class="screen-slide active absolute inset-0 flex flex-col" data-screen="0">
                 <!-- Status bar -->
@@ -292,7 +292,7 @@ import Layout from '../../layouts/Layout.astro';
                     </div>
                   </div>
                   <!-- Bottom sheet peek -->
-                  <div class="absolute bottom-0 left-0 right-0 bg-[#1e1e1e] rounded-t-2xl p-3 shadow-2xl">
+                  <div class="absolute bottom-0 left-0 right-0 bg-[#1e1e1e] p-3 border-t-[4px] border-[var(--bauhaus-black)]">
                     <div class="w-8 h-1 bg-white/20 rounded-full mx-auto mb-2"></div>
                     <div class="flex items-center gap-2">
                       <div class="w-8 h-8 rounded-full bg-[#8B0000]/30 flex items-center justify-center">
@@ -332,11 +332,11 @@ import Layout from '../../layouts/Layout.astro';
             </div>
           </div>
           <!-- Home indicator -->
-          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-gray-600 rounded-full"></div>
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-[var(--bauhaus-black)]"></div>
         </div>
         <!-- Screen navigation dots -->
         <div class="flex justify-center gap-2 mt-4">
-          <button class="screen-dot w-2 h-2 rounded-full bg-[#FF6B5A] transition-colors cursor-pointer" data-target="0" aria-label="Home screen"></button>
+          <button class="screen-dot w-2 h-2 rounded-full transition-colors cursor-pointer" style="background: var(--bauhaus-red);" data-target="0" aria-label="Home screen"></button>
           <button class="screen-dot w-2 h-2 rounded-full bg-white/20 transition-colors cursor-pointer" data-target="1" aria-label="Stop detail"></button>
           <button class="screen-dot w-2 h-2 rounded-full bg-white/20 transition-colors cursor-pointer" data-target="2" aria-label="Map"></button>
         </div>
@@ -348,7 +348,7 @@ import Layout from '../../layouts/Layout.astro';
         <div class="rounded-none bauhaus-border overflow-hidden bg-white">
           <div class="divide-y" style="border-color: var(--bauhaus-black);">
             <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
-              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-none border-2 border-[var(--bauhaus-black)] bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -359,7 +359,7 @@ import Layout from '../../layouts/Layout.astro';
               </div>
             </div>
             <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
-              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-none border-2 border-[var(--bauhaus-black)] bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
                 </svg>
@@ -370,7 +370,7 @@ import Layout from '../../layouts/Layout.astro';
               </div>
             </div>
             <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
-              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-none border-2 border-[var(--bauhaus-black)] bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
                 </svg>
@@ -381,7 +381,7 @@ import Layout from '../../layouts/Layout.astro';
               </div>
             </div>
             <div class="px-4 sm:px-6 py-3.5 sm:py-4 flex items-start gap-3 sm:gap-4">
-              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-none border-2 border-[var(--bauhaus-black)] bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.384 3.188c-.767.454-1.655-.349-1.397-1.194l1.47-4.799a1.125 1.125 0 00-.372-1.172L1.652 8.203c-.673-.548-.276-1.578.572-1.637l4.834-.34a1.125 1.125 0 001.013-.735l1.93-4.7c.352-.858 1.56-.858 1.912 0l1.93 4.7c.078.19.228.343.41.435" />
                 </svg>
@@ -428,6 +428,70 @@ import Layout from '../../layouts/Layout.astro';
   </div>
 </Layout>
 
+<style>
+  .demo-bauhaus .text-text-muted,
+  .demo-bauhaus .text-text-secondary,
+  .demo-bauhaus .text-border-glass {
+    color: var(--bauhaus-black) !important;
+  }
+
+  .demo-bauhaus [class*="text-amber"],
+  .demo-bauhaus [class*="text-yellow"] { color: var(--bauhaus-yellow) !important; }
+  .demo-bauhaus [class*="text-green"],
+  .demo-bauhaus [class*="text-cyan"],
+  .demo-bauhaus [class*="text-blue"] { color: var(--bauhaus-blue) !important; }
+  .demo-bauhaus [class*="text-purple"],
+  .demo-bauhaus [class*="text-orange"],
+  .demo-bauhaus [class*="text-red"] { color: var(--bauhaus-red) !important; }
+
+  .demo-bauhaus [class*="bg-amber"],
+  .demo-bauhaus [class*="bg-yellow"] { background-color: var(--bauhaus-yellow) !important; }
+  .demo-bauhaus [class*="bg-green"],
+  .demo-bauhaus [class*="bg-cyan"],
+  .demo-bauhaus [class*="bg-blue"] { background-color: var(--bauhaus-blue) !important; }
+  .demo-bauhaus [class*="bg-purple"],
+  .demo-bauhaus [class*="bg-orange"],
+  .demo-bauhaus [class*="bg-red"] { background-color: var(--bauhaus-red) !important; }
+  .demo-bauhaus [class*="bg-gray"] { background-color: var(--bauhaus-black) !important; }
+  .demo-bauhaus [class*="text-gray"],
+  .demo-bauhaus [class*="border-gray"] { color: var(--bauhaus-black) !important; border-color: var(--bauhaus-black) !important; }
+
+  .demo-bauhaus .phone-frame-wrapper,
+  .demo-bauhaus #phone-screen {
+    border-radius: 0 !important;
+  }
+
+  .demo-bauhaus .phone-frame-wrapper [class*="rounded-"]:not(.rounded-full) {
+    border-radius: 0 !important;
+  }
+
+  .demo-bauhaus [style*="#1a1a1a"],
+  .demo-bauhaus [style*="#121212"],
+  .demo-bauhaus [style*="#1e1e1e"],
+  .demo-bauhaus [style*="#2a3a2a"] {
+    background: var(--bauhaus-black) !important;
+  }
+
+  .demo-bauhaus [style*="#8B0000"],
+  .demo-bauhaus [style*="#CC3300"],
+  .demo-bauhaus [style*="#CC6600"],
+  .demo-bauhaus [style*="#FF6B5A"] {
+    background: var(--bauhaus-red) !important;
+  }
+
+  .demo-bauhaus [style*="#0066CC"],
+  .demo-bauhaus [style*="#006633"],
+  .demo-bauhaus [style*="#339933"],
+  .demo-bauhaus [style*="bg-blue-500"] {
+    background: var(--bauhaus-blue) !important;
+  }
+
+  .demo-bauhaus [style*="#DAA520"] {
+    color: var(--bauhaus-yellow) !important;
+    background-color: var(--bauhaus-yellow) !important;
+  }
+</style>
+
 <script>
   // Responsive phone scaling for small viewports
   function scalePhone() {
@@ -473,7 +537,9 @@ import Layout from '../../layouts/Layout.astro';
       el.style.transition = 'all 0.4s ease';
     });
     dots.forEach((d, i) => {
-      (d as HTMLElement).className = `screen-dot w-2 h-2 rounded-full transition-colors cursor-pointer ${i === idx ? 'bg-[#FF6B5A]' : 'bg-white/20'}`;
+      const dot = d as HTMLElement;
+      dot.className = 'screen-dot w-2 h-2 rounded-full transition-colors cursor-pointer';
+      dot.style.background = i === idx ? 'var(--bauhaus-red)' : 'rgba(255,255,255,0.2)';
     });
     current = idx;
   }

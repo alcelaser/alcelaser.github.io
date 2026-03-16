@@ -28,3 +28,6 @@ tmpclaude-*
 
 # local guide (not for repo)
 GUIDE.md
+
+#tests
+playwright-report/

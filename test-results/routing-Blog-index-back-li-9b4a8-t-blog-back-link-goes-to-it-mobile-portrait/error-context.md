@@ -1,0 +1,66 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "← Torna alla Home" [ref=e4] [cursor=pointer]:
+      - /url: /it
+    - heading "Articoli e Pubblicazioni" [level=1] [ref=e5]
+  - generic [ref=e6]:
+    - 'link "The AI Bubble: To Burst Or Not Burst? Artificial intelligence has ignited the global economy, becoming the defining investment thesis of the 2020s. Unprecedented capital expenditures, soaring equity valuations, and a pervasive cultural... Google Developer Group Guido Carli leggi articolo ↗" [ref=e7] [cursor=pointer]':
+      - /url: /blog/ai-bubble
+      - generic [ref=e8]:
+        - 'heading "The AI Bubble: To Burst Or Not Burst?" [level=2] [ref=e9]'
+        - paragraph [ref=e10]: Artificial intelligence has ignited the global economy, becoming the defining investment thesis of the 2020s. Unprecedented capital expenditures, soaring equity valuations, and a pervasive cultural...
+      - generic [ref=e11]:
+        - generic [ref=e12]: Google Developer Group Guido Carli
+        - generic [ref=e13]: leggi articolo ↗
+    - link "AI and Violence Exploring how AI perpetuates systemic violence through manufactured consent, labor displacement, commoditized intelligence, and the erosion of democratic agency. Google Developer Group Guido Carli leggi articolo ↗" [ref=e14] [cursor=pointer]:
+      - /url: /blog/ai-power-structures
+      - generic [ref=e15]:
+        - heading "AI and Violence" [level=2] [ref=e16]
+        - paragraph [ref=e17]: Exploring how AI perpetuates systemic violence through manufactured consent, labor displacement, commoditized intelligence, and the erosion of democratic agency.
+      - generic [ref=e18]:
+        - generic [ref=e19]: Google Developer Group Guido Carli
+        - generic [ref=e20]: leggi articolo ↗
+    - link "The Efficient Compute Frontier – AI's Great Filter Discusses efficiency in AI development and its potential constraints on future innovation. Google Developer Group Guido Carli leggi articolo ↗" [ref=e21] [cursor=pointer]:
+      - /url: /blog/efficient-compute
+      - generic [ref=e22]:
+        - heading "The Efficient Compute Frontier – AI's Great Filter" [level=2] [ref=e23]
+        - paragraph [ref=e24]: Discusses efficiency in AI development and its potential constraints on future innovation.
+      - generic [ref=e25]:
+        - generic [ref=e26]: Google Developer Group Guido Carli
+        - generic [ref=e27]: leggi articolo ↗
+    - 'link "The Illusion of Control: Why AI No-Code Tools May Not Empower Users AI-driven no-code platforms promise to democratize software creation, giving non-technical users the power to build tools once reserved for specialists. The appeal is obvious: speed, flexibility, and accessibility... Google Developer Group Guido Carli leggi articolo ↗" [ref=e28] [cursor=pointer]':
+      - /url: /blog/illusion-of-control
+      - generic [ref=e29]:
+        - 'heading "The Illusion of Control: Why AI No-Code Tools May Not Empower Users" [level=2] [ref=e30]'
+        - paragraph [ref=e31]: "AI-driven no-code platforms promise to democratize software creation, giving non-technical users the power to build tools once reserved for specialists. The appeal is obvious: speed, flexibility, and accessibility..."
+      - generic [ref=e32]:
+        - generic [ref=e33]: Google Developer Group Guido Carli
+        - generic [ref=e34]: leggi articolo ↗
+    - link "Julia AI, Your Personal Guide for Rome In an ever evolving generative AI scene, Microsoft's latest venture, Julia AI, provides a refreshing take on touristic guides, ready to tackle the influx of visitors from around the globe... Google Developer Group Guido Carli leggi articolo ↗" [ref=e35] [cursor=pointer]:
+      - /url: /blog/julia-ai
+      - generic [ref=e36]:
+        - heading "Julia AI, Your Personal Guide for Rome" [level=2] [ref=e37]
+        - paragraph [ref=e38]: In an ever evolving generative AI scene, Microsoft's latest venture, Julia AI, provides a refreshing take on touristic guides, ready to tackle the influx of visitors from around the globe...
+      - generic [ref=e39]:
+        - generic [ref=e40]: Google Developer Group Guido Carli
+        - generic [ref=e41]: leggi articolo ↗
+    - link "Quantum Computing On The Global Stage Quantum computing leverages subatomic principles like superposition and entanglement to achieve exponential processing capabilities. While functional prototypes currently exist, widespread industrial application depends on overcoming critical error-correction challenges. Google Developer Group Guido Carli x LIMES leggi articolo ↗" [ref=e42] [cursor=pointer]:
+      - /url: /blog/quantum-computing
+      - generic [ref=e43]:
+        - heading "Quantum Computing On The Global Stage" [level=2] [ref=e44]
+        - paragraph [ref=e45]: Quantum computing leverages subatomic principles like superposition and entanglement to achieve exponential processing capabilities. While functional prototypes currently exist, widespread industrial application depends on overcoming critical error-correction challenges.
+      - generic [ref=e46]:
+        - generic [ref=e47]: Google Developer Group Guido Carli x LIMES
+        - generic [ref=e48]: leggi articolo ↗
+    - 'link "Vibe Coding: Explanation and Applications A new spectre is haunting the generative AI scene — the spectre of Vibe Coding. Google Developer Group Guido Carli leggi articolo ↗" [ref=e49] [cursor=pointer]':
+      - /url: /blog/vibe-coding
+      - generic [ref=e50]:
+        - 'heading "Vibe Coding: Explanation and Applications" [level=2] [ref=e51]'
+        - paragraph [ref=e52]: A new spectre is haunting the generative AI scene — the spectre of Vibe Coding.
+      - generic [ref=e53]:
+        - generic [ref=e54]: Google Developer Group Guido Carli
+        - generic [ref=e55]: leggi articolo ↗
+```

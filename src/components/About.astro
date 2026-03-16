@@ -3,6 +3,14 @@ import { getCV, useTranslations } from '../i18n/utils';
 const lang = Astro.currentLocale || 'en';
 const { personal, stats } = getCV(lang);
 const t = useTranslations(lang);
+
+const languageSectionTitle = lang === 'it' ? 'Lingue fluenti' : lang === 'fr' ? 'Langues parlées' : 'Fluent Languages';
+const learningSectionTitle = lang === 'it' ? 'Apprendimento' : lang === 'fr' ? 'En cours' : 'Learning';
+const italianLabel = lang === 'it' ? 'Italiano' : lang === 'fr' ? 'Italien' : 'Italian';
+const englishLabel = lang === 'it' ? 'Inglese' : lang === 'fr' ? 'Anglais' : 'English';
+const frenchLabel = lang === 'it' ? 'Francese' : lang === 'fr' ? 'Français' : 'French';
+const spanishLabel = lang === 'it' ? 'Spagnolo' : lang === 'fr' ? 'Espagnol' : 'Spanish';
+const germanLabel = lang === 'it' ? 'Tedesco' : lang === 'fr' ? 'Allemand' : 'German';
 ---
 
 <section id="about" class="py-16 sm:py-24 px-4 sm:px-6">
@@ -18,6 +26,24 @@ const t = useTranslations(lang);
           {personal.summary}
         </p>
         <p class="text-text-secondary leading-relaxed" set:html={t('about.desc1')} />
+
+        <div class="mt-8 sm:mt-10 flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-10">
+          <div class="flex-1 min-w-0">
+            <h3 class="text-lg sm:text-xl font-bold mb-3 text-text-primary uppercase tracking-wide">{languageSectionTitle}</h3>
+            <div class="flex flex-wrap gap-3">
+                <a href="/it" class="inline-block px-4 py-2 text-sm sm:text-base font-bold uppercase border-2 border-black shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 transition-transform" style="background-color: var(--bauhaus-red); color: var(--bauhaus-white);">{italianLabel}</a>
+                <a href="/" class="inline-block px-4 py-2 text-sm sm:text-base font-bold uppercase border-2 border-black shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 transition-transform" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">{englishLabel}</a>
+                <a href="/fr" class="inline-block px-4 py-2 text-sm sm:text-base font-bold uppercase border-2 border-black shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 transition-transform" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">{frenchLabel}</a>
+            </div>
+          </div>
+          <div class="min-w-0 lg:ml-auto w-fit flex flex-col items-end">
+            <h3 class="text-lg sm:text-xl font-bold mb-3 text-text-primary uppercase tracking-wide text-right">{learningSectionTitle}</h3>
+            <div class="flex flex-wrap gap-3 justify-end">
+                <span class="inline-block px-4 py-2 text-sm sm:text-base font-bold uppercase border-2 border-black shadow-[6px_6px_0px_#000]" style="background-color: var(--bauhaus-white); color: var(--bauhaus-black);">{spanishLabel}</span>
+                <span class="inline-block px-4 py-2 text-sm sm:text-base font-bold uppercase border-2 border-black shadow-[6px_6px_0px_#000]" style="background-color: var(--bauhaus-white); color: var(--bauhaus-black);">{germanLabel}</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="md:col-span-2 grid grid-cols-2 gap-3 sm:gap-4 section-fade">

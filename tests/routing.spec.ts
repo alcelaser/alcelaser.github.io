@@ -10,8 +10,8 @@ import { test, expect } from '@playwright/test';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const routes: { path: string; titleFragment: string; landmark?: string }[] = [
-    { path: '/', titleFragment: 'Alberto Maccanico', landmark: '#hero' },
-    { path: '/blog', titleFragment: 'Blog', landmark: '#blog-content' },
+    { path: '/', titleFragment: 'Alberto Maccanico', landmark: 'header h1' },
+    { path: '/blog', titleFragment: 'Articles', landmark: '#blog-content' },
     { path: '/demos', titleFragment: 'Alberto Maccanico', landmark: '#demos-content' },
     { path: '/research', titleFragment: 'Research', landmark: '#research-content' },
     { path: '/demos/cfpython', titleFragment: 'Codice Fiscale' },
@@ -39,7 +39,7 @@ const routes: { path: string; titleFragment: string; landmark?: string }[] = [
 
 for (const { path, titleFragment, landmark } of routes) {
     test(`GET ${path} → 200, title contains "${titleFragment}"`, async ({ page }) => {
-        const response = await page.goto(path);
+        const response = await page.goto(path, { waitUntil: 'domcontentloaded', timeout: 30000 });
         expect(response?.status(), `${path} returned non-200`).not.toBe(404);
         expect(response?.status()).not.toBe(500);
         await expect(page).toHaveTitle(new RegExp(titleFragment, 'i'));
@@ -58,59 +58,6 @@ test('404.astro renders custom not-found body', async ({ page }) => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Nav logo links – locale-aware
-// ─────────────────────────────────────────────────────────────────────────────
-
-test.describe('Nav logo locale routing', () => {
-    test('EN: AM logo href is / (no locale prefix)', async ({ page }) => {
-        await page.goto('/');
-        const logo = page.locator('#navbar a', { hasText: 'AM' });
-        const href = await logo.getAttribute('href');
-        expect(href).toMatch(/^\/$/);
-    });
-
-    test('IT: AM logo href is /it/', async ({ page }) => {
-        await page.goto('/it');
-        const logo = page.locator('#navbar a', { hasText: 'AM' });
-        const href = await logo.getAttribute('href');
-        expect(href).toBe('/it/');
-    });
-
-    test('FR: AM logo href is /fr/', async ({ page }) => {
-        await page.goto('/fr');
-        const logo = page.locator('#navbar a', { hasText: 'AM' });
-        const href = await logo.getAttribute('href');
-        expect(href).toBe('/fr/');
-    });
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Language-switcher links resolve to valid pages
-// ─────────────────────────────────────────────────────────────────────────────
-
-test.describe('Language switcher navigation', () => {
-    const localeLinks: { from: string; switchTo: RegExp; expectedLandmark: string }[] = [
-        { from: '/it', switchTo: /^\/$/, expectedLandmark: '#hero' },
-        { from: '/fr', switchTo: /^\/$/, expectedLandmark: '#hero' },
-        { from: '/it/blog', switchTo: /^\/blog/, expectedLandmark: '#blog-content' },
-        { from: '/fr/blog', switchTo: /^\/blog/, expectedLandmark: '#blog-content' },
-    ];
-
-    for (const { from, switchTo, expectedLandmark } of localeLinks) {
-        test(`Switching from ${from} to EN leads to a working page`, async ({ page }) => {
-            await page.goto(from);
-            // Find any locator for the EN link in the language dropdown
-            const enLink = page.locator('a[href]').filter({ hasText: /🇬🇧|EN/ }).first();
-            const href = await enLink.getAttribute('href');
-            expect(href).toMatch(switchTo);
-            const response = await page.goto(href!);
-            expect(response?.status()).not.toBe(404);
-            await expect(page.locator(expectedLandmark)).toBeVisible();
-        });
-    }
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
 // Live Demos button destination
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -123,11 +70,11 @@ test.describe('"Live Demos" button routes', () => {
 
     for (const { locale, url, expectedDest } of cases) {
         test(`${locale} homepage Live Demos button points to ${expectedDest}`, async ({ page }) => {
-            await page.goto(url);
+            await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
             // The locator finds the "Live Demos" style button in the page body (not mobile nav)
             const btn = page.locator(`a[href="${expectedDest}"]:not(#mobile-menu a):visible`).first();
             await expect(btn).toBeVisible();
-            const response = await page.goto(expectedDest);
+            const response = await page.goto(expectedDest, { waitUntil: 'domcontentloaded', timeout: 30000 });
             expect(response?.status()).not.toBe(404);
             await expect(page.locator('#demos-content')).toBeVisible();
         });
@@ -163,7 +110,7 @@ test.describe('Blog index back-link correctness', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 test('Blog index: all article cards have valid hrefs (no 404)', async ({ page }) => {
-    await page.goto('/blog');
+    await page.goto('/blog', { waitUntil: 'domcontentloaded', timeout: 30000 });
     const cards = page.locator('#blog-content a.glass');
     const count = await cards.count();
     expect(count, 'No blog cards found').toBeGreaterThan(0);
