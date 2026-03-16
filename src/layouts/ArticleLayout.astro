@@ -201,6 +201,10 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
     margin: 0;
   }
 
+  .markdown-body .prose {
+    position: relative;
+  }
+
   .markdown-body .prose sup a.annotation-trigger {
     background: var(--bauhaus-yellow);
     color: var(--bauhaus-black) !important;
@@ -234,7 +238,8 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
       }
     });
 
-    const refLinks = Array.from(articleRoot.querySelectorAll('sup a[href^="#fn"]'));
+    const refLinks = Array.from(articleRoot.querySelectorAll('sup a[data-footnote-ref]'));
+    const popupByRef = new Map<HTMLAnchorElement, HTMLElement>();
     const popups: HTMLElement[] = [];
 
     const closePopups = () => {
@@ -252,52 +257,67 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
       if (!(note instanceof HTMLElement)) return;
 
       const noteClone = note.cloneNode(true) as HTMLElement;
-      const backref = noteClone.querySelector('a[href^="#fnref"]');
+      const backref = noteClone.querySelector('a[data-footnote-backref]');
       if (backref) backref.remove();
 
       const popup = document.createElement('div');
       popup.className = 'annotation-popup';
       popup.appendChild(noteClone);
-      document.body.appendChild(popup);
+      articleRoot.appendChild(popup);
       popups.push(popup);
+      popupByRef.set(link, popup);
 
       link.classList.add('annotation-trigger');
+      link.removeAttribute('href');
+      link.setAttribute('role', 'button');
+    });
 
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        const rect = link.getBoundingClientRect();
-        const isVisible = popup.classList.contains('is-visible');
-        closePopups();
+    const openPopupForLink = (link: HTMLAnchorElement) => {
+      const popup = popupByRef.get(link);
+      if (!popup) return;
 
-        if (!isVisible) {
-          popup.classList.add('is-visible');
-          popup.style.visibility = 'hidden';
+      const rect = link.getBoundingClientRect();
+      const rootRect = articleRoot.getBoundingClientRect();
+      const isVisible = popup.classList.contains('is-visible');
+      closePopups();
 
-          const popupRect = popup.getBoundingClientRect();
-          const popupWidth = popupRect.width;
-          const popupHeight = popupRect.height;
+      if (isVisible) return;
 
-          const viewportTop = window.scrollY;
-          const viewportBottom = window.scrollY + window.innerHeight;
-          const belowTop = rect.bottom + window.scrollY + 10;
-          const aboveTop = rect.top + window.scrollY - popupHeight - 10;
-          const shouldFlipAbove = belowTop + popupHeight > viewportBottom - 12 && aboveTop > viewportTop + 12;
+      popup.classList.add('is-visible');
+      popup.style.visibility = 'hidden';
 
-          const unclampedTop = shouldFlipAbove ? aboveTop : belowTop;
-          const maxTop = Math.max(viewportTop + 12, viewportBottom - popupHeight - 12);
-          const top = Math.min(Math.max(unclampedTop, viewportTop + 12), maxTop);
+      const popupRect = popup.getBoundingClientRect();
+      const popupWidth = popupRect.width;
+      const popupHeight = popupRect.height;
 
-          const left = Math.max(
-            window.scrollX + 16,
-            Math.min(rect.left + window.scrollX, window.scrollX + window.innerWidth - popupWidth - 16)
-          );
+      const belowTop = rect.bottom - rootRect.top + 10;
+      const aboveTop = rect.top - rootRect.top - popupHeight - 10;
+      const shouldFlipAbove = belowTop + popupHeight > articleRoot.scrollHeight - 12 && aboveTop > 12;
 
-          popup.style.top = `${top}px`;
-          popup.style.left = `${left}px`;
-          popup.style.visibility = 'visible';
-          popup.classList.add('is-visible');
-        }
-      });
+      const unclampedTop = shouldFlipAbove ? aboveTop : belowTop;
+      const maxTop = Math.max(12, articleRoot.scrollHeight - popupHeight - 12);
+      const top = Math.min(Math.max(unclampedTop, 12), maxTop);
+
+      const left = Math.max(
+        16,
+        Math.min(rect.left - rootRect.left, articleRoot.clientWidth - popupWidth - 16)
+      );
+
+      popup.style.top = `${top}px`;
+      popup.style.left = `${left}px`;
+      popup.style.visibility = 'visible';
+    };
+
+    articleRoot.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const trigger = target.closest('sup a.annotation-trigger');
+      if (!(trigger instanceof HTMLAnchorElement)) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      openPopupForLink(trigger);
     });
 
     document.addEventListener('click', (event) => {
@@ -308,7 +328,6 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
       }
     });
 
-    window.addEventListener('scroll', closePopups, { passive: true });
     window.addEventListener('resize', closePopups);
   }
 </script>
