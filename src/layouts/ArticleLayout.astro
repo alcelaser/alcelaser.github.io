@@ -14,7 +14,7 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
       <a href={blogUrl} class="inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-white)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-white)] hover:text-black transition-colors">
         ← return to articles 
       </a>
-      <h1 class="text-5xl sm:text-7xl lg:text-[6rem] font-black mb-6 tracking-tighter leading-none">{frontmatter.title}</h1>
+      <h1 class="text-4xl sm:text-6xl lg:text-[5rem] font-black mb-6 tracking-tighter leading-none">{frontmatter.title}</h1>
       
       {frontmatter.description && (
         <p class="text-2xl sm:text-3xl font-medium max-w-5xl leading-tight border-l-[8px] border-white pl-6">{frontmatter.description}</p>
@@ -25,7 +25,7 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
           <span class="bg-[var(--bauhaus-black)] text-white px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider">{frontmatter.publication}</span>
         )}
         {frontmatter.originalUrl && (
-          <a href={frontmatter.originalUrl} target="_blank" rel="noopener noreferrer" class="bg-[var(--bauhaus-yellow)] text-black px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider hover:bg-black hover:text-white transition-colors">
+          <a href={frontmatter.originalUrl} target="_blank" rel="noopener noreferrer" class="bg-[var(--bauhaus-yellow)] !text-black px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider hover:bg-black hover:text-white transition-colors" style="color: var(--bauhaus-black);">
             read original publication ↗
           </a>
         )}
@@ -34,7 +34,7 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
 
     <!-- ARTICLE BODY -->
     <article class="p-8 sm:p-12 lg:p-16 flex-1 bg-white markdown-body">
-      <div class="prose prose-2xl max-w-[1000px] mx-auto prose-h2:font-black prose-h2:text-5xl prose-h2:uppercase prose-h3:font-black prose-h3:text-4xl prose-p:font-medium prose-p:leading-relaxed prose-a:bg-[var(--bauhaus-yellow)] prose-a:text-black prose-a:px-1 prose-a:font-bold prose-a:no-underline hover:prose-a:bg-black hover:prose-a:text-[var(--bauhaus-white)] prose-img:border-[6px] prose-img:border-black prose-img:rounded-none">
+      <div class="prose prose-2xl max-w-[1000px] mx-auto prose-h2:font-black prose-h2:text-6xl prose-h2:uppercase prose-h3:font-black prose-h3:text-5xl prose-p:font-medium prose-p:leading-relaxed prose-a:bg-[var(--bauhaus-yellow)] prose-a:text-black prose-a:px-1 prose-a:font-bold prose-a:no-underline hover:prose-a:bg-black hover:prose-a:text-[var(--bauhaus-white)] prose-img:border-[6px] prose-img:border-black prose-img:rounded-none">
         <slot />
       </div>
     </article>
@@ -44,6 +44,35 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
 
 <style is:global>
   /* Bauhaus Overrides for standard Markdown */
+  .markdown-body .prose h2 {
+    font-size: clamp(2.5rem, 5.4vw, 4.5rem) !important;
+    line-height: 0.98 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    margin-top: 3.25rem !important;
+    margin-bottom: 1.25rem !important;
+    letter-spacing: -0.02em;
+  }
+
+  .markdown-body .prose h3 {
+    font-size: clamp(2rem, 4.2vw, 3.5rem) !important;
+    line-height: 1.02 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    margin-top: 2.75rem !important;
+    margin-bottom: 1rem !important;
+    letter-spacing: -0.015em;
+  }
+
+  .markdown-body .prose h4 {
+    font-size: clamp(1.5rem, 3.1vw, 2.5rem) !important;
+    line-height: 1.08 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    margin-top: 2rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
   .markdown-body .prose p { color: var(--bauhaus-black); margin-bottom: 2rem; font-size: 1.5rem; }
   .markdown-body .prose pre { 
     background: var(--bauhaus-black); 
@@ -79,4 +108,207 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
     list-style-type: square; 
   }
   .markdown-body .prose li { margin-bottom: 0.75rem; }
+
+  .markdown-body .prose .bibliography-title {
+    background: var(--bauhaus-red);
+    color: var(--bauhaus-white);
+    border: var(--line-weight) solid var(--bauhaus-black);
+    padding: 1rem 1.25rem;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .markdown-body .prose .bibliography-item {
+    background: var(--bauhaus-blue);
+    color: var(--bauhaus-white) !important;
+    border: var(--line-weight) solid var(--bauhaus-black);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .markdown-body .prose .bibliography-item:nth-child(odd) {
+    background: var(--bauhaus-red);
+  }
+
+  .markdown-body .prose .bibliography-item a,
+  .markdown-body .prose .bibliography-item strong,
+  .markdown-body .prose .bibliography-item em {
+    color: var(--bauhaus-white) !important;
+  }
+
+  .markdown-body .prose .footnotes {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: var(--line-weight) solid var(--bauhaus-black);
+  }
+
+  .markdown-body .prose .footnotes ol {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .markdown-body .prose .footnotes li {
+    background: var(--bauhaus-yellow);
+    color: var(--bauhaus-black) !important;
+    border: var(--line-weight) solid var(--bauhaus-black);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .markdown-body .prose .footnotes li:nth-child(even) {
+    background: var(--bauhaus-yellow);
+  }
+
+  .markdown-body .prose .footnotes li p,
+  .markdown-body .prose .footnotes li a,
+  .markdown-body .prose .footnotes li code,
+  .markdown-body .prose .footnotes li strong,
+  .markdown-body .prose .footnotes li em {
+    color: var(--bauhaus-black) !important;
+  }
+
+  .markdown-body .prose .footnotes li code {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .markdown-body .prose .annotation-popup {
+    display: none;
+    position: absolute;
+    z-index: 40;
+    max-width: min(460px, calc(100vw - 2rem));
+    background: var(--bauhaus-yellow);
+    color: var(--bauhaus-black);
+    border: var(--line-weight) solid var(--bauhaus-black);
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.45;
+    box-shadow: 6px 6px 0 var(--bauhaus-black);
+  }
+
+  .markdown-body .prose .annotation-popup.is-visible {
+    display: block;
+  }
+
+  .markdown-body .prose .annotation-popup p,
+  .markdown-body .prose .annotation-popup a,
+  .markdown-body .prose .annotation-popup strong,
+  .markdown-body .prose .annotation-popup em,
+  .markdown-body .prose .annotation-popup code {
+    color: var(--bauhaus-black) !important;
+    margin: 0;
+  }
+
+  .markdown-body .prose sup a.annotation-trigger {
+    background: var(--bauhaus-yellow);
+    color: var(--bauhaus-black) !important;
+    border: 2px solid var(--bauhaus-black);
+    padding: 0.1rem 0.35rem;
+    text-decoration: none;
+    font-weight: 900;
+  }
 </style>
+
+<script>
+  const articleRoot = document.querySelector('.markdown-body .prose');
+
+  if (articleRoot) {
+    const bibliographyHeadings = Array.from(articleRoot.querySelectorAll('h2, h3, h4')).filter((heading) => {
+      const text = (heading.textContent || '').trim().toLowerCase();
+      return text === 'bibliography' || text === 'references';
+    });
+
+    bibliographyHeadings.forEach((heading) => {
+      heading.classList.add('bibliography-title');
+
+      let current: Element | null = heading.nextElementSibling;
+      while (current && !/^H[1-6]$/.test(current.tagName)) {
+        if (current.tagName === 'UL' || current.tagName === 'OL') {
+          current.querySelectorAll('li').forEach((item) => item.classList.add('bibliography-item'));
+        } else if (current.tagName === 'P') {
+          current.classList.add('bibliography-item');
+        }
+        current = current.nextElementSibling;
+      }
+    });
+
+    const refLinks = Array.from(articleRoot.querySelectorAll('sup a[href^="#fn"]'));
+    const popups: HTMLElement[] = [];
+
+    const closePopups = () => {
+      popups.forEach((popup) => popup.classList.remove('is-visible'));
+    };
+
+    refLinks.forEach((link) => {
+      if (!(link instanceof HTMLAnchorElement)) return;
+
+      const href = link.getAttribute('href') || '';
+      const noteId = href.slice(1);
+      if (!noteId) return;
+
+      const note = articleRoot.querySelector(`#${noteId}`);
+      if (!(note instanceof HTMLElement)) return;
+
+      const noteClone = note.cloneNode(true) as HTMLElement;
+      const backref = noteClone.querySelector('a[href^="#fnref"]');
+      if (backref) backref.remove();
+
+      const popup = document.createElement('div');
+      popup.className = 'annotation-popup';
+      popup.appendChild(noteClone);
+      document.body.appendChild(popup);
+      popups.push(popup);
+
+      link.classList.add('annotation-trigger');
+
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const rect = link.getBoundingClientRect();
+        const isVisible = popup.classList.contains('is-visible');
+        closePopups();
+
+        if (!isVisible) {
+          popup.classList.add('is-visible');
+          popup.style.visibility = 'hidden';
+
+          const popupRect = popup.getBoundingClientRect();
+          const popupWidth = popupRect.width;
+          const popupHeight = popupRect.height;
+
+          const viewportTop = window.scrollY;
+          const viewportBottom = window.scrollY + window.innerHeight;
+          const belowTop = rect.bottom + window.scrollY + 10;
+          const aboveTop = rect.top + window.scrollY - popupHeight - 10;
+          const shouldFlipAbove = belowTop + popupHeight > viewportBottom - 12 && aboveTop > viewportTop + 12;
+
+          const unclampedTop = shouldFlipAbove ? aboveTop : belowTop;
+          const maxTop = Math.max(viewportTop + 12, viewportBottom - popupHeight - 12);
+          const top = Math.min(Math.max(unclampedTop, viewportTop + 12), maxTop);
+
+          const left = Math.max(
+            window.scrollX + 16,
+            Math.min(rect.left + window.scrollX, window.scrollX + window.innerWidth - popupWidth - 16)
+          );
+
+          popup.style.top = `${top}px`;
+          popup.style.left = `${left}px`;
+          popup.style.visibility = 'visible';
+          popup.classList.add('is-visible');
+        }
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (!target.closest('.annotation-popup') && !target.closest('sup a.annotation-trigger')) {
+        closePopups();
+      }
+    });
+
+    window.addEventListener('scroll', closePopups, { passive: true });
+    window.addEventListener('resize', closePopups);
+  }
+</script>

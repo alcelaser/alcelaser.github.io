@@ -10,7 +10,7 @@ const demos = [
     title: 'Albert Dashboard',
     description: 'Real-time investment dashboard tracking stocks, crypto, and commodities with interactive TradingView charts.',
     tech: ['React 19', 'TailwindCSS 4'],
-    href: '/demos/albert-dashboard/',
+    href: '/demos/albert-dashboard/index.html',
     external: true,
   },
   {
@@ -26,6 +26,7 @@ const demos = [
     tech: ['Flutter', 'Riverpod'],
     href: '/demos/limitedlands',
     external: false,
+    badge: 'Showcase',
   },
   {
     title: 'BUS Roma',
@@ -33,16 +34,17 @@ const demos = [
     tech: ['Flutter', 'Drift SQLite'],
     href: '/demos/bus-roma',
     external: false,
+    badge: 'Showcase',
   },
 ];
 ---
 
 <Layout title={`${t('demos.title')} | Alberto Maccanico`}>
   
-  <div class="content-wrapper min-h-screen flex flex-col bg-white">
+  <div id="demos-content" class="content-wrapper min-h-screen flex flex-col bg-white">
     <!-- DEMOS HEADER -->
     <header class="p-6 sm:p-12 lg:p-16 flex flex-col justify-center bauhaus-border-b" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">
-      <a href={lang === 'en' ? '/' : `/${lang}`} class="inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-black)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-black)] hover:text-white transition-colors">
+      <a href={lang === 'en' ? '/' : `/${lang}`} class="inline-block px-4 py-2 border-[3px] border-[var(--bauhaus-black)] font-bold uppercase mb-8 sm:mb-12 w-fit hover:bg-[var(--bauhaus-white)] hover:text-[var(--bauhaus-black)] transition-colors">
         ← {t('demos.back')}
       </a>
       <h1 class="text-5xl sm:text-7xl lg:text-[8rem] font-black tracking-tighter leading-none mb-6">{t('demos.title')}</h1>
@@ -63,12 +65,17 @@ const demos = [
             href={demo.href}
             target={demo.external ? '_blank' : undefined}
             rel={demo.external ? 'noopener noreferrer' : undefined}
-            class="block p-6 sm:p-12 lg:p-16 bauhaus-border-b last:border-b-0 flex flex-col xl:flex-row justify-between xl:items-center gap-8 lg:gap-16 hover:opacity-90 transition-opacity" 
+            class="glass block p-6 sm:p-12 lg:p-16 bauhaus-border-b last:border-b-0 flex flex-col xl:flex-row justify-between xl:items-center gap-8 lg:gap-16 hover:opacity-90 transition-opacity" 
             style={`background-color: ${bg}; color: ${tx};`}
           >
             <div class="xl:w-2/3">
               <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 sm:mb-6 tracking-tight leading-none">{demo.title}</h2>
               <p class="text-xl sm:text-2xl lg:text-3xl font-medium max-w-4xl leading-tight mb-8">{demo.description}</p>
+              {demo.badge && (
+                <span class="inline-block px-3 py-1 text-base font-black uppercase border-[3px] mb-5" style={`border-color: ${tx};`}>
+                  {demo.badge}
+                </span>
+              )}
               
               <div class="flex flex-wrap gap-4">
                 {demo.tech.map(t => (
@@ -80,7 +87,7 @@ const demos = [
             </div>
             
             <div class="xl:w-1/3 xl:text-right pt-4 xl:pt-0">
-               <span class="inline-block px-6 py-4 bg-black text-white text-2xl sm:text-3xl font-black uppercase transition-transform hover:-translate-y-1 w-fit">
+               <span class="inline-block px-6 py-4 bg-black text-white text-2xl sm:text-3xl font-black uppercase transition-transform hover:-translate-y-1 w-fit border-[3px] border-white">
                  {demo.external ? 'launch external ↗' : 'launch demo →'}
                </span>
             </div>

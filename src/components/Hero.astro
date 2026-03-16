@@ -8,7 +8,7 @@ const t = useTranslations(lang);
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
   <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-    <div class="mb-8 flex justify-center gap-4 opacity-0" id="hero-socials">
+    <div class="mb-8 flex justify-center gap-4" id="hero-socials">
       <a
         href={personal.github}
         target="_blank"
@@ -45,7 +45,7 @@ const t = useTranslations(lang);
     </div>
 
     <h1
-      class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-medium mb-4 md:mb-6 opacity-0 drop-shadow-xl"
+      class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-medium mb-4 md:mb-6 drop-shadow-xl"
       id="hero-name"
     >
       <span class="gradient-text">{personal.name}</span>
@@ -53,7 +53,7 @@ const t = useTranslations(lang);
 
     <div class="h-8 md:h-10 mb-8 overflow-hidden">
       <p
-        class="font-display font-normal text-base sm:text-lg md:text-xl text-text-primary opacity-0 drop-shadow-sm"
+        class="font-display font-normal text-base sm:text-lg md:text-xl text-text-primary drop-shadow-sm"
         id="hero-tagline"
         data-phrases={t('hero.phrases')}
       >
@@ -62,7 +62,7 @@ const t = useTranslations(lang);
       </p>
     </div>
 
-    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 opacity-0 mt-6 md:mt-8 w-full px-4 sm:px-0" id="hero-cta">
+    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 mt-6 md:mt-8 w-full px-4 sm:px-0" id="hero-cta">
       <a
         href="#projects"
         class="group relative px-6 md:px-8 py-3 rounded-full font-medium text-[14px] md:text-[15px] overflow-hidden w-full sm:w-auto"
@@ -89,7 +89,7 @@ const t = useTranslations(lang);
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0" id="scroll-indicator">
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2" id="scroll-indicator">
     <div class="flex flex-col items-center gap-2 text-text-muted">
       <span class="text-xs font-mono">{t('hero.scroll')}</span>
       <div class="w-5 h-8 rounded-full border border-text-muted/30 flex justify-center pt-1.5">
@@ -134,31 +134,9 @@ const t = useTranslations(lang);
     setTimeout(type, delay);
   }
 
-  // Hero entrance animations
-  function animateHero() {
-    const socials = document.getElementById('hero-socials')!;
-    const name = document.getElementById('hero-name')!;
-    const tagline = document.getElementById('hero-tagline')!;
-    const cta = document.getElementById('hero-cta')!;
-    const scroll = document.getElementById('scroll-indicator')!;
-
-    const items = [socials, name, tagline, cta, scroll];
-    items.forEach((el, i) => {
-      setTimeout(() => {
-        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        el.style.transform = 'translateY(0)';
-        el.style.opacity = '1';
-      }, 300 + i * 200);
-      el.style.transform = 'translateY(20px)';
-    });
-
-    setTimeout(type, 1400);
-  }
-
-  // Start after particles have loaded (or immediately)
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', animateHero);
+    document.addEventListener('DOMContentLoaded', type);
   } else {
-    animateHero();
+    type();
   }
 
