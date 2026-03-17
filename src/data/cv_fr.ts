@@ -113,7 +113,7 @@ export const education: Education[] = [
 
 export interface Skill {
   name: string;
-  category: 'programming' | 'ai' | 'tools' | 'soft';
+  category: 'programming' | 'ai' | 'tools' | 'writing' | 'soft';
 }
 
 export const skills: Skill[] = [
@@ -149,6 +149,12 @@ export const skills: Skill[] = [
   { name: 'Rédaction Scientifique', category: 'tools' },
   { name: 'Plateformes No-Code/Low-Code', category: 'tools' },
   { name: 'API OpenAI', category: 'tools' },
+  { name: 'Essais Long Format', category: 'writing' },
+  { name: 'Communication Technique', category: 'writing' },
+  { name: 'Analyse des Politiques', category: 'writing' },
+  { name: 'Synthèse de Recherche', category: 'writing' },
+  { name: 'Rédaction Éditoriale', category: 'writing' },
+  { name: 'Critique Socio-Technique', category: 'writing' },
   { name: 'Travail d\'équipe', category: 'soft' },
   { name: 'Vice-Président MUN', category: 'soft' },
   { name: 'Multilingue', category: 'soft' },

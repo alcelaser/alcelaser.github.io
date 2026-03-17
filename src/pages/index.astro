@@ -12,6 +12,21 @@ const {
   personal
 } = getCV(lang);
 const t = useTranslations(lang);
+
+const skillCategoryMeta = {
+  programming: { label: t('section.skills.cat.programming'), bg: 'var(--bauhaus-blue)',   text: 'var(--bauhaus-white)' },
+  ai:          { label: t('section.skills.cat.ai'),          bg: 'var(--bauhaus-red)',    text: 'var(--bauhaus-white)' },
+  tools:       { label: t('section.skills.cat.tools'),       bg: 'var(--bauhaus-yellow)', text: 'var(--bauhaus-black)' },
+  writing:     { label: t('section.skills.cat.writing'),     bg: 'var(--bauhaus-grey)',   text: 'var(--bauhaus-black)' },
+  soft:        { label: t('section.skills.cat.soft'),        bg: 'var(--bauhaus-black)',  text: 'var(--bauhaus-white)' },
+} as const;
+
+const skillCategories = (['programming', 'ai', 'tools', 'writing', 'soft'] as const).map(key => ({
+  key,
+  ...skillCategoryMeta[key],
+  items: skills.filter(s => s.category === key),
+}));
+
 const titleVariants = personal.title
   .split('|')
   .map((item) => item.trim())
@@ -79,21 +94,21 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       </div>
 
       <!-- Outbound Initial Links (User Request) -->
-      <nav class="md:w-[450px] flex flex-col bauhaus-border-t md:bauhaus-border-t-0 md:bauhaus-border-l shrink-0 bg-white">
+      <nav class="bauhaus-link-stagger md:w-[450px] flex flex-col bauhaus-border-t md:bauhaus-border-t-0 md:bauhaus-border-l shrink-0 bg-white">
         <a href={`mailto:${personal.email}`} class="bauhaus-link" style="background-color: var(--bauhaus-red); color: white;">
-          {t('hero.contact')} <span class="bauhaus-link-arrow">↗</span>
+          <span class="kinetic-clip hero-nav-label">{t('hero.contact')}</span> <span class="bauhaus-link-arrow">↗</span>
         </a>
         <a href={personal.linkedin} target="_blank" class="bauhaus-link">
-          linkedin <span class="bauhaus-link-arrow">↗</span>
+          <span class="kinetic-clip hero-nav-label">linkedin</span> <span class="bauhaus-link-arrow">↗</span>
         </a>
         <a href={personal.github} target="_blank" class="bauhaus-link">
-          github <span class="bauhaus-link-arrow">↗</span>
+          <span class="kinetic-clip hero-nav-label">github</span> <span class="bauhaus-link-arrow">↗</span>
         </a>
         <a href={lang === 'en' ? '/blog' : `/${lang}/blog`} class="bauhaus-link">
-          {t('hero.readBlog')} <span class="bauhaus-link-arrow">→</span>
+          <span class="kinetic-clip hero-nav-label">{t('hero.readBlog')}</span> <span class="bauhaus-link-arrow">→</span>
         </a>
         <a href={lang === 'en' ? '/demos' : `/${lang}/demos`} class="bauhaus-link">
-          {t('hero.projects')} <span class="bauhaus-link-arrow">→</span>
+          <span class="kinetic-clip hero-nav-label">{t('hero.projects')}</span> <span class="bauhaus-link-arrow">→</span>
         </a>
       </nav>
 
@@ -102,7 +117,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     <!-- ABOUT ACCORDION -->
     <section id="about" class="bauhaus-border-b flex flex-col bg-white">
       <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-black); color: var(--bauhaus-white);">
-        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.about')}</h2>
+        <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.about')}</h2>
         <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
       </div>
       <div class="accordion-content overflow-hidden bauhaus-border-t">
@@ -132,25 +147,35 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     <!-- SKILLS ACCORDION -->
     <section id="skills" class="bauhaus-border-b flex flex-col bg-white">
       <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">
-        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.skills')}</h2>
+        <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.skills')}</h2>
         <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
       </div>
       <div class="accordion-content overflow-hidden bg-[#F5F5F5] bauhaus-border-t">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 p-8 sm:p-12 lg:p-16">
-          {skills.map((s) => {
-            const categoryColors = {
-              programming: { bg: 'var(--bauhaus-blue)', text: 'var(--bauhaus-white)' },
-              ai: { bg: 'var(--bauhaus-red)', text: 'var(--bauhaus-white)' },
-              tools: { bg: 'var(--bauhaus-yellow)', text: 'var(--bauhaus-black)' },
-              soft: { bg: 'var(--bauhaus-black)', text: 'var(--bauhaus-white)' },
-            };
-            const c = categoryColors[s.category] ?? { bg: 'var(--bauhaus-white)', text: 'var(--bauhaus-black)' };
-            return (
-              <div class="skill-card-flow uppercase shadow-[6px_6px_0px_#000]" style={`background-color: ${c.bg}; color: ${c.text}; border: var(--line-weight) solid var(--bauhaus-black); padding: 1.5rem; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 900; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 100px;`}>
-                {s.name}
+        <div class="flex flex-col p-8 sm:p-12 lg:p-16 gap-5">
+          {skillCategories.map(cat => (
+            <div class="skill-category-block">
+              <button
+                class="skill-cat-trigger w-full flex items-center justify-between px-6 sm:px-10 py-6 sm:py-8 uppercase font-black text-3xl sm:text-4xl lg:text-5xl border-[var(--line-weight)] border-[var(--bauhaus-black)] shadow-[6px_6px_0px_#000] cursor-pointer transition-transform hover:-translate-y-0.5"
+                style={`background-color: ${cat.bg}; color: ${cat.text};`}
+                data-category={cat.key}
+              >
+                <span>{cat.label}</span>
+                <span class="skill-cat-icon font-black leading-none transition-transform duration-300 text-5xl sm:text-6xl lg:text-7xl">+</span>
+              </button>
+              <div class="skill-chips-wrap overflow-hidden" style="height: 0;">
+                <div class="skill-chips-inner flex flex-wrap gap-3 sm:gap-4 p-6 sm:p-8 bg-white" style="border: var(--line-weight) solid var(--bauhaus-black); border-top: none;">
+                  {cat.items.map(s => (
+                    <span
+                      class="skill-chip uppercase font-black px-4 sm:px-5 py-2 sm:py-3 text-lg sm:text-xl lg:text-2xl shadow-[4px_4px_0px_#000]"
+                      style={`border: 3px solid var(--bauhaus-black); background-color: ${cat.bg}; color: ${cat.text};`}
+                    >
+                      {s.name}
+                    </span>
+                  ))}
+                </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -158,7 +183,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     <!-- EXPERIENCE ACCORDION -->
     <section id="experience" class="bauhaus-border-b flex flex-col bg-white">
       <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-red); color: var(--bauhaus-white);">
-        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.experience')}</h2>
+        <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.experience')}</h2>
         <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
       </div>
       <div class="accordion-content overflow-hidden bauhaus-border-t">
@@ -184,7 +209,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     <!-- PROJECTS ACCORDION -->
     <section id="projects" class="bauhaus-border-b flex flex-col bg-white">
       <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">
-        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.projects')}</h2>
+        <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.projects')}</h2>
         <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
       </div>
       <div class="accordion-content overflow-hidden bauhaus-border-t">
@@ -213,7 +238,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     <!-- ARTICLES ACCORDION -->
     <section id="articles" class="bauhaus-border-b flex flex-col bg-white">
       <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-grey); color: var(--bauhaus-black);">
-        <h2 class="huge-text pointer-events-none mb-0 leading-none">{t('nav.articles')}</h2>
+        <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.articles')}</h2>
         <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
       </div>
       <div class="accordion-content overflow-hidden bauhaus-border-t">
@@ -253,7 +278,69 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
   
   gsap.registerPlugin(ScrollTrigger);
 
+  // --- Hero nav labels: kinetic char-split stagger ---
+  function splitToChars(el: HTMLElement) {
+    const text = el.innerText;
+    el.innerHTML = '';
+    text.split('').forEach(ch => {
+      const s = document.createElement('span');
+      s.className = 'char';
+      s.innerHTML = ch === ' ' ? '&nbsp;' : ch;
+      el.appendChild(s);
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('.hero-nav-label').forEach(label => splitToChars(label));
+
+  // Animate each label's chars with a per-label offset so they pop in row by row
+  document.querySelectorAll<HTMLElement>('.hero-nav-label').forEach((label, rowIndex) => {
+    gsap.to(label.querySelectorAll('.char'), {
+      y: 0,
+      duration: 0.6,
+      ease: 'power4.out',
+      stagger: 0.03,
+      delay: 0.1 + rowIndex * 0.12,
+    });
+  });
+
+  // --- Section headings: kinetic char-split stagger ---
+  document.querySelectorAll<HTMLElement>('.section-heading-kinetic').forEach((heading, headingIndex) => {
+    splitToChars(heading);
+    gsap.to(heading.querySelectorAll('.char'), {
+      y: 0,
+      duration: 0.7,
+      ease: 'power4.out',
+      stagger: 0.025,
+      delay: 0.2 + headingIndex * 0.08,
+    });
+  });
+
   // --- Scroll Animations ---
+    // --- Skill category explode ---
+    document.querySelectorAll<HTMLElement>('.skill-cat-trigger').forEach(trigger => {
+      const block = trigger.closest('.skill-category-block') as HTMLElement;
+      const wrap = block.querySelector<HTMLElement>('.skill-chips-wrap')!;
+      const icon = trigger.querySelector<HTMLElement>('.skill-cat-icon')!;
+      let open = false;
+
+      trigger.addEventListener('click', () => {
+        if (!open) {
+          open = true;
+          gsap.to(icon, { rotation: 45, duration: 0.3, ease: 'power2.out' });
+          gsap.to(wrap, { height: 'auto', duration: 0.4, ease: 'power3.out' });
+          const chips = wrap.querySelectorAll<HTMLElement>('.skill-chip');
+          gsap.fromTo(chips,
+            { scale: 0, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)', stagger: { amount: 0.45, from: 'center' }, delay: 0.15 }
+          );
+        } else {
+          open = false;
+          gsap.to(icon, { rotation: 0, duration: 0.3, ease: 'power2.out' });
+          gsap.to(wrap, { height: 0, duration: 0.35, ease: 'power3.inOut' });
+        }
+      });
+    });
+
   const sections = gsap.utils.toArray('.anim-slide-up');
   sections.forEach((sec: any) => {
     gsap.fromTo(sec, 
