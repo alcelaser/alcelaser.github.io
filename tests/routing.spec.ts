@@ -25,8 +25,8 @@ const routes: { path: string; titleFragment: string; landmark?: string }[] = [
     // Research paper
     { path: '/research/anomaly-detection', titleFragment: 'Alberto Maccanico' },
     // Localised homepages
-    { path: '/it', titleFragment: 'Alberto Maccanico', landmark: '#hero' },
-    { path: '/fr', titleFragment: 'Alberto Maccanico', landmark: '#hero' },
+    { path: '/it', titleFragment: 'Alberto Maccanico', landmark: 'header h1' },
+    { path: '/fr', titleFragment: 'Alberto Maccanico', landmark: 'header h1' },
     // Localised sub-pages (titles may be in locale language)
     { path: '/it/blog', titleFragment: 'Alberto Maccanico', landmark: '#blog-content' },
     { path: '/fr/blog', titleFragment: 'Alberto Maccanico', landmark: '#blog-content' },

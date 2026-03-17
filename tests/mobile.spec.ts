@@ -352,7 +352,7 @@ test.describe('Italian locale (/it)', () => {
   });
   test('hero renders', async ({ page }) => {
     await page.goto('/it', { waitUntil: 'domcontentloaded', timeout: 30000 });
-    await expect(page.locator('#hero')).toBeVisible();
+    await expect(page.locator('header h1').first()).toBeVisible();
   });
   test('no overflow on /it', async ({ page }) => {
     await page.goto('/it', { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -378,11 +378,11 @@ test.describe('Italian locale (/it)', () => {
       page.locator('a[href="/it/demos"]:not(#mobile-menu a):visible').first()
     ).toBeVisible();
   });
-  test('/it desktop navbar blog link → /it/blog', async ({ page }, info) => {
+  test('/it header nav blog link → /it/blog', async ({ page }, info) => {
     test.skip(info.project.name !== 'desktop', 'Desktop only');
     await gotoFast(page, '/it');
     await expect(
-      page.locator('#navbar .hidden.md\\:flex a[href="/it/blog"]').first()
+      page.locator('header nav a[href="/it/blog"]').first()
     ).toBeVisible();
   });
 });
@@ -398,7 +398,7 @@ test.describe('French locale (/fr)', () => {
   });
   test('hero renders', async ({ page }) => {
     await gotoFast(page, '/fr');
-    await expect(page.locator('#hero')).toBeVisible();
+    await expect(page.locator('header h1').first()).toBeVisible();
   });
   test('no overflow on /fr', async ({ page }) => {
     await gotoFast(page, '/fr');
@@ -422,11 +422,11 @@ test.describe('French locale (/fr)', () => {
       page.locator('a[href="/fr/demos"]:not(#mobile-menu a):visible').first()
     ).toBeVisible();
   });
-  test('/fr desktop navbar blog link → /fr/blog', async ({ page }, info) => {
+  test('/fr header nav blog link → /fr/blog', async ({ page }, info) => {
     test.skip(info.project.name !== 'desktop', 'Desktop only');
     await gotoFast(page, '/fr');
     await expect(
-      page.locator('#navbar .hidden.md\\:flex a[href="/fr/blog"]').first()
+      page.locator('header nav a[href="/fr/blog"]').first()
     ).toBeVisible();
   });
 });
