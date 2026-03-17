@@ -33,13 +33,30 @@ export async function fetchYahooChart(
 ): Promise<{ quote: AssetQuote; history: PricePoint[]; ohlc: OHLC[]; volume: VolumeBar[] }> {
   const config = TIME_RANGES[timeRange];
   const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=${config.range}&interval=${config.interval}&includePrePost=false`;
-  const url = `https://corsproxy.io/?url=${encodeURIComponent(yahooUrl)}`;
+  const proxyUrls = [
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`,
+    `https://corsproxy.io/?url=${encodeURIComponent(yahooUrl)}`,
+  ];
 
-  const res = await fetch(url);
-  if (!res.ok) {
-    const text = await res.text();
-    console.error(`Yahoo Finance HTTP ${res.status} for ${symbol}:`, text.slice(0, 200));
-    throw new Error(`Yahoo Finance error: ${res.status}`);
+  let res: Response | null = null;
+  let lastStatus = 0;
+  for (const url of proxyUrls) {
+    try {
+      const attempt = await fetch(url);
+      if (attempt.ok) {
+        res = attempt;
+        break;
+      }
+      lastStatus = attempt.status;
+      const text = await attempt.text();
+      console.warn(`Yahoo proxy HTTP ${attempt.status} via ${url}:`, text.slice(0, 120));
+    } catch (err) {
+      console.warn(`Yahoo proxy fetch failed via ${url}:`, err);
+    }
+  }
+
+  if (!res) {
+    throw new Error(`Yahoo Finance proxy error: ${lastStatus || 'network'}`);
   }
 
   const json = await res.json();
