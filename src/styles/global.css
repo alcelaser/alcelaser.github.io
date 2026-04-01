@@ -276,6 +276,66 @@ a {
   justify-content: center;
 }
 
+/* HERO BALL PHYSICS */
+.hero-ball-letter {
+  display: inline-block;
+  cursor: grab;
+  transition: transform 0.2s ease, color 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  z-index: 50;
+}
+
+.hero-ball-letter:hover {
+  transform: scale(1.15);
+  color: var(--bauhaus-red);
+}
+
+.hero-ball-letter:active {
+  cursor: grabbing;
+}
+
+.hero-ball-text {
+  position: absolute !important;
+  color: var(--bauhaus-black);
+  cursor: grab;
+  z-index: 100;
+  transition: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto;
+  font-family: 'Product Sans', sans-serif !important;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.hero-ball-text:hover {
+  transform: none;
+  color: var(--bauhaus-black);
+}
+
+.hero-ball-text:active {
+  cursor: grabbing;
+}
+
+.typewriter-char {
+  display: inline-block;
+  position: relative;
+}
+
+.bouncing-char {
+  position: absolute;
+  font-weight: 900;
+  font-family: 'Product Sans', sans-serif !important;
+  color: var(--bauhaus-black);
+  pointer-events: none;
+  z-index: 90;
+  text-transform: lowercase;
+  line-height: 1;
+}
+
 /* General Layout Utilities */
 .content-wrapper {
   max-width: 1400px;

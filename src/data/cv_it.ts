@@ -194,6 +194,11 @@ export interface Award {
 
 export const awards: Award[] = [
   {
+    title: 'LUISS Grand Challenge – 1° Posto',
+    issuer: 'Poste Italiane & LUISS',
+    detail: 'Corso e competizione universitaria',
+  },
+  {
     title: 'Certificato Internazionale di Eccellenza - Distinzione',
     issuer: 'Università di Cambridge',
   },
