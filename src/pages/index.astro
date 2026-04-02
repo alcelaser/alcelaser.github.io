@@ -656,6 +656,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
             const impulse = impactSpeed * 1.4;
             b.vx += -nx * impulse;
             b.vy += -ny * impulse;
+            b.rotV += (Math.random() - 0.5) * impulse * 1.5;
             // Slight pushback on the ball
             bvx -= -nx * impulse * 0.15;
             bvy -= -ny * impulse * 0.15;
@@ -726,7 +727,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         b.x  += b.vx * dt;
         b.y  += b.vy * dt;
         b.rot += b.rotV * dt;
-        b.rotV *= 0.98; // slow rotation over time
+        b.rotV *= 0.90; // fast decay, halts spinning smoothly around ~1s
 
         bounceBody(b, w, h);
 
@@ -795,7 +796,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
             vy: -ny * speed - 150 - Math.random() * 100,
             w: cr.width, h: cr.height,
             rot: 0,
-            rotV: 0,
+            rotV: (Math.random() - 0.5) * 300,
           });
         }
       });
