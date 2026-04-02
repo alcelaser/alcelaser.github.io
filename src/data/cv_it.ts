@@ -24,14 +24,16 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
-    role: 'Ricercatore',
+    role: 'Ricercatore e Autore',
     company: 'Google Developer Group on Campus – Guido Carli',
-    type: 'Ricerca',
+    type: 'Ricerca e Scrittura',
     period: '2026',
     bullets: [
       'Co-autore dell\'articolo di ricerca: "Anomaly Detection in Spacecraft Telemetry: An Ensemble Approach"',
       'Sviluppo di un framework di ensemble ibrido che combina Isolation Forest, un predittore temporale ispirato a Telemanom e un livello di meta-apprendimento XGBoost',
       'Lavoro con il dataset ESA Anomaly Detection Benchmark, con enfasi sull\'interpretabilità tramite analisi dell\'importanza delle feature basata su alberi',
+      'Scritto un articolo sulle implicazioni etiche dell\'IA nelle strutture di potere, nonché sul futuro dell\'IA e il suo impatto sulla società',
+      'Scritto numerosi altri articoli per il blog del GDG on Campus - Guido Carli',
     ],
   },
   {
