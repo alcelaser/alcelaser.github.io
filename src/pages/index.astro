@@ -613,6 +613,8 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       // Freeze the typewriter immediately
       (window as any).__heroBallDetached = true;
 
+      // Unscale momentarily to capture true physical dimensions without hover scaling
+      heroBall.style.transform = 'none';
       const oRect  = heroBall.getBoundingClientRect();
       const pgRect = playground.getBoundingClientRect();
       const h1     = document.getElementById('hero-name');
@@ -621,6 +623,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       // Record real character dimensions
       ballW = oRect.width;
       ballH = oRect.height;
+      heroBall.style.transform = '';
 
       // Record centre position. Offset 'by' downwards to match the optical center of the lowercase 'o' ink.
       bx = oRect.left - pgRect.left + ballW / 2;
@@ -701,11 +704,11 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     function ballHitsBodies() {
       const br = ballW * 0.45; // Tight visual radius for the 'o'
       for (const b of bodies) {
-        const dr = Math.max(b.w, b.h) / 2;
+        const dr = b.w * 0.5; // Tighter hit radius matching the inner ink better
         const dx = bx - b.x;
         const dy = by - b.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const minD = br + dr * 0.6;
+        const minD = br + dr;
         if (dist < minD && dist > 0.1) {
           // Push the char away from the ball
           const nx = dx / dist;
@@ -733,7 +736,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     // --- Bounce a body off walls ---
     function bounceBody(b: Body, w: number, h: number) {
       const rw = b.w / 2;
-      const rh = b.h / 2;
+      const rh = b.h * 0.45; // Optical bounds ignoring DOM leading
       if (b.x - rw < 0)     { b.x = rw;     b.vx =  Math.abs(b.vx) * RESTITUTION; b.vy *= FLOOR_FRIC; b.rotV *= FLOOR_FRIC; }
       if (b.x + rw > w)     { b.x = w - rw; b.vx = -Math.abs(b.vx) * RESTITUTION; b.vy *= FLOOR_FRIC; b.rotV *= FLOOR_FRIC; }
       if (b.y - rh < 0)     { b.y = rh;     b.vy =  Math.abs(b.vy) * RESTITUTION; b.vx *= FLOOR_FRIC; b.rotV *= FLOOR_FRIC; }
@@ -803,7 +806,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         }
 
         b.el.style.left = `${b.x - b.w / 2}px`;
-        b.el.style.top  = `${b.y - b.h / 2}px`;
+        b.el.style.top  = `${b.y - b.h * 0.55}px`;
         b.el.style.transform = `rotate(${b.rot}deg)`;
       }
 
@@ -823,12 +826,12 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         if (ch.dataset.freed === '1') return;
         const cr = ch.getBoundingClientRect();
         const cx = cr.left - pgRect.left + cr.width / 2;
-        const cy = cr.top  - pgRect.top  + cr.height / 2;
+        const cy = cr.top  - pgRect.top  + cr.height * 0.55;
 
         const dx = bx - cx;
         const dy = by - cy;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const minD = br + Math.max(cr.width, cr.height) * 0.45;
+        const minD = br + cr.width * 0.5; // Precision targeting ink width
 
         if (dist < minD) {
           ch.dataset.freed = '1';
@@ -840,7 +843,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
           el.textContent = ch.textContent;
           el.style.position = 'absolute';
           el.style.left = `${cx - cr.width / 2}px`;
-          el.style.top  = `${cy - cr.height / 2}px`;
+          el.style.top  = `${cy - cr.height * 0.55}px`;
           el.style.fontSize = twFontSize;
           el.style.zIndex = '90';
           playground.appendChild(el);
