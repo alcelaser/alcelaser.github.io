@@ -781,7 +781,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         knockStaticChars();
       }
 
-      // --- Bouncing typewriter chars ---
+      // --- Bouncing typewriter chars integration and wall bounce ---
       for (const b of bodies) {
         b.vx += gravityX * dt;
         b.vy += gravityY * dt;
@@ -793,11 +793,52 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         b.rotV *= 0.90; // fast decay, halts spinning smoothly around ~1s
 
         bounceBody(b, w, h);
+      }
 
+      // --- Body-to-body collision ---
+      for (let i = 0; i < bodies.length; i++) {
+        for (let j = i + 1; j < bodies.length; j++) {
+          const b1 = bodies[i];
+          const b2 = bodies[j];
+          const dx = b1.x - b2.x;
+          const dy = b1.y - b2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const minD = b1.w * 0.5 + b2.w * 0.5;
+
+          if (dist < minD && dist > 0.1) {
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const relVx = b1.vx - b2.vx;
+            const relVy = b1.vy - b2.vy;
+            const impactSpeed = relVx * (-nx) + relVy * (-ny);
+            
+            if (impactSpeed > 0) {
+              const impulse = impactSpeed * 0.8;
+              b1.vx += nx * impulse;
+              b1.vy += ny * impulse;
+              b2.vx -= nx * impulse;
+              b2.vy -= ny * impulse;
+
+              b1.rotV += (Math.random() - 0.5) * impulse * 1.5;
+              b2.rotV += (Math.random() - 0.5) * impulse * 1.5;
+            }
+
+            // Positional separation to prevent sinking into each other
+            const overlap = (minD - dist) * 0.5;
+            b1.x += nx * overlap;
+            b1.y += ny * overlap;
+            b2.x -= nx * overlap;
+            b2.y -= ny * overlap;
+          }
+        }
+      }
+
+      // --- Body resting checks and rendering ---
+      for (const b of bodies) {
         // Come to rest
         if (Math.abs(b.vx) < 4 && Math.abs(b.vy) < 4) {
-          const againstBottom = b.y + b.h / 2 >= h - 2 && gravityY > 0;
-          const againstTop    = b.y - b.h / 2 <= 2     && gravityY < 0;
+          const againstBottom = b.y + b.h * 0.45 >= h - 2 && gravityY > 0;
+          const againstTop    = b.y - b.h * 0.45 <= 2     && gravityY < 0;
           const againstRight  = b.x + b.w / 2 >= w - 2 && gravityX > 0;
           const againstLeft   = b.x - b.w / 2 <= 2     && gravityX < 0;
           if (againstBottom || againstTop || againstRight || againstLeft) {
