@@ -206,6 +206,35 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       </div>
     </section>
 
+    <!-- EDUCATION ACCORDION -->
+    <section id="education" class="bauhaus-border-b flex flex-col bg-white">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-grey); color: var(--bauhaus-black);">
+        <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.education')}</h2>
+        <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
+      </div>
+      <div class="accordion-content overflow-hidden bauhaus-border-t">
+        <div class="flex flex-col">
+          {education.map((edu, i) => (
+            <article class="p-8 sm:p-12 lg:p-16 bauhaus-border-b last:border-b-0 flex flex-col xl:flex-row gap-8 lg:gap-16 bg-white hover-row transition-transform duration-300">
+              <div class="xl:w-1/3 shrink-0">
+                <h3 class="text-4xl md:text-5xl font-black mb-4 uppercase leading-none tracking-tight">{edu.degree}</h3>
+                <span class="inline-block px-4 py-2 bg-black text-white font-bold text-2xl md:text-3xl leading-none shadow-[6px_6px_0px_#D3D3D3]">{edu.institution}</span>
+                {edu.period && <p class="mt-8 text-2xl font-bold font-mono text-gray-700 bg-[var(--bauhaus-yellow)] w-fit px-2 border-[3px] border-black">{edu.period}</p>}
+                {edu.location && <p class="mt-4 text-xl font-bold uppercase tracking-widest text-[#555]">{edu.location}</p>}
+              </div>
+              <div class="xl:w-2/3">
+                {edu.details && edu.details.length > 0 && (
+                  <ul class="list-square pl-6 text-2xl md:text-[1.75rem] leading-snug font-medium space-y-6">
+                    {edu.details.map((d: string) => <li>{d}</li>)}
+                  </ul>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- PROJECTS ACCORDION -->
     <section id="projects" class="bauhaus-border-b flex flex-col bg-white">
       <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black);">
@@ -235,9 +264,36 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       </div>
     </section>
 
+    <!-- AWARDS ACCORDION -->
+    <section id="awards" class="bauhaus-border-b flex flex-col bg-white">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-blue); color: var(--bauhaus-white);">
+        <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.awards')}</h2>
+        <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
+      </div>
+      <div class="accordion-content overflow-hidden bauhaus-border-t">
+        <div class="flex flex-wrap bg-white">
+          {awards.map((award, i) => {
+            const bgs = ['var(--bauhaus-white)', 'var(--bauhaus-yellow)', 'var(--bauhaus-blue)', 'var(--bauhaus-grey)', 'var(--bauhaus-white)', 'var(--bauhaus-red)'];
+            const textCols = ['var(--bauhaus-black)', 'var(--bauhaus-black)', 'var(--bauhaus-white)', 'var(--bauhaus-black)', 'var(--bauhaus-black)', 'var(--bauhaus-white)'];
+            
+            let bg = bgs[(i+2) % bgs.length];
+            let tx = textCols[(i+2) % textCols.length];
+            
+            return (
+               <div class="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col hover-row-red min-h-[300px]" style={`background-color: ${bg}; color: ${tx}; border-bottom: var(--line-weight) solid var(--bauhaus-black); border-right: var(--line-weight) solid var(--bauhaus-black); margin-bottom: -5px; margin-right: -5px;`}>
+                 <h3 class="text-4xl lg:text-5xl font-black mb-6 leading-none tracking-tight">{award.title}</h3>
+                 <p class="text-2xl font-bold uppercase">{award.issuer}</p>
+                 {award.detail && <p class="text-2xl font-medium leading-relaxed flex-1 mt-4">{award.detail}</p>}
+               </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
     <!-- ARTICLES ACCORDION -->
     <section id="articles" class="bauhaus-border-b flex flex-col bg-white">
-      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-grey); color: var(--bauhaus-black);">
+      <div class="accordion-trigger p-6 sm:p-12 lg:p-16 flex flex-row justify-between items-center cursor-pointer transition-colors" style="background-color: var(--bauhaus-black); color: var(--bauhaus-white);">
         <h2 class="huge-text pointer-events-none mb-0 leading-none kinetic-clip section-heading-kinetic">{t('nav.articles')}</h2>
         <div class="accordion-icon text-[4rem] sm:text-[6rem] lg:text-[10rem] font-black leading-none pointer-events-none transition-transform duration-500">+</div>
       </div>
