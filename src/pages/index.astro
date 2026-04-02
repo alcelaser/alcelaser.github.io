@@ -279,6 +279,11 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
             let bg = bgs[(i+2) % bgs.length];
             let tx = textCols[(i+2) % textCols.length];
             
+            if (award.title.includes('Model United Nations')) {
+              bg = 'var(--bauhaus-blue)';
+              tx = 'var(--bauhaus-white)';
+            }
+            
             return (
                <div class="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col hover-row-red min-h-[300px]" style={`background-color: ${bg}; color: ${tx}; border-bottom: var(--line-weight) solid var(--bauhaus-black); border-right: var(--line-weight) solid var(--bauhaus-black); margin-bottom: -5px; margin-right: -5px;`}>
                  <h3 class="text-4xl lg:text-5xl font-black mb-6 leading-none tracking-tight">{award.title}</h3>

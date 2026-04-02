@@ -79,12 +79,14 @@ export const education: Education[] = [
     location: 'Rome',
     degree: 'BSc in Artificial Intelligence and Management (in progress)',
     period: 'September 2024 – Present',
+    details: ['Focus on machine learning algorithms, enterprise management, and bridging the gap between technical AI implementation and business strategy.'],
   },
   {
     institution: 'Vrije Universiteit Amsterdam',
     location: 'Netherlands',
     degree: 'BSc in Computer Science (Bioinformatics Track – Discontinued)',
     period: 'Sept 2022 – June 2025',
+    details: ['Studied foundational computer science, data structures, and bioinformatics algorithms before refocusing on AI and Management.'],
   },
   {
     institution: 'International School of Flanders',
@@ -108,6 +110,7 @@ export const education: Education[] = [
     location: 'Waterloo, Belgium',
     degree: 'High School',
     period: '2017 - 2021',
+    details: ['Completed high school with a strong focus on sciences and international cooperation.'],
   },
 ];
 

@@ -79,12 +79,14 @@ export const education: Education[] = [
     location: 'Rome',
     degree: 'Licence en Intelligence Artificielle et Management (en cours)',
     period: 'Septembre 2024 – Présent',
+    details: ['Focus sur les algorithmes d\'apprentissage automatique, la gestion d\'entreprise et la réduction de l\'écart entre la mise en œuvre technique de l\'IA et la stratégie commerciale.'],
   },
   {
     institution: 'Vrije Universiteit Amsterdam',
     location: 'Pays-Bas',
     degree: 'Licence en Informatique (Filière Bioinformatique – Interrompu)',
     period: 'Sept 2022 – Juin 2025',
+    details: ['Études en informatique fondamentale, structures de données et algorithmes de bioinformatique avant de se recentrer sur l\'IA et la gestion.'],
   },
   {
     institution: 'International School of Flanders',
@@ -108,6 +110,7 @@ export const education: Education[] = [
     location: 'Waterloo, Belgique',
     degree: 'Lycée',
     period: '2017 - 2021',
+    details: ['Diplôme d\'études secondaires avec un fort accent sur les sciences et la coopération internationale.'],
   },
 ];
 
