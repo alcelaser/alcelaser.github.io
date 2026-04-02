@@ -88,7 +88,7 @@ export const education: Education[] = [
     location: 'Netherlands',
     degree: 'BSc in Computer Science',
     period: 'Sept 2022 – June 2023',
-    details: ['Studied foundational computer science, data structures, and bioinformatics algorithms before refocusing on AI and Management.'],
+    details: ['Studied foundational computer science, data structures, and bioinformatics algorithms', 'Pursued employment in an AI company and thus discontinued studies'],
   },
   {
     institution: 'International School of Flanders',

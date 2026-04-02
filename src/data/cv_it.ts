@@ -88,7 +88,7 @@ export const education: Education[] = [
     location: 'Paesi Bassi',
     degree: 'Laurea in Computer Science',
     period: 'Sett 2022 – Giu 2023',
-    details: ['Studi in fondamenti di informatica, strutture dati e algoritmi di bioinformatica prima di focalizzarmi sull\'IA e il Management.'],
+    details: ['Studi in fondamenti di informatica, strutture dati e algoritmi di bioinformatica', 'Messa in pausa degli studi per intraprendere un impiego in una società di IA'],
   },
   {
     institution: 'International School of Flanders',

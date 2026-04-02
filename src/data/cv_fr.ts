@@ -88,7 +88,7 @@ export const education: Education[] = [
     location: 'Pays-Bas',
     degree: 'Licence en Informatique',
     period: 'Sept 2022 – Juin 2023',
-    details: ['Études en informatique fondamentale, structures de données et algorithmes de bioinformatique avant de se recentrer sur l\'IA et la gestion.'],
+    details: ['Études en informatique fondamentale, structures de données et algorithmes de bioinformatique', 'Interruption des études pour poursuivre une opportunité d\'emploi dans une entreprise d\'IA'],
   },
   {
     institution: 'International School of Flanders',
