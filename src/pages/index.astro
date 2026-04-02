@@ -622,9 +622,9 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       ballW = oRect.width;
       ballH = oRect.height;
 
-      // Record centre position
+      // Record centre position. Offset 'by' downwards to match the optical center of the lowercase 'o' ink.
       bx = oRect.left - pgRect.left + ballW / 2;
-      by = oRect.top  - pgRect.top  + ballH / 2;
+      by = oRect.top  - pgRect.top  + ballH * 0.55;
 
       // Reparent to playground, keep text appearance
       const fontSize = h1Style ? h1Style.fontSize : '3rem';
@@ -634,7 +634,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       heroBall.className = 'hero-ball-text';
       heroBall.style.position  = 'absolute';
       heroBall.style.left      = `${bx - ballW / 2}px`;
-      heroBall.style.top       = `${by - ballH / 2}px`;
+      heroBall.style.top       = `${by - ballH * 0.55}px`;
       heroBall.style.fontSize  = fontSize;
       heroBall.style.cursor    = 'grab';
       heroBall.style.zIndex    = '100';
@@ -665,7 +665,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       bx = cx - pgRect.left;
       by = cy - pgRect.top;
       heroBall.style.left = `${bx - ballW / 2}px`;
-      heroBall.style.top  = `${by - ballH / 2}px`;
+      heroBall.style.top  = `${by - ballH * 0.55}px`;
     }
 
     function releaseBall() {
@@ -699,7 +699,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
 
     // --- Ball-to-body collision ---
     function ballHitsBodies() {
-      const br = Math.max(ballW, ballH) / 2;
+      const br = ballW * 0.45; // Tight visual radius for the 'o'
       for (const b of bodies) {
         const dr = Math.max(b.w, b.h) / 2;
         const dx = bx - b.x;
@@ -751,8 +751,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
 
       // --- Ball ('o') ---
       if (detached && !dragging) {
-        const rw = ballW / 2;
-        const rh = ballH / 2;
+        const visualR = ballW * 0.45; // Precise visual circle of the "o"
 
         bvy += BASE_GRAVITY * dt;
         bvx *= AIR_DRAG;
@@ -760,17 +759,17 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         bx  += bvx * dt;
         by  += bvy * dt;
 
-        if (bx - rw < 0)     { bx = rw;     bvx =  Math.abs(bvx) * RESTITUTION; }
-        if (bx + rw > w)     { bx = w - rw; bvx = -Math.abs(bvx) * RESTITUTION; }
-        if (by - rh < 0)     { by = rh;     bvy =  Math.abs(bvy) * RESTITUTION; }
-        if (by + rh > h)     { by = h - rh; bvy = -Math.abs(bvy) * RESTITUTION; bvx *= FLOOR_FRIC; }
+        if (bx - visualR < 0)     { bx = visualR;     bvx =  Math.abs(bvx) * RESTITUTION; }
+        if (bx + visualR > w)     { bx = w - visualR; bvx = -Math.abs(bvx) * RESTITUTION; }
+        if (by - visualR < 0)     { by = visualR;     bvy =  Math.abs(bvy) * RESTITUTION; }
+        if (by + visualR > h)     { by = h - visualR; bvy = -Math.abs(bvy) * RESTITUTION; bvx *= FLOOR_FRIC; }
 
-        if (Math.abs(bvx) < REST_THRESH && Math.abs(bvy) < REST_THRESH && by + rh >= h - 2) {
+        if (Math.abs(bvx) < REST_THRESH && Math.abs(bvy) < REST_THRESH && by + visualR >= h - 2) {
           bvx = 0; bvy = 0;
         }
 
-        heroBall.style.left = `${bx - rw}px`;
-        heroBall.style.top  = `${by - rh}px`;
+        heroBall.style.left = `${bx - ballW / 2}px`;
+        heroBall.style.top  = `${by - ballH * 0.55}px`;
 
         // Collide with already-freed letter bodies
         ballHitsBodies();
@@ -816,7 +815,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       const chars = document.querySelectorAll<HTMLElement>('.typewriter-char');
       if (chars.length === 0) return;
       const pgRect = playground.getBoundingClientRect();
-      const br = Math.max(ballW, ballH) / 2;
+      const br = ballW * 0.45; // Precise visual radius for 'o'
       const twEl = document.getElementById('hero-typewriter');
       const twFontSize = twEl ? window.getComputedStyle(twEl).fontSize : '2rem';
 
