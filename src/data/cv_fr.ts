@@ -51,7 +51,7 @@ export const experience: Experience[] = [
     period: 'Sept 2023 – Déc 2023',
     bullets: [
       'Travail avec les modèles Laravel et OpenLLaMA',
-      'Concentration sur le prompt engineering et les logiciels d\'entreprise',
+      'Focus sur la création de microservices logiciels et l\'intégration de LLM dans les logiciels d\'entreprise',
     ],
   },
   {
@@ -60,7 +60,7 @@ export const experience: Experience[] = [
     type: 'Technicien de Laboratoire Chimique',
     period: 'Sept 2019 – Oct 2020',
     bullets: [
-      'Soutien aux laboratoires scientifiques, collecte de données et préparation d\'expériences',
+      'Soutien aux laboratoires scientifiques, collecte de données et préparation d\'expériences. Supervision de la sécurité et des bonnes pratiques de laboratoire',
     ],
   },
 ];
@@ -79,13 +79,13 @@ export const education: Education[] = [
     location: 'Rome',
     degree: 'Licence en Intelligence Artificielle et Management (en cours)',
     period: 'Septembre 2024 – Présent',
-    details: ['Focus sur les algorithmes d\'apprentissage automatique, la gestion d\'entreprise et la réduction de l\'écart entre la mise en œuvre technique de l\'IA et la stratégie commerciale.'],
+    details: ['Focus sur les algorithmes d\'apprentissage automatique, la gestion d\'entreprise et la réduction de l\'écart entre la mise en œuvre technique de l\'IA et la stratégie commerciale. Comprendre comment la technologie interagit avec les personnes, et comment les personnes interagissent avec la technologie.'],
   },
   {
     institution: 'Vrije Universiteit Amsterdam',
     location: 'Pays-Bas',
-    degree: 'Licence en Informatique (Filière Bioinformatique – Interrompu)',
-    period: 'Sept 2022 – Juin 2025',
+    degree: 'Licence en Informatique',
+    period: 'Sept 2022 – Juin 2023',
     details: ['Études en informatique fondamentale, structures de données et algorithmes de bioinformatique avant de se recentrer sur l\'IA et la gestion.'],
   },
   {
@@ -97,13 +97,6 @@ export const education: Education[] = [
       'A Levels (2021): Français (A*), Mathématiques (B), Physique (B)',
       'IGCSEs (2019): 9 matières dont Sciences Coordonnées, Français, Littérature Anglaise, Commerce, Histoire',
     ],
-  },
-  {
-    institution: 'SAT',
-    location: '',
-    degree: 'Scholastic Aptitude Test — 1350/1600 (90e Centile)',
-    period: '',
-    details: ['Mathématiques: 650 — Lecture et Écriture: 700'],
   },
   {
     institution: 'ISF Waterloo',

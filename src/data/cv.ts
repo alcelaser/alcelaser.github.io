@@ -51,7 +51,7 @@ export const experience: Experience[] = [
     period: 'Sept 2023 – Dec 2023',
     bullets: [
       'Worked with Laravel and OpenLLaMA models',
-      'Focus on prompt engineering and enterprise software',
+      'Focus on building software microservices and LLM integration into enterprise software',
     ],
   },
   {
@@ -60,7 +60,7 @@ export const experience: Experience[] = [
     type: 'Chemical Lab Technician',
     period: 'Sept 2019 – Oct 2020',
     bullets: [
-      'Supported science labs, data collection, and experiment setup',
+      'Supported science labs, data collection, and experiment setup. Overviewed security and proper lab practices',
     ],
   },
 ];
@@ -79,13 +79,13 @@ export const education: Education[] = [
     location: 'Rome',
     degree: 'BSc in Artificial Intelligence and Management (in progress)',
     period: 'September 2024 – Present',
-    details: ['Focus on machine learning algorithms, enterprise management, and bridging the gap between technical AI implementation and business strategy.'],
+    details: ['Focus on machine learning algorithms, enterprise management, and bridging the gap between technical AI implementation and business strategy. Learning how technology interacts with people, and how people interact with technology.'],
   },
   {
     institution: 'Vrije Universiteit Amsterdam',
     location: 'Netherlands',
-    degree: 'BSc in Computer Science (Bioinformatics Track – Discontinued)',
-    period: 'Sept 2022 – June 2025',
+    degree: 'BSc in Computer Science',
+    period: 'Sept 2022 – June 2023',
     details: ['Studied foundational computer science, data structures, and bioinformatics algorithms before refocusing on AI and Management.'],
   },
   {
@@ -97,13 +97,6 @@ export const education: Education[] = [
       'A Levels (2021): French (A*), Mathematics (B), Physics (B)',
       'IGCSEs (2019): 9 Subjects incl. Coordinated Sciences, French, English Literature, Business, History',
     ],
-  },
-  {
-    institution: 'SAT',
-    location: '',
-    degree: 'Scholastic Aptitude Test — 1350/1600 (90th Percentile)',
-    period: '',
-    details: ['Math: 650 — Reading & Writing: 700'],
   },
   {
     institution: 'ISF Waterloo',

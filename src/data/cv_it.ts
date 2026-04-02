@@ -51,7 +51,7 @@ export const experience: Experience[] = [
     period: 'Sett 2023 – Dic 2023',
     bullets: [
       'Esperienza con i modelli Laravel e OpenLLaMA',
-      'Focus su prompt engineering e software aziendale',
+      'Focus sulla creazione di microservizi software e sull\'integrazione di LLM in software aziendali',
     ],
   },
   {
@@ -60,7 +60,7 @@ export const experience: Experience[] = [
     type: 'Tecnico di Laboratorio Chimico',
     period: 'Sett 2019 – Ott 2020',
     bullets: [
-      'Supporto a laboratori scientifici, raccolta dati e preparazione di esperimenti',
+      'Supporto a laboratori scientifici, raccolta dati e preparazione di esperimenti. Supervisione della sicurezza e delle corrette pratiche di laboratorio',
     ],
   },
 ];
@@ -79,13 +79,13 @@ export const education: Education[] = [
     location: 'Roma',
     degree: 'Laurea in Artificial Intelligence and Management (in corso)',
     period: 'Settembre 2024 – Presente',
-    details: ['Focus sugli algoritmi di machine learning, sulla gestione aziendale e sul colmare il divario tra l\'implementazione tecnica dell\'IA e la strategia di business.'],
+    details: ['Focus sugli algoritmi di machine learning, sulla gestione aziendale e sul colmare il divario tra l\'implementazione tecnica dell\'IA e la strategia di business. Comprendere come la tecnologia interagisce con le persone e come le persone interagiscono con la tecnologia.'],
   },
   {
     institution: 'Vrije Universiteit Amsterdam',
     location: 'Paesi Bassi',
-    degree: 'Laurea in Computer Science (Indirizzo Bioinformatica – Interrotta)',
-    period: 'Sett 2022 – Giu 2025',
+    degree: 'Laurea in Computer Science',
+    period: 'Sett 2022 – Giu 2023',
     details: ['Studi in fondamenti di informatica, strutture dati e algoritmi di bioinformatica prima di focalizzarmi sull\'IA e il Management.'],
   },
   {
@@ -97,13 +97,6 @@ export const education: Education[] = [
       'A Levels (2021): Francese (A*), Matematica (B), Fisica (B)',
       'IGCSEs (2019): 9 materie tra cui Scienze Coordinate, Francese, Letteratura Inglese, Business, Storia',
     ],
-  },
-  {
-    institution: 'SAT',
-    location: '',
-    degree: 'Scholastic Aptitude Test — 1350/1600 (90° Percentile)',
-    period: '',
-    details: ['Matematica: 650 — Lettura e Scrittura: 700'],
   },
   {
     institution: 'ISF Waterloo',
