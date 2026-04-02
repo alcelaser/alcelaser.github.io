@@ -673,10 +673,10 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     function bounceBody(b: Body, w: number, h: number) {
       const rw = b.w / 2;
       const rh = b.h / 2;
-      if (b.x - rw < 0)     { b.x = rw;     b.vx =  Math.abs(b.vx) * RESTITUTION; b.vy *= FLOOR_FRIC; }
-      if (b.x + rw > w)     { b.x = w - rw; b.vx = -Math.abs(b.vx) * RESTITUTION; b.vy *= FLOOR_FRIC; }
-      if (b.y - rh < 0)     { b.y = rh;     b.vy =  Math.abs(b.vy) * RESTITUTION; b.vx *= FLOOR_FRIC; }
-      if (b.y + rh > h)     { b.y = h - rh; b.vy = -Math.abs(b.vy) * RESTITUTION; b.vx *= FLOOR_FRIC; }
+      if (b.x - rw < 0)     { b.x = rw;     b.vx =  Math.abs(b.vx) * RESTITUTION; b.vy *= FLOOR_FRIC; b.rotV *= FLOOR_FRIC; }
+      if (b.x + rw > w)     { b.x = w - rw; b.vx = -Math.abs(b.vx) * RESTITUTION; b.vy *= FLOOR_FRIC; b.rotV *= FLOOR_FRIC; }
+      if (b.y - rh < 0)     { b.y = rh;     b.vy =  Math.abs(b.vy) * RESTITUTION; b.vx *= FLOOR_FRIC; b.rotV *= FLOOR_FRIC; }
+      if (b.y + rh > h)     { b.y = h - rh; b.vy = -Math.abs(b.vy) * RESTITUTION; b.vx *= FLOOR_FRIC; b.rotV *= FLOOR_FRIC; }
     }
 
     // --- Physics loop ---
@@ -727,7 +727,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         b.x  += b.vx * dt;
         b.y  += b.vy * dt;
         b.rot += b.rotV * dt;
-        b.rotV *= 0.998; // slow rotation over time
+        b.rotV *= 0.98; // slow rotation over time
 
         bounceBody(b, w, h);
 
