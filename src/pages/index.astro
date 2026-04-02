@@ -656,7 +656,6 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
             const impulse = impactSpeed * 1.4;
             b.vx += -nx * impulse;
             b.vy += -ny * impulse;
-            b.rotV += (Math.random() - 0.5) * impulse * 3;
             // Slight pushback on the ball
             bvx -= -nx * impulse * 0.15;
             bvy -= -ny * impulse * 0.15;
@@ -796,7 +795,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
             vy: -ny * speed - 150 - Math.random() * 100,
             w: cr.width, h: cr.height,
             rot: 0,
-            rotV: (Math.random() - 0.5) * 600,
+            rotV: 0,
           });
         }
       });
