@@ -188,6 +188,7 @@ export interface Award {
   title: string;
   issuer: string;
   detail?: string;
+  url?: string;
 }
 
 export const awards: Award[] = [
@@ -195,6 +196,7 @@ export const awards: Award[] = [
     title: 'LUISS Grand Challenge – 1st Place',
     issuer: 'Poste Italiane & LUISS',
     detail: 'University course and competition',
+    url: 'https://www.linkedin.com/posts/poste-italiane_innovazione-dataanalytics-posteitaliane-activity-7454446234565672960-Vplg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE7DmRoBfGK7ohJRK4edX5QSysV2Sb7wEi8',
   },
   {
     title: 'International Certificate of Excellence - Distinction',

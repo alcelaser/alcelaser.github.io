@@ -286,13 +286,19 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
               tx = 'var(--bauhaus-white)';
             }
             
-            return (
-               <div class="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col hover-row-red min-h-[300px]" style={`background-color: ${bg}; color: ${tx}; border-bottom: var(--line-weight) solid var(--bauhaus-black); border-right: var(--line-weight) solid var(--bauhaus-black); margin-bottom: -5px; margin-right: -5px;`}>
-                 <h3 class="text-4xl lg:text-5xl font-black mb-6 leading-none tracking-tight">{award.title}</h3>
-                 <p class="text-2xl font-bold uppercase">{award.issuer}</p>
-                 {award.detail && <p class="text-2xl font-medium leading-relaxed flex-1 mt-4">{award.detail}</p>}
-               </div>
+            const card = (
+              <div class="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col hover-row-red min-h-[300px]" style={`background-color: ${bg}; color: ${tx}; border-bottom: var(--line-weight) solid var(--bauhaus-black); border-right: var(--line-weight) solid var(--bauhaus-black); margin-bottom: -5px; margin-right: -5px;`}>
+                <h3 class="text-4xl lg:text-5xl font-black mb-6 leading-none tracking-tight">{award.title}</h3>
+                <p class="text-2xl font-bold uppercase">{award.issuer}</p>
+                {award.detail && <p class="text-2xl font-medium leading-relaxed flex-1 mt-4">{award.detail}</p>}
+              </div>
             );
+
+            return award.url ? (
+              <a href={award.url} target="_blank" rel="noreferrer noopener" class="block no-underline">
+                {card}
+              </a>
+            ) : card;
           })}
         </div>
       </div>
@@ -505,14 +511,26 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         }
 
         const visibleText = current.slice(0, charIndex);
-        // Render each char as a separate span for ball collision detection
+        // Render words as nowrap groups so wrapping only happens between words.
         typewriter.innerHTML = '';
         if (visibleText.length > 0) {
-          for (const ch of visibleText) {
-            const span = document.createElement('span');
-            span.className = 'typewriter-char';
-            span.textContent = ch === ' ' ? '\u00A0' : ch;
-            typewriter.appendChild(span);
+          const tokens = visibleText.split(/(\s+)/);
+          for (const token of tokens) {
+            if (!token) continue;
+            if (/^\s+$/.test(token)) {
+              typewriter.appendChild(document.createTextNode(token.replace(/ /g, '\u00A0')));
+              continue;
+            }
+
+            const word = document.createElement('span');
+            word.className = 'typewriter-word';
+            for (const ch of token) {
+              const span = document.createElement('span');
+              span.className = 'typewriter-char';
+              span.textContent = ch;
+              word.appendChild(span);
+            }
+            typewriter.appendChild(word);
           }
         } else {
           typewriter.textContent = '\u00A0';

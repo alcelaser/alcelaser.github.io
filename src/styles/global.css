@@ -338,17 +338,22 @@ a {
 
 /* Typewriter container - prevent word breaks on mobile */
 .typewriter-container {
-  word-break: keep-all;
+  word-break: normal;
   white-space: normal;
-  overflow-wrap: break-word;
+  overflow-wrap: normal;
   display: block;
 }
 
 #hero-typewriter {
-  word-break: keep-all;
+  word-break: normal;
   white-space: normal;
-  overflow-wrap: break-word;
+  overflow-wrap: normal;
   display: block;
+}
+
+.typewriter-word {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 /* Hero name parts for collision detection */
