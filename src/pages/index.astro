@@ -819,6 +819,36 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       }
     }
 
+    function bodyHitsStaticNameBodies(b: Body) {
+      for (const sb of staticBodies) {
+        const br = b.w * 0.45;
+        const sr = sb.w * 0.25; // Tight static body radius - much closer to letter shapes
+        const dx = b.x - sb.x;
+        const dy = b.y - sb.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const minD = br + sr;
+
+        if (dist < minD && dist > 0.1) {
+          const nx = dx / dist;
+          const ny = dy / dist;
+          const relVx = b.vx;
+          const relVy = b.vy;
+          const impactSpeed = relVx * (-nx) + relVy * (-ny);
+
+          if (impactSpeed > 0) {
+            const impulse = impactSpeed * 1.1;
+            b.vx += -nx * impulse;
+            b.vy += -ny * impulse;
+            b.rotV += (Math.random() - 0.5) * impulse * 1.2;
+          }
+
+          const overlap = minD - dist;
+          b.x -= nx * overlap;
+          b.y -= ny * overlap;
+        }
+      }
+    }
+
     // --- Bounce a body off walls ---
     function bounceBody(b: Body, w: number, h: number) {
       const rw = b.w / 2;
@@ -877,6 +907,8 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         b.y  += b.vy * dt;
         b.rot += b.rotV * dt;
         b.rotV *= 0.90; // fast decay, halts spinning smoothly around ~1s
+
+        bodyHitsStaticNameBodies(b);
 
         bounceBody(b, w, h);
       }
