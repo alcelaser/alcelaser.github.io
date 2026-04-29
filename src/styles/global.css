@@ -336,6 +336,32 @@ a {
   line-height: 1;
 }
 
+/* Typewriter container - prevent word breaks on mobile */
+.typewriter-container {
+  word-break: keep-all;
+  white-space: normal;
+  overflow-wrap: break-word;
+  display: block;
+}
+
+#hero-typewriter {
+  word-break: keep-all;
+  white-space: normal;
+  overflow-wrap: break-word;
+  display: block;
+}
+
+/* Hero name parts for collision detection */
+.hero-name-part {
+  display: inline;
+  position: relative;
+}
+
+.name-char-collision {
+  display: inline;
+  position: relative;
+}
+
 /* General Layout Utilities */
 .content-wrapper {
   max-width: 1400px;

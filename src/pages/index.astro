@@ -87,8 +87,10 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     <header class="bauhaus-border-b flex flex-col md:flex-row min-h-[60vh]">
       
       <div id="hero-playground" class="flex-1 p-8 sm:p-12 lg:p-16 flex flex-col justify-center relative overflow-hidden" style="background-color: var(--bauhaus-yellow); color: var(--bauhaus-black); border-bottom: var(--line-weight) solid var(--bauhaus-black); border-right: var(--line-weight) solid var(--bauhaus-black);">
-        <h1 id="hero-name" class="huge-text mb-6 tracking-tight block">{personal.name.split(' ')[0].slice(0, -1)}<span id="hero-ball-o" class="hero-ball-letter">o</span><br/>{personal.name.split(' ')[1]}</h1>
-        <h2 class="large-text">
+        <h1 id="hero-name" class="huge-text mb-6 tracking-tight block">
+          <span class="hero-name-part" data-collision-target="albert">{personal.name.split(' ')[0].slice(0, -1)}</span><span id="hero-ball-o" class="hero-ball-letter">o</span><br/><span class="hero-name-part" data-collision-target="maccanico">{personal.name.split(' ')[1]}</span>
+        </h1>
+        <h2 class="large-text typewriter-container">
           <span id="hero-typewriter" data-positions={JSON.stringify(titleVariants)}>{titleVariants[0] ?? personal.title}</span>
         </h2>
       </div>
@@ -599,7 +601,14 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       w: number; h: number;
       rot: number; rotV: number;
     }
+    
+    interface StaticBody {
+      x: number; y: number;
+      w: number; h: number;
+    }
+    
     const bodies: Body[] = [];
+    const staticBodies: StaticBody[] = [];
 
     function pgBounds() {
       return { w: playground.clientWidth, h: playground.clientHeight };
@@ -643,7 +652,39 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       heroBall.style.zIndex    = '100';
       heroBall.style.transition = 'none';
 
-      // Letters stay in place — they only become physics bodies when hit by the 'o'
+      // Create static collision bodies for the rest of the name (albert, maccanico)
+      createStaticNameColliders(pgRect);
+    }
+
+    function createStaticNameColliders(pgRect: DOMRect) {
+      const namePartElements = document.querySelectorAll<HTMLElement>('.hero-name-part');
+      namePartElements.forEach(part => {
+        const text = part.textContent || '';
+        // Wrap each character in a span for per-character collision
+        const chars: HTMLElement[] = [];
+        part.innerHTML = '';
+        for (const char of text) {
+          const charSpan = document.createElement('span');
+          charSpan.className = 'name-char-collision';
+          charSpan.textContent = char;
+          part.appendChild(charSpan);
+          chars.push(charSpan);
+        }
+        
+        // Create collision body for each character
+        for (const charEl of chars) {
+          const rect = charEl.getBoundingClientRect();
+          const x = rect.left - pgRect.left + rect.width / 2;
+          const y = rect.top - pgRect.top + rect.height * 0.55;
+          
+          staticBodies.push({
+            x: x,
+            y: y,
+            w: rect.width,
+            h: rect.height,
+          });
+        }
+      });
     }
 
     // --- Drag ---
@@ -703,6 +744,8 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
     // --- Ball-to-body collision ---
     function ballHitsBodies() {
       const br = ballW * 0.45; // Tight visual radius for the 'o'
+      
+      // Collide with dynamic bodies
       for (const b of bodies) {
         const dr = b.w * 0.5; // Tighter hit radius matching the inner ink better
         const dx = bx - b.x;
@@ -729,6 +772,31 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
           const overlap = minD - dist;
           b.x -= nx * overlap;
           b.y -= ny * overlap;
+        }
+      }
+      
+      // Collide with static bodies (name parts)
+      for (const sb of staticBodies) {
+        const sr = sb.w * 0.25; // Tight static body radius - much closer to letter shapes
+        const dx = bx - sb.x;
+        const dy = by - sb.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const minD = br + sr;
+        
+        if (dist < minD && dist > 0.1) {
+          // Calculate collision normal
+          const nx = dx / dist;
+          const ny = dy / dist;
+          
+          // Bounce the ball - reflect velocity
+          const dotProd = bvx * nx + bvy * ny;
+          bvx = (bvx - 2 * dotProd * nx) * 0.9; // 0.9 for some damping
+          bvy = (bvy - 2 * dotProd * ny) * 0.9;
+          
+          // Push ball away from static body
+          const overlap = minD - dist;
+          bx += nx * overlap;
+          by += ny * overlap;
         }
       }
     }
