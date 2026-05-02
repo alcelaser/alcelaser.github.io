@@ -280,13 +280,13 @@ export const languages: Language[] = [
   },
   {
     name: 'Spagnolo',
-    level: 'B2',
+    level: 'Intermedio',
     detail: 'Livello Intermedio Superiore',
     percent: 65,
   },
   {
     name: 'Tedesco',
-    level: 'A1',
+    level: 'Intermedio',
     detail: 'In corso, seguendo un corso di lingua',
     percent: 25,
   },
