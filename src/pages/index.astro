@@ -796,7 +796,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       
       // Collide with static bodies (name parts)
       for (const sb of staticBodies) {
-        const sr = sb.w * 0.25; // Tight static body radius - much closer to letter shapes
+        const sr = sb.w * 0.5; // Wider radius to prevent bodies falling through gaps
         const dx = bx - sb.x;
         const dy = by - sb.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -822,8 +822,8 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
 
     function bodyHitsStaticNameBodies(b: Body) {
       for (const sb of staticBodies) {
-        const br = b.w * 0.35; // Tighter hit radius matching the inner ink better
-        const sr = sb.w * 0.25; // Tight static body radius - much closer to letter shapes
+        const br = b.w * 0.4; // Tighter hit radius matching the inner ink better
+        const sr = sb.w * 0.5; // Wider radius to prevent bodies falling through gaps
         const dx = b.x - sb.x;
         const dy = b.y - sb.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
