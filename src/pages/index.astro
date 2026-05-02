@@ -766,7 +766,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
       
       // Collide with dynamic bodies
       for (const b of bodies) {
-        const dr = b.w * 0.5; // Tighter hit radius matching the inner ink better
+        const dr = b.w * 0.35; // Tighter hit radius matching the inner ink better
         const dx = bx - b.x;
         const dy = by - b.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -822,7 +822,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
 
     function bodyHitsStaticNameBodies(b: Body) {
       for (const sb of staticBodies) {
-        const br = b.w * 0.45;
+        const br = b.w * 0.35; // Tighter hit radius matching the inner ink better
         const sr = sb.w * 0.25; // Tight static body radius - much closer to letter shapes
         const dx = b.x - sb.x;
         const dy = b.y - sb.y;
@@ -837,15 +837,15 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
           const impactSpeed = relVx * (-nx) + relVy * (-ny);
 
           if (impactSpeed > 0) {
-            const impulse = impactSpeed * 1.1;
-            b.vx += -nx * impulse;
-            b.vy += -ny * impulse;
+            const impulse = impactSpeed * 1.3; // Give it a nice bounce
+            b.vx += nx * impulse;
+            b.vy += ny * impulse;
             b.rotV += (Math.random() - 0.5) * impulse * 1.2;
           }
 
           const overlap = minD - dist;
-          b.x -= nx * overlap;
-          b.y -= ny * overlap;
+          b.x += nx * overlap;
+          b.y += ny * overlap;
         }
       }
     }
@@ -922,7 +922,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
           const dx = b1.x - b2.x;
           const dy = b1.y - b2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const minD = b1.w * 0.5 + b2.w * 0.5;
+          const minD = b1.w * 0.35 + b2.w * 0.35; // Tighter hit radius for letters hitting each other
 
           if (dist < minD && dist > 0.1) {
             const nx = dx / dist;
@@ -991,7 +991,7 @@ const projectCards = repos.length > 0 ? repos : fallbackRepos;
         const dx = bx - cx;
         const dy = by - cy;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const minD = br + cr.width * 0.5; // Precision targeting ink width
+        const minD = br + cr.width * 0.35; // Precision targeting ink width
 
         if (dist < minD) {
           ch.dataset.freed = '1';
