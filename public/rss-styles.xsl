@@ -128,6 +128,21 @@
             box-shadow: 2px 2px 0px var(--bauhaus-black);
           }
         </style>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            var contents = document.querySelectorAll('.content');
+            contents.forEach(function(el) {
+              // The browser rendered escaped HTML tags as plain text. 
+              // Setting innerHTML to itself parses the tags into real DOM nodes.
+              // We use textContent because disable-output-escaping failed fallback.
+              if (el.textContent) {
+                var txt = el.textContent;
+                // Basic cleanup of leading/trailing spaces
+                el.innerHTML = txt;
+              }
+            });
+          });
+        </script>
       </head>
       <body>
         <div class="header">
@@ -143,7 +158,7 @@
             <div class="item">
               <h2><a href="{link}"><xsl:value-of select="title"/></a></h2>
               <div class="meta">
-                Published: <xsl:value-of select="pubDate"/>
+                Published: <xsl:value-of select="substring(pubDate, 1, 16)"/>
               </div>
               <div class="content">
                 <xsl:value-of select="content:encoded" disable-output-escaping="yes"/>
