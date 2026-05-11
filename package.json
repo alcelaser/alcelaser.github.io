@@ -12,6 +12,7 @@
     "test:desktop": "npx playwright test --project=desktop"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
     "@chenglou/pretext": "^0.0.4",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^6.0.4",
