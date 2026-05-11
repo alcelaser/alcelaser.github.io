@@ -1,10 +1,12 @@
-import rss from '@astrojs/rss';
 import sanitizeHtml from 'sanitize-html';
+import type { APIRoute } from 'astro';
 
-export async function GET(context) {
+export const GET: APIRoute = async (context) => {
   const posts = import.meta.glob('./blog/*.md', { eager: true });
   
-  const items = await Promise.all(Object.values(posts).map(async (post) => {
+  const baseUrl = (context.site || new URL('https://alcelaser.github.io')).toString().replace(/\/$/, '');
+  
+  const items = await Promise.all(Object.values(posts).map(async (post: any) => {
     // Attempt to extract a date from originalUrl (e.g. https://.../2025/11/18/...)
     let pubDate = post.frontmatter.pubDate;
     if (!pubDate && post.frontmatter.originalUrl) {
@@ -23,27 +25,43 @@ export async function GET(context) {
       htmlContent = String(post.compiledContent || '');
     }
 
-    return {
-      title: post.frontmatter.title,
-      description: post.frontmatter.description,
-      pubDate: pubDate,
-      link: post.url,
-      // Render full markdown content into the RSS feed
-      content: sanitizeHtml(htmlContent, {
-        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
-      }),
-      // Add author info if available
-      author: 'Albert Maccanico',
-      customData: post.frontmatter.publication ? `<category>${post.frontmatter.publication}</category>` : '',
-    };
+    const sanitizedHtml = sanitizeHtml(htmlContent, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+    });
+
+    const categoryStr = post.frontmatter.publication 
+      ? `<category>${post.frontmatter.publication}</category>` 
+      : '';
+
+    const postLink = `${baseUrl}${post.url || ''}`;
+
+    return `
+    <item>
+      <title><![CDATA[${post.frontmatter.title || ''}]]></title>
+      <link>${postLink}</link>
+      <guid isPermaLink="true">${postLink}</guid>
+      <description><![CDATA[${post.frontmatter.description || ''}]]></description>
+      <pubDate>${pubDate.toUTCString()}</pubDate>
+      ${categoryStr}
+      <content:encoded><![CDATA[${sanitizedHtml}]]></content:encoded>
+    </item>`;
   }));
 
-  return rss({
-    title: 'Albert Maccanico Blog',
-    description: 'Discussions on AI, Economics, and Technology by Albert Maccanico.',
-    site: context.site || 'https://alcelaser.github.io',
-    items: items,
-    stylesheet: '/rss-styles.xsl',
-    customData: `<language>en-us</language>`,
+  const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/rss-styles.xsl" type="text/xsl"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Albert Maccanico Blog and Articles</title>
+    <description>Discussions on AI, Ethics, Economics, and Technology.</description>
+    <link>${baseUrl}/</link>
+    <language>en-us</language>
+${items.join('\n')}
+  </channel>
+</rss>`;
+
+  return new Response(rssFeed, {
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+    },
   });
 }
