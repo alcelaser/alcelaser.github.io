@@ -8,7 +8,7 @@ export const GET: APIRoute = async (context) => {
   
   const items = await Promise.all(Object.values(posts).map(async (post: any) => {
     // Attempt to extract a date from originalUrl (e.g. https://.../2025/11/18/...)
-    let pubDate = post.frontmatter.pubDate;
+    let pubDate = post.frontmatter.pubDate ? new Date(post.frontmatter.pubDate) : null;
     if (!pubDate && post.frontmatter.originalUrl) {
       const match = post.frontmatter.originalUrl.match(/(\d{4})\/(\d{2})\/(\d{2})/);
       if (match) {
