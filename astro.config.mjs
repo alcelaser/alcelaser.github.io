@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 
 export default defineConfig({
   site: 'https://alcelaser.github.io',
+  trailingSlash: 'always',
   markdown: {
     remarkPlugins: [remarkGfm],
   },
