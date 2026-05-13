@@ -25,7 +25,7 @@ const blogUrl = lang === 'en' ? '/blog' : `/${lang}/blog`;
           <span class="bg-[var(--bauhaus-black)] text-white px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider">{frontmatter.publication}</span>
         )}
         {frontmatter.originalUrl && (
-          <a href={frontmatter.originalUrl} target="_blank" rel="noopener noreferrer" class="bg-[var(--bauhaus-yellow)] !text-[var(--bauhaus-black)] px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider hover:!bg-black hover:!text-[var(--bauhaus-white)] transition-colors">
+          <a href={frontmatter.originalUrl} target="_blank" rel="noopener noreferrer" class="bg-[var(--bauhaus-yellow)] !text-black px-6 py-3 font-bold border-[3px] border-black text-xl lg:text-2xl uppercase tracking-wider hover:!bg-black hover:!text-white transition-colors" style="color: black;">
             read original publication ↗
           </a>
         )}
