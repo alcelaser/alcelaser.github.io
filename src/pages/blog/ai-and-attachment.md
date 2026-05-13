@@ -3,6 +3,8 @@ layout: ../../layouts/ArticleLayout.astro
 title: "AI and Attachment: A Safe Haven or a False Promise?"
 description: "As technology progresses, more and more users are looking towards Artificial Intelligence chatbots as a mental safe haven. But is this necessarily harmful? Could it even have positive consequences for the user?"
 pubDate: "2026-05-13"
+publication: "Google Developer Group Guido Carli"
+originalUrl: "https://googleguidocarli.wordpress.com/2026/05/12/can-ai-replace-connection/"
 ---
 We live in a unique cultural moment, at the daybreak of development, where many adolescents and young adults alike find themselves relying on Artificial Intelligence chatbots as the first responders to psychological distress. After all, from our perspective, it doesn't seem that harmful; we aren't burdening our peers with our problems, it's accessible, in most cases free, and we can't burden the AI; it can't even feel the sensation of burden. Corporate technology giants recognise this by integrating interventions directly into search engines and video platforms (Google, 2024), and generative AI is increasingly positioned as the primary touchpoint in case of an emotional crisis.
 
