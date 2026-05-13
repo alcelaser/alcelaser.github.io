@@ -1,3 +1,8 @@
+---
+layout: ../../layouts/ArticleLayout.astro
+title: "AI and Attachment: A Safe Haven or a False Promise?"
+description: "As technology progresses, more and more users are looking towards Artificial Intelligence chatbots as a mental safe haven. But is this necessarily harmful? Could it even have positive consequences for the user?"
+---
 SUMMARY:  
 As technology progresses, more and more users are looking towards Artificial Intelligence chatbots as a mental safe haven, a person to talk to about hard times, a friend, a therapist, and for some even a partner. But is this necessarily harmful? Could it even have positive consequences for the user? In this article, we explore the empirical data from recent studies to see what research has picked up from our attachment to these AI systems. Is human presence vital to attachment? Or can algorithmic processes do the trick? Do the established research and cultural background agree with the data? We'll explore the role AI takes through 4 main lenses: AI as an instrument of empathy, AI as a friend, AI as a therapist, and most crucially, AI for what it is.
 
@@ -53,4 +58,5 @@ Baudrillard, J. (1994). Simulacra and simulation (S. F. Glaser, Trans.). Univers
 [Google. (2024, May 14). New mental health updates for Search and YouTube. Google Blog.](https://blog.google/innovation-and-ai/technology/health/mental-health-updates/) 
 
 [Kim, R. S. (2026). The Resonant Amplification Framework (RAF): Phases of human–AI attachment. Computers in Human Behavior Reports, 21, Article 100975\.](https://doi.org/10.1016/j.chbr.2026.100975) 
+
 
